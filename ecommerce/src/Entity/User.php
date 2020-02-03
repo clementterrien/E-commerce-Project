@@ -33,6 +33,26 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $birthDate;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\FavoriteList", mappedBy="User", cascade={"persist", "remove"})
+     */
+    private $favoriteList;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +129,58 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(\DateTimeInterface $birthDate): self
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function getFavoriteList(): ?FavoriteList
+    {
+        return $this->favoriteList;
+    }
+
+    public function setFavoriteList(FavoriteList $favoriteList): self
+    {
+        $this->favoriteList = $favoriteList;
+
+        // set the owning side of the relation if necessary
+        if ($favoriteList->getUser() !== $this) {
+            $favoriteList->setUser($this);
+        }
+
+        return $this;
     }
 }
