@@ -53,6 +53,11 @@ class User implements UserInterface
      */
     private $favoriteList;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $loginAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -180,6 +185,19 @@ class User implements UserInterface
         if ($favoriteList->getUser() !== $this) {
             $favoriteList->setUser($this);
         }
+
+        return $this;
+    }
+
+
+    public function getLoginAt(): ?\DateTimeInterface
+    {
+        return $this->loginAt;
+    }
+
+    public function setLoginAt(?\DateTimeInterface $loginAt): self
+    {
+        $this->loginAt = $loginAt;
 
         return $this;
     }

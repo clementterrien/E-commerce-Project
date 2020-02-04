@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FavoriteList;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,9 +46,6 @@ class SecurityController extends AbstractController
         dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-
-            $user->setPassword($hash);
 
             $manager->persist($user);
             $manager->flush();
