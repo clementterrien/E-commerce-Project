@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Welcome on Wine!{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}"/>
+{% endblock %}
+{% block title %}Welcome on Wine!
+{% endblock %}
 {% block body %}
-
+	<section>
+		<div class="product">Hello</div>
+	</section>
 {% endblock %}

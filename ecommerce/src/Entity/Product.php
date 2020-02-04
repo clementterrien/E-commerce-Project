@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
-class Article
+class Product
 {
     /**
      * @ORM\Id()
@@ -32,7 +32,7 @@ class Article
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $region;
 
@@ -47,14 +47,29 @@ class Article
     private $designation;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $liter;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capacity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $likeCounter;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $orderCounter;
 
     public function getId(): ?int
     {
@@ -102,7 +117,7 @@ class Article
         return $this->region;
     }
 
-    public function setRegion(string $region): self
+    public function setRegion(?string $region): self
     {
         $this->region = $region;
 
@@ -133,14 +148,26 @@ class Article
         return $this;
     }
 
-    public function getLiter(): ?int
+    public function getLiter(): ?string
     {
         return $this->liter;
     }
 
-    public function setLiter(?int $liter): self
+    public function setLiter(string $liter): self
     {
         $this->liter = $liter;
+
+        return $this;
+    }
+
+    public function getCapacity(): ?int
+    {
+        return $this->capacity;
+    }
+
+    public function setCapacity(int $capacity): self
+    {
+        $this->capacity = $capacity;
 
         return $this;
     }
@@ -153,6 +180,30 @@ class Article
     public function setPrice(?int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getLikeCounter(): ?int
+    {
+        return $this->likeCounter;
+    }
+
+    public function setLikeCounter(?int $likeCounter): self
+    {
+        $this->likeCounter = $likeCounter;
+
+        return $this;
+    }
+
+    public function getOrderCounter(): ?int
+    {
+        return $this->orderCounter;
+    }
+
+    public function setOrderCounter(?int $orderCounter): self
+    {
+        $this->orderCounter = $orderCounter;
 
         return $this;
     }

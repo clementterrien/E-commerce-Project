@@ -25,13 +25,14 @@ class FavoriteList
     private $User;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteArticle", mappedBy="favoriteList", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteProduct", mappedBy="favoriteList", orphanRemoval=true)
      */
-    private $favoriteArticles;
+    private $favoriteProducts;
 
     public function __construct()
     {
         $this->favoriteArticles = new ArrayCollection();
+        $this->favoriteProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,30 +53,30 @@ class FavoriteList
     }
 
     /**
-     * @return Collection|FavoriteArticle[]
+     * @return Collection|FavoriteProduct[]
      */
-    public function getFavoriteArticles(): Collection
+    public function getFavoriteProducts(): Collection
     {
-        return $this->favoriteArticles;
+        return $this->favoriteProducts;
     }
 
-    public function addFavoriteArticle(FavoriteArticle $favoriteArticle): self
+    public function addFavoriteProduct(FavoriteProduct $favoriteProduct): self
     {
-        if (!$this->favoriteArticles->contains($favoriteArticle)) {
-            $this->favoriteArticles[] = $favoriteArticle;
-            $favoriteArticle->setFavoriteList($this);
+        if (!$this->favoriteProducts->contains($favoriteProduct)) {
+            $this->favoriteProducts[] = $favoriteProduct;
+            $favoriteProduct->setFavoriteList($this);
         }
 
         return $this;
     }
 
-    public function removeFavoriteArticle(FavoriteArticle $favoriteArticle): self
+    public function removeFavoriteProduct(FavoriteProduct $favoriteProduct): self
     {
-        if ($this->favoriteArticles->contains($favoriteArticle)) {
-            $this->favoriteArticles->removeElement($favoriteArticle);
+        if ($this->favoriteProducts->contains($favoriteProduct)) {
+            $this->favoriteProducts->removeElement($favoriteProduct);
             // set the owning side to null (unless already changed)
-            if ($favoriteArticle->getFavoriteList() === $this) {
-                $favoriteArticle->setFavoriteList(null);
+            if ($favoriteProduct->getFavoriteList() === $this) {
+                $favoriteProduct->setFavoriteList(null);
             }
         }
 
