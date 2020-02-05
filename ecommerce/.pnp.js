@@ -134,6 +134,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@symfony/webpack-encore", "npm:0.28.2"],
             ["core-js", "npm:3.6.4"],
             ["regenerator-runtime", "npm:0.13.3"],
+            ["webpack", "npm:4.41.5"],
+            ["webpack-cli", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.3.10"],
             ["webpack-notifier", "npm:1.8.0"]
           ],
           "linkType": "SOFT"
@@ -1662,10 +1664,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["ajv-keywords", [
-        ["virtual:2f056f51d8f374414608c5e5f28b2aff80cdab12fa7b0aa7dc249dc338a368aac3acae6c3920cded920144fbc08c9749eaa4f903a14d4de048fe73a654908057#npm:3.4.1", {
-          "packageLocation": "./.yarn/$$virtual/ajv-keywords-virtual-45a5d5efbc/0/cache/ajv-keywords-npm-3.4.1-851fd088de-1.zip/node_modules/ajv-keywords/",
+        ["virtual:2b49db17d1e4e8854e6e7543c07eb7bc19ec9da65a1b99b9cb28e764846d419e5ecd6e057ad65249f2b928862ffd70dbf8a7c79643ccdd7c1c40cab5b59aa03f#npm:3.4.1", {
+          "packageLocation": "./.yarn/$$virtual/ajv-keywords-virtual-89a6979aa1/0/cache/ajv-keywords-npm-3.4.1-851fd088de-1.zip/node_modules/ajv-keywords/",
           "packageDependencies": [
-            ["ajv-keywords", "virtual:2f056f51d8f374414608c5e5f28b2aff80cdab12fa7b0aa7dc249dc338a368aac3acae6c3920cded920144fbc08c9749eaa4f903a14d4de048fe73a654908057#npm:3.4.1"],
+            ["ajv-keywords", "virtual:2b49db17d1e4e8854e6e7543c07eb7bc19ec9da65a1b99b9cb28e764846d419e5ecd6e057ad65249f2b928862ffd70dbf8a7c79643ccdd7c1c40cab5b59aa03f#npm:3.4.1"],
             ["ajv", "npm:6.11.0"]
           ],
           "packagePeers": [
@@ -8195,6 +8197,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@symfony/webpack-encore", "npm:0.28.2"],
             ["core-js", "npm:3.6.4"],
             ["regenerator-runtime", "npm:0.13.3"],
+            ["webpack", "npm:4.41.5"],
+            ["webpack-cli", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.3.10"],
             ["webpack-notifier", "npm:1.8.0"]
           ],
           "linkType": "SOFT"
@@ -8260,7 +8264,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["schema-utils", "npm:0.4.7"],
             ["ajv", "npm:6.11.0"],
-            ["ajv-keywords", "virtual:2f056f51d8f374414608c5e5f28b2aff80cdab12fa7b0aa7dc249dc338a368aac3acae6c3920cded920144fbc08c9749eaa4f903a14d4de048fe73a654908057#npm:3.4.1"]
+            ["ajv-keywords", "virtual:2b49db17d1e4e8854e6e7543c07eb7bc19ec9da65a1b99b9cb28e764846d419e5ecd6e057ad65249f2b928862ffd70dbf8a7c79643ccdd7c1c40cab5b59aa03f#npm:3.4.1"]
           ],
           "linkType": "HARD"
         }],
@@ -8270,7 +8274,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["schema-utils", "npm:1.0.0"],
             ["ajv", "npm:6.11.0"],
             ["ajv-errors", "virtual:2b49db17d1e4e8854e6e7543c07eb7bc19ec9da65a1b99b9cb28e764846d419e5ecd6e057ad65249f2b928862ffd70dbf8a7c79643ccdd7c1c40cab5b59aa03f#npm:1.0.1"],
-            ["ajv-keywords", "virtual:2f056f51d8f374414608c5e5f28b2aff80cdab12fa7b0aa7dc249dc338a368aac3acae6c3920cded920144fbc08c9749eaa4f903a14d4de048fe73a654908057#npm:3.4.1"]
+            ["ajv-keywords", "virtual:2b49db17d1e4e8854e6e7543c07eb7bc19ec9da65a1b99b9cb28e764846d419e5ecd6e057ad65249f2b928862ffd70dbf8a7c79643ccdd7c1c40cab5b59aa03f#npm:3.4.1"]
           ],
           "linkType": "HARD"
         }]
@@ -9576,6 +9580,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/$$virtual/webpack-cli-virtual-0112741e62/0/cache/webpack-cli-npm-3.3.10-3487cce4fe-1.zip/node_modules/webpack-cli/",
           "packageDependencies": [
             ["webpack-cli", "virtual:7e349689e888467e80a559aa42acb66e2c57fbbeaeca5c57005694e46d3a2d5f533b06c5163a92c3bd9cffbc087fd1dc1f354bb0d2c38adc033c8782030884ed#npm:3.3.10"],
+            ["chalk", "npm:2.4.2"],
+            ["cross-spawn", "npm:6.0.5"],
+            ["enhanced-resolve", "npm:4.1.0"],
+            ["findup-sync", "npm:3.0.0"],
+            ["global-modules", "npm:2.0.0"],
+            ["import-local", "npm:2.0.0"],
+            ["interpret", "npm:1.2.0"],
+            ["loader-utils", "npm:1.2.3"],
+            ["supports-color", "npm:6.1.0"],
+            ["v8-compile-cache", "npm:2.0.3"],
+            ["webpack", "npm:4.41.5"],
+            ["yargs", "npm:13.2.4"]
+          ],
+          "packagePeers": [
+            "webpack"
+          ],
+          "linkType": "HARD"
+        }],
+        ["virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.3.10", {
+          "packageLocation": "./.yarn/$$virtual/webpack-cli-virtual-f481a501ed/0/cache/webpack-cli-npm-3.3.10-3487cce4fe-1.zip/node_modules/webpack-cli/",
+          "packageDependencies": [
+            ["webpack-cli", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.3.10"],
             ["chalk", "npm:2.4.2"],
             ["cross-spawn", "npm:6.0.5"],
             ["enhanced-resolve", "npm:4.1.0"],
