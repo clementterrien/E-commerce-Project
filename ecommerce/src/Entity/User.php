@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ * fields={"email"},
+ * message= "This email is already used !")
  */
 class User implements UserInterface
 {
@@ -28,10 +34,15 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8", minMessage="Your password must contain at least 8 characters")
      */
     private $password;
+
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Both passwords must be identical")
+     */
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -57,6 +68,11 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $loginAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function getId(): ?int
     {
@@ -198,6 +214,18 @@ class User implements UserInterface
     public function setLoginAt(?\DateTimeInterface $loginAt): self
     {
         $this->loginAt = $loginAt;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
