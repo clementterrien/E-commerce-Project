@@ -20,6 +20,7 @@ class UserEntityListener
             $list = new FavoriteList;
             $entity->setFavoriteList($list);
             $entity->setCreatedAt(new \DateTime());
+            $entity->setEnabled('true');
         }
     }
 

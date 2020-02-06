@@ -71,6 +71,11 @@ class Product
      */
     private $orderCounter;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enabled;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -204,6 +209,18 @@ class Product
     public function setOrderCounter(?int $orderCounter): self
     {
         $this->orderCounter = $orderCounter;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }
