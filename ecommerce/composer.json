@@ -29,7 +29,6 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
@@ -42,7 +41,7 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packcges": true
     },
     "autoload": {
         "psr-4": {
