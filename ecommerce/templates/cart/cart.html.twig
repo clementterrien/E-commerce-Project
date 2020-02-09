@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+
+{% if cart | length > 0 %}
+
+<div class="jumbotron">
+    <p class="lead">Votre panier contient actuellement {{ totalQuantity }} articles</p>
+    <hr class="my-4">
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th>X</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price }} €</td>
+            <td>
+                {{ item.quantity }}
+                <a href=" {{ path("cart_add", {'product_id': item.product.id})}}" class="btn btn-secondary btn-sm">+</a>
+                <a href=" {{ path("cart_remove_one", {'product_id': item.product.id})}}"
+                    class="btn btn-secondary btn-sm">-</a>
+            </td>
+            <td>{{ item.product.price * item.quantity }} €</td>
+            <td></td>
+            <td>
+                <a href="{{ path("cart_remove", {'product_id': item.product.id})}}" class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td> {{ totalPrice }} €</td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+{% else %}
+<p>Surprise c'est vide</p>
+{% endif %}
+{% endblock %}
