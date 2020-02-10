@@ -59,7 +59,11 @@ class CartService
         $this->session->set('cart', $cart);
     }
 
-    public function getFullCart()
+    /**
+     * This function return the cart content
+     * Return array with associative array // product and quantity 
+     */
+    public function getFullCart(): array
     {
         $cart = $this->session->get('cart', []);
         $cartWithData = [];
@@ -73,6 +77,9 @@ class CartService
         return $cartWithData;
     }
 
+    /**
+     * Returns the Cart total price
+     */
     public function getTotalPrice(): float
     {
         $totalPrice = 0;
@@ -84,6 +91,9 @@ class CartService
         return $totalPrice;
     }
 
+    /**
+     * Returns the number of items in the cart
+     */
     public function getTotalQuantity(): int
     {
         $totalQuantity = 0;

@@ -36,6 +36,12 @@ services:
                 - { name: doctrine.event_listener, event: prePersist }
                 - { name: doctrine.event_listener, event: postPersist }
 
+    application_backend.event_listener.adress_entity:
+        class: Application\BackendBundle\EventListener\AdressEntityListener
+        tags:
+                - { name: doctrine.event_listener, event: prePersist }
+                - { name: doctrine.event_listener, event: postPersist }
+
     app.doctrine.hash_password_listener:
         class: AppBundle\Doctrine\HashPasswordListener
         autowire: true

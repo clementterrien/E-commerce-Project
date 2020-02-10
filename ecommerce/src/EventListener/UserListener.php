@@ -4,9 +4,7 @@ namespace Application\BackendBundle\EventListener;
 
 use App\Entity\User;
 use App\Entity\FavoriteList;
-use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 
 class UserEntityListener
