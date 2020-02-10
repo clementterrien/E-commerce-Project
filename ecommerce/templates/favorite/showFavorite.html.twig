@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FavoriteController!{% endblock %}
+
+{% block body %}
+
+{% for favoriteProduct in favoriteProducts %}
+<div class="product">
+    Name: {{ favoriteProduct.product.name }}</br>
+    Year: {{ favoriteProduct.product.year }}</br>
+    Price: {{ favoriteProduct.product.price }}€</br>
+    Favorite_id: {{ favoriteProduct.id }}</br>
+    <a href=" {{ path("favorite_add", {'product_id': favoriteProduct.product.id}) }}"><button>Add</button></a>
+    <a href=" {{ path("favorite_remove", {'favoriteProduct_id': favoriteProduct.id}) }}"><button>Remove</button></a>
+    <a href=" {{ path("cart_add", {'product_id': favoriteProduct.product.id}) }}"><button>Add Cart</button></a>
+</div>
+{% endfor %}
+
+{% endblock %}

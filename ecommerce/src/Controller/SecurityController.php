@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="app_registration")
      */
-    public function registration(Request $request, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request)
     {
         $user = new User();
 

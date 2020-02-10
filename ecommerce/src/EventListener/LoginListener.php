@@ -2,9 +2,7 @@
 
 namespace App\EventListener;
 
-use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener
