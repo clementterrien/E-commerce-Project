@@ -1,0 +1,13 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+<h1>Register</h1>
+
+{% if form is defined %}
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<button type="submit" class="btn btn-success">Enregistrer</button>
+{{ form_end(form) }}
+{% endif %}
+
+{% endblock %}

@@ -22,6 +22,12 @@ class FavoriteProduct
      */
     private $favoriteList;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="favoriteProducts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Product;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +41,18 @@ class FavoriteProduct
     public function setFavoriteList(?FavoriteList $favoriteList): self
     {
         $this->favoriteList = $favoriteList;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->Product;
+    }
+
+    public function setProduct(?Product $Product): self
+    {
+        $this->Product = $Product;
 
         return $this;
     }
