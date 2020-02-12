@@ -2,7 +2,6 @@
 
 namespace App\Service\Adress;
 
-use App\Entity\Adress;
 use App\Repository\AdressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -27,6 +26,6 @@ class AdressService
 
     public function getDefaultAdress()
     {
-        return $this->adressRepo->findOneBy(['active' => 1]);
+        return $this->adressRepo->findOneBy(['active' => 1, 'User' => $this->user]);
     }
 }

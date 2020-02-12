@@ -95,9 +95,15 @@ class User implements UserInterface
      */
     private $adresses;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ConfirmedOrder", mappedBy="User")
+     */
+    private $confirmedOrders;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
+        $this->confirmedOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -310,8 +316,40 @@ class User implements UserInterface
         return $this;
     }
 
-    public function __toString()
+    /**
+     * @return Collection|ConfirmedOrder[]
+     */
+    public function getConfirmedOrders(): Collection
     {
-        return $this->email;
+        return $this->confirmedOrders;
     }
+
+    public function addConfirmedOrder(ConfirmedOrder $confirmedOrder): self
+    {
+        if (!$this->confirmedOrders->contains($confirmedOrder)) {
+            $this->confirmedOrders[] = $confirmedOrder;
+            $confirmedOrder->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfirmedOrder(ConfirmedOrder $confirmedOrder): self
+    {
+        if ($this->confirmedOrders->contains($confirmedOrder)) {
+            $this->confirmedOrders->removeElement($confirmedOrder);
+            // set the owning side to null (unless already changed)
+            if ($confirmedOrder->getUser() === $this) {
+                $confirmedOrder->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    // public function __toString()
+    // {
+    //     return strval($this->id);
+    // }
 }
