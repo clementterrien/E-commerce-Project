@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\Adress\AdressService;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,14 +12,16 @@ class CartController extends AbstractController
     /**
      * @Route("/mycart", name="cart_show")
      */
-    public function showMyCart(CartService $service)
+    public function showMyCart(CartService $cartService, AdressService $adressService)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         return $this->render('cart/cart.html.twig', [
-            'cart' => $service->getFullCart(),
-            'totalPrice' => $service->getTotalPrice(),
-            'totalQuantity' => $service->getTotalQuantity()
+            'cart' => $cartService->getFullCart(),
+            'totalPrice' => $cartService->getTotalPrice(),
+            'totalQuantity' => $cartService->getTotalQuantity(),
+            'defaultAdress' => $adressService->getDefaultAdress(),
+            'adresses' => $adressService->getFullAdresses()
         ]);
     }
 

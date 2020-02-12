@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -65,6 +67,16 @@ class Adress
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $modifiedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ConfirmedOrder", mappedBy="Adress")
+     */
+    private $confirmedOrders;
+
+    public function __construct()
+    {
+        $this->confirmedOrders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -187,6 +199,37 @@ class Adress
     public function setModifiedAt(?\DateTimeInterface $modifiedAt): self
     {
         $this->modifiedAt = $modifiedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConfirmedOrder[]
+     */
+    public function getConfirmedOrders(): Collection
+    {
+        return $this->confirmedOrders;
+    }
+
+    public function addConfirmedOrder(ConfirmedOrder $confirmedOrder): self
+    {
+        if (!$this->confirmedOrders->contains($confirmedOrder)) {
+            $this->confirmedOrders[] = $confirmedOrder;
+            $confirmedOrder->setAdress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfirmedOrder(ConfirmedOrder $confirmedOrder): self
+    {
+        if ($this->confirmedOrders->contains($confirmedOrder)) {
+            $this->confirmedOrders->removeElement($confirmedOrder);
+            // set the owning side to null (unless already changed)
+            if ($confirmedOrder->getAdress() === $this) {
+                $confirmedOrder->setAdress(null);
+            }
+        }
 
         return $this;
     }

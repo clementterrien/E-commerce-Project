@@ -3,10 +3,10 @@
 namespace Application\BackendBundle\EventListener;
 
 use App\Entity\Adress;
+use Symfony\Component\Mime\Address;
 use App\Repository\AdressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Security\Core\Security;
 
 class AdressEntityListener
@@ -26,6 +26,11 @@ class AdressEntityListener
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
+
+        if (!$entity instanceof Adress) {
+            return;
+        }
+
         $entity->setCreatedAt(new \DateTime());
 
         if ($this->adressRepo->findBy(['User' => $this->user]) == null) {

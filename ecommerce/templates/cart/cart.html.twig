@@ -10,7 +10,7 @@
     <p class="lead">Votre panier contient actuellement {{ totalQuantity }} articles</p>
     <hr class="my-4">
 </div>
-
+<h2>Mon Panier</h2>
 <table class="table">
     <thead>
         <tr>
@@ -51,6 +51,10 @@
         </tr>
     </tfoot>
 </table>
+<h2>Mon adresse</h2>
+{{ defaultAdress.name }}
+</br>
+<a href=" {{path('order')}}" class="btn btn-success">Commander</a>
 {% else %}
 <p>Surprise c'est vide</p>
 {% endif %}
