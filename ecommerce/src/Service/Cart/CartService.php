@@ -77,6 +77,11 @@ class CartService
         return $cartWithData;
     }
 
+    public function getLightCart(): array
+    {
+        return $this->session->get('cart', []);
+    }
+
     /**
      * Returns the Cart total price
      */

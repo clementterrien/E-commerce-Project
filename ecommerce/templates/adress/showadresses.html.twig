@@ -29,7 +29,8 @@
                 {% if adress.active == true %}
                 [Par défaut]
                 {% else %}
-                <a href="#" class="btn btn-primary btn-sm">Définir comme par défaut</a>
+                <a href="{{ path('adress_setdefault', {'adress_id': adress.id})}}"
+                    class="btn btn-primary btn-sm">Définir comme par défaut</a>
                 {% endif %}
             </td>
             <td>{{ adress.city }}

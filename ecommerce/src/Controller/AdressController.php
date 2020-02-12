@@ -6,6 +6,7 @@ use App\Entity\Adress;
 use App\Form\CreateAdressType;
 use App\Repository\AdressRepository;
 use App\Service\Adress\AdressService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class AdressController extends AbstractController
      */
     public function showMyAdresses(AdressService $service)
     {
+
         return $this->render('adress/showadresses.html.twig', [
             'activeAdress' => $service->getDefaultAdress(),
             'adresses' => $service->getFullAdresses()
@@ -48,12 +50,14 @@ class AdressController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/o", name="hello")
+    /** 
+     * @Route("/setDefaultAdress/{adress_id}", name="adress_setdefault")
      */
-    public function test(AdressRepository $repo)
+    public function setDefaultAdress(int $adress_id, AdressRepository $adressRepo, EntityManagerInterface $em)
     {
-        $adress = $this->getUser()->getAdresses();
-        dd($adress);
+        $adressToSetAsDefault = $adressRepo->findOneBy(['id' => $adress_id])->setActive(true);
+        $em->flush();
+
+        return $this->redirectToRoute('adress_show');
     }
 }
