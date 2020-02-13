@@ -22,7 +22,7 @@ class ConfirmedOrder
     private $Cart;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Adress", inversedBy="confirmedOrders")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Adress", inversedBy="confirmedOrders", cascade={"persist", "remove"})
      */
     private $Adress;
 

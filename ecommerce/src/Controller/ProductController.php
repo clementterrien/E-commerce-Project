@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\CreateProductType;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,5 +35,17 @@ class ProductController extends AbstractController
         return $this->render('product/create.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/like/{product_id}", name="product_like")
+     */
+    public function likeProduct($product_id, ProductRepository $productRepo, EntityManagerInterface $em)
+    {
+        $product = $productRepo->findOneBy(['id' => $product_id]);
+        $product->setLikeCounter($product->getLikeCounter() + 1);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
     }
 }

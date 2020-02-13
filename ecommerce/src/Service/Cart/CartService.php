@@ -59,6 +59,11 @@ class CartService
         $this->session->set('cart', $cart);
     }
 
+    public function removeCart()
+    {
+        $this->session->remove('cart');
+    }
+
     /**
      * This function return the cart content
      * Return array with associative array // product and quantity 
