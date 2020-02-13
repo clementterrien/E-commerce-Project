@@ -1,11 +1,3 @@
-:root{
-	--primary:#192a56;
-	--color: #fbc531;
-	--light-grey:#f5f6fa;
-	--yellowish: #fbc531;
-	--redish:#c23616;
-}
-
 .products-exposition{
 	display:grid;
 	height:100vh;
@@ -13,8 +5,8 @@
 
 .product-card{
 	margin:auto;
-	width:40vw;
-	height:50vh;
+	width:30vw;
+	height:auto;
 	display:flex;
 	flex-direction:column;
 	justify-content:space-between;
@@ -23,7 +15,8 @@
 }
 
 .product-card img {
-	width:80%;
+	width:50%;
+	height:80%;
 	margin-top:1em;
 	align-self:center;
 }

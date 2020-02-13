@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+:root{
+	--primary:#192a56;
+	--color: #fbc531;
+	--light-grey:#f5f6fa;
+	--yellowish: #fbc531;
+	--redish:#c23616;
+}
+
 * {
 	font-family: 'Roboto', sans-serif;
 }
@@ -222,3 +230,10 @@ header input {
 
 /*=====  End of Sidebar comment block  ======*/
 
+.container {
+	max-width:100vw;
+	display:grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, auto);
+	grid-gap:3em;
+}
