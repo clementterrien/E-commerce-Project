@@ -88,6 +88,11 @@ class Product
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $stock;
+
     public function __construct()
     {
         $this->favoriteProducts = new ArrayCollection();
@@ -298,6 +303,18 @@ class Product
             $this->tags->removeElement($tag);
             $tag->removeProduct($this);
         }
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }

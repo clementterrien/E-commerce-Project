@@ -63,8 +63,11 @@ class AdressEntityListener
     {
         $entity = $args->getEntity();
 
+        if (!$entity instanceof Adress) {
+            return;
+        }
+
         $defaultAdress = $this->defaultAdress;
-        // dd($defaultAdress);
 
         if ($entity === $defaultAdress) {
             return;
