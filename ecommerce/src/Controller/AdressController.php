@@ -18,7 +18,6 @@ class AdressController extends AbstractController
      */
     public function showMyAdresses(AdressService $service)
     {
-
         return $this->render('adress/showadresses.html.twig', [
             'activeAdress' => $service->getDefaultAdress(),
             'adresses' => $service->getFullAdresses()
@@ -28,10 +27,9 @@ class AdressController extends AbstractController
     /**
      * @Route("/add/adress", name="adress_add")
      */
-    public function addAdress(Request $request)
+    public function addAdress(Request $request, EntityManagerInterface $em)
     {
         $adress = new Adress;
-        $manager = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(CreateAdressType::class, $adress);
 
@@ -39,8 +37,8 @@ class AdressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $manager->persist($adress);
-            $manager->flush();
+            $em->persist($adress);
+            $em->flush();
 
             return $this->redirectToRoute('adress_show');
         }
