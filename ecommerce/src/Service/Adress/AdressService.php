@@ -27,7 +27,7 @@ class AdressService
 
     public function getDefaultAdress()
     {
-        if (count($this->adressRepo->findBy(['active' => 1])) > 1) {
+        if (count($this->adressRepo->findBy(['active' => 1, "User" => $this->user])) > 1) {
             throw new Exception("There is more than 1 default adress for this user in the DB");
         }
         return $this->adressRepo->findOneBy(['active' => 1, 'User' => $this->user]);
