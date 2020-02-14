@@ -32,14 +32,14 @@ class AdressEntityListener
         }
 
         $entity->setCreatedAt(new \DateTime());
+        $entity->setUser($this->user);
 
-        if ($this->adressRepo->findBy(['User' => $this->user]) == null) {
+        if ($this->adressRepo->findBy(['User' => $this->user]) == []) {
             $entity->setActive(true);
         } elseif ($entity->getActive() == true) {
             $defaultAdress = $this->adressRepo->findOneBy(['active' => true]);
             $defaultAdress->setActive(false);
             $this->em->flush();
-            $entity->setActive(true);
         } else {
             $entity->setActive(false);
         }
