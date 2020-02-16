@@ -14,28 +14,8 @@
 	</div>
 	<div class="row">
 		{% for product in topThreeProducts %}
-		<div class="card col-md-3 ml-3 mb-3 justify-content-center" style="width: 18rem;">
-			{% if product.type == "Blanc" %}
-			<img src={{asset('/images/vin-blanc.png')}} class="card-img pt-4" alt="vin blanc">
-			{% elseif product.type == "Rouge" %}
-			<img src={{asset('/images/vin-rouge.png')}} class="card-img pt-4" alt="vin blanc">
-			{% elseif product.type == "Champagne" %}
-			<img src={{asset('/images/champagne.png')}} class="card-img pt-4" alt="vin blanc">
-			{% endif %}
-			<div class="card-body">
-				<h5 class="card-title">{{product.price}} €</h5>
-				<p class="card-text">{{product.name}}</p>
-			</div>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item">{{product.liter}}</li>
-				<li class="list-group-item">{{product.year}}</li>
-				<li class="list-group-item">{{product.region}}</li>
-			</ul>
-			<div class="card-body">
-				<a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">En Savoir plus</a>
-				<a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au
-					panier</a>
-			</div>
+		<div class="col-md-4 d-flex justify-content-center mb-3">
+			{% include 'partials/product-card.html.twig' %}
 		</div>
 		{% endfor %}
 	</div>
@@ -46,32 +26,12 @@
 	</div>
 	<div class="row">
 		{% for product in allTheProducts %}
-		<div class="card col-md-2 ml-4 mb-4" style="width: 18rem;">
-			{% if product.type == "Blanc" %}
-			<img src={{asset('/images/vin-blanc.png')}} class="card-img pt-4" alt="vin blanc">
-			{% elseif product.type == "Rouge" %}
-			<img src={{asset('/images/vin-rouge.png')}} class="card-img pt-4" alt="vin blanc">
-			{% elseif product.type == "Champagne" %}
-			<img src={{asset('/images/champagne.png')}} class="card-img pt-4" alt="vin blanc">
-			{% endif %}
-			<div class="card-body">
-				<h5 class="card-title">{{product.price}} €</h5>
-				<p class="card-text">{{product.name}}</p>
-			</div>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item">{{product.liter}}</li>
-				<li class="list-group-item">{{product.year}}</li>
-				<li class="list-group-item">{{product.region}}</li>
-			</ul>
-			<div class="card-body">
-				<a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">En Savoir plus</a>
-				<a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au
-					panier</a>
-			</div>
+		<div class="col-md-4 d-flex justify-content-center mb-3">
+			{% include 'partials/product-card.html.twig' %}
 		</div>
 		{% endfor %}
 	</div>
-	<div class="pagination">
+	<div class="pagination d-flex justify-content-center mt-2">
 		{{ knp_pagination_render(allTheProducts) }}
 	</div>
 </section>
