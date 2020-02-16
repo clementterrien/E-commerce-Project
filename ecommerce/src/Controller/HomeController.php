@@ -2,24 +2,28 @@
 
 namespace App\Controller;
 
+use App\Service\Cart\CartService;
 use App\Repository\AdressRepository;
 use App\Repository\ProductRepository;
-use App\Service\Cart\CartService;
 use App\Service\Product\ProductService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
      */
-    public function home(ProductService $productService)
+    public function home(ProductService $productService, PaginatorInterface $paginator, Request $request)
     {
         $topThreeProducts = $productService->getTop3MostLikedProducts();
-        $allTheProducts = $productService->getAllTheProducts();
+        $allTheProducts = $paginator->paginate($productService->getAllTheProducts(), 
+            $request->query->getInt('page', 1),
+            12);
 
         return $this->render('/home/home.html.twig', [
             "topThreeProducts" => $topThreeProducts,
