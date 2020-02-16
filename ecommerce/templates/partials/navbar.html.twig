@@ -43,14 +43,6 @@
 				<a href="{{ path('app_logout') }}">Logout</a>
 			</button>
 			{% endif %}
-			<div class="searchbar">
-				<form action="{{ path('home') }}" class="form-inline my-2 my-lg-0" method="POST">
-					<input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" />
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit">
-						Search
-					</button>
-				</form>
-			</div>
 			<a href="{{ path('cart_show') }}">My Cart</a>
 			<button type="button" class="btn btn-outline-primary">
 				<a href="{{ path('adress_show') }}">Mes Adresses</a>
@@ -66,5 +58,6 @@
 					</button>
 				</form>
 			</div>
+		</button>
 	</div>
 </nav>

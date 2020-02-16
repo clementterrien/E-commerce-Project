@@ -48,4 +48,12 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
+    /**
+     * @Route("/product/{product_id}", name="product_details")
+     */
+    public function productDetails($product_id, ProductRepository $productRepo, EntityManagerInterface $em)
+    {
+        return;
+    }
 }

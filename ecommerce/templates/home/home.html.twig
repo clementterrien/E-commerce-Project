@@ -1,12 +1,75 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheet %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}" />
 {% endblock %}
 {% block title %}Welcome on Wine!
 {% endblock %}
 {% block body %}
-	<section>
-		<div class="product">Hello</div>
-	</section>
+<section class="container">
+	<div class="card mt-2 mb-3 bg-warning">
+		<div class="card-body text-white display-4">
+			Top 3 products
+		</div>
+	</div>
+	<div class="row">
+		{% for product in topThreeProducts %}
+		<div class="card col-md-3 ml-3 mb-3 justify-content-center" style="width: 18rem;">
+			{% if product.type == "Blanc" %}
+			<img src={{asset('/images/vin-blanc.png')}} class="card-img pt-4" alt="vin blanc">
+			{% elseif product.type == "Rouge" %}
+			<img src={{asset('/images/vin-rouge.png')}} class="card-img pt-4" alt="vin blanc">
+			{% elseif product.type == "Champagne" %}
+			<img src={{asset('/images/champagne.png')}} class="card-img pt-4" alt="vin blanc">
+			{% endif %}
+			<div class="card-body">
+				<h5 class="card-title">{{product.price}} €</h5>
+				<p class="card-text">{{product.name}}</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">{{product.liter}}</li>
+				<li class="list-group-item">{{product.year}}</li>
+				<li class="list-group-item">{{product.region}}</li>
+			</ul>
+			<div class="card-body">
+				<a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">En Savoir plus</a>
+				<a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au
+					panier</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="card mt-2 mb-3 bg-warning">
+		<div class="card-body text-white display-4">
+			Tous les produits
+		</div>
+	</div>
+	<div class="row">
+		{% for product in allTheProducts %}
+		<div class="card col-md-2 ml-4 mb-4" style="width: 18rem;">
+			{% if product.type == "Blanc" %}
+			<img src={{asset('/images/vin-blanc.png')}} class="card-img pt-4" alt="vin blanc">
+			{% elseif product.type == "Rouge" %}
+			<img src={{asset('/images/vin-rouge.png')}} class="card-img pt-4" alt="vin blanc">
+			{% elseif product.type == "Champagne" %}
+			<img src={{asset('/images/champagne.png')}} class="card-img pt-4" alt="vin blanc">
+			{% endif %}
+			<div class="card-body">
+				<h5 class="card-title">{{product.price}} €</h5>
+				<p class="card-text">{{product.name}}</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">{{product.liter}}</li>
+				<li class="list-group-item">{{product.year}}</li>
+				<li class="list-group-item">{{product.region}}</li>
+			</ul>
+			<div class="card-body">
+				<a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">En Savoir plus</a>
+				<a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au
+					panier</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
 {% endblock %}

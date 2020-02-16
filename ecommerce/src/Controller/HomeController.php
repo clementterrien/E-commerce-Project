@@ -18,9 +18,13 @@ class HomeController extends AbstractController
      */
     public function home(ProductService $productService)
     {
-        $productService->getTop3MostLikedProducts();
+        $topThreeProducts = $productService->getTop3MostLikedProducts();
+        $allTheProducts = $productService->getAllTheProducts();
 
-        return $this->render('/home/home.html.twig');
+        return $this->render('/home/home.html.twig', [
+            "topThreeProducts" => $topThreeProducts,
+            "allTheProducts" => $allTheProducts
+        ]);
     }
 
     /**
