@@ -52,8 +52,9 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/{product_id}", name="product_details")
      */
-    public function productDetails($product_id, ProductRepository $productRepo, EntityManagerInterface $em)
+    public function productDetails($product_id, ProductRepository $productRepo)
     {
-        return;
+        $product = $productRepo->findOneBy(['id' => $product_id]);
+        return $this->render("product/product.html.twig", ["product" => $product]);
     }
 }
