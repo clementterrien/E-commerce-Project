@@ -1,0 +1,57 @@
+<header>
+    <div class="logo">
+        <a href="{{path('home')}}">Webways</a>
+    </div>
+    <input type="text" placeholder="Search for a product here...">
+    <div class="top-navbar">
+        <ul>
+            <li>
+                <a href="{{path('app_login')}}">
+                    <i class="fas fa-user"></i>My account
+                </a>
+                <div class="drop-down-container">
+                    <form class="drop-down-form" action="">
+                        <p>Already Registered ?</p>
+                        <div class="form-group">
+                            <label for="">Email adress</label><input type="text">
+                            <label for="">Password</label><input type="text">
+                            <a href="{{path('app_login')}}" class="sign-in" type="submit">Sign in</a>
+                        </div>
+                        <div class="to-register-form">
+                            <span>New Customer ?</span>
+                            <a href="{{path('app_registration')}}" class="register">Register</a>
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fas fa-envelope"></i>Newsletter
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fas fa-heart"></i>Favorites
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fas fa-shopping-bag"></i>my cart
+                </a>
+            </li>
+        </ul>
+    </div>
+    <nav class="navbar">
+        <div class="home">
+            <a href="">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <ul>
+            <a href="">Promos</a>
+            <a href="">vins rouge</a>
+            <a href="">vins blanc</a>
+            <a href="">champagne</a>
+        </ul>
+    </nav>
+</header>

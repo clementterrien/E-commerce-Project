@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{# {{encore_entry_link_tags('app')}} #}
+<link rel="stylesheet" type="text/css " href="{{asset('build/app.css')}}">
+{% endblock %}
+
+{% block title %}Hello HelloController!{% endblock %}
+
+{% block body %}
+
+{# {% include 'layout/navbar.html.twig' %} #}
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at
+            <code><a href="{{ '/Users/franciscomambo/OneDrive/epitech/webways/E-commerce-Project/ecommerce/src/Controller/HelloController.php'|file_link(0) }}">src/Controller/HelloController.php</a></code>
+        </li>
+        <li>Your template at
+            <code><a href="{{ '/Users/franciscomambo/OneDrive/epitech/webways/E-commerce-Project/ecommerce/templates/hello/index.html.twig'|file_link(0) }}">templates/hello/index.html.twig</a></code>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    {% for i in 0..6 %}
+    <div class="product-card">
+        <img src="{{random(images)}}" alt="beverage">
+        <div class="product-card-info">
+            <h4 class="product-title">{{random(["Vin Blanc", "Vin Rouge", "Champagne"])|upper}}</h4>
+            <span class="product-liter">0.75 L</span>
+            <span class="product-price">12,35 €</span>
+        </div>
+        <div class="cart">
+            <span class="quantity">1</span>
+            <a href="" class="btn add-to-cart-btn">Ajouter au Panier</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

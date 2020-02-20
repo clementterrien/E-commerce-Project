@@ -29,7 +29,10 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
+<<<<<<< HEAD
         "symfony/webpack-encore-bundle": "^1.7",
+=======
+>>>>>>> test
         "symfony/yaml": "5.0.*",
         "knplabs/knp-paginator-bundle": "^5.1"
     },
