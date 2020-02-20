@@ -34,13 +34,4 @@ class ProductService
         $products = $this->productRepo->findBy([], ['likeCounter' => 'DESC'], 3);
         return $products;
     }
-
-    /**
-     * Return list of all the products
-     */
-    public function getAllTheProducts():array
-    {
-        $products = $this->productRepo->findAll([]);
-        return $products;
-    }
 }
