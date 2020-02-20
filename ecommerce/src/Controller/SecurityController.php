@@ -9,8 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -34,9 +35,10 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="app_registration")
      */
-    public function registration(Request $request)
+    public function registration(MailerInterface $mailer, Request $request)
     {
         $user = new User();
+        $token = md5(rand());
 
         $manager = $this->getDoctrine()->getManager();
 
@@ -46,6 +48,15 @@ class SecurityController extends AbstractController
         dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $email = (new Email())
+                ->from('hello@symfony.com')
+                ->to($user->getEmail())
+                ->subject('welcome to wine')
+                ->text('thanks for registering');
+
+            $mailer->send($email);
 
             $manager->persist($user);
             $manager->flush();

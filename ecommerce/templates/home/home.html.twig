@@ -1,12 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheet %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}" />
 {% endblock %}
 {% block title %}Welcome on Wine!
 {% endblock %}
 {% block body %}
-	<section>
-		<div class="product">Hello</div>
-	</section>
+<section class="container">
+	{% include 'partials/carousel.html.twig' %}
+	<div class="card mt-2 mb-3 bg-secondary">
+		<div class="card-body text-white display-4">
+			Top 3 products
+		</div>
+	</div>
+	<div class="row">
+		{% for product in topThreeProducts %}
+		<div class="col-md-4 d-flex justify-content-center mb-3">
+			{% include 'partials/product-card.html.twig' %}
+		</div>
+		{% endfor %}
+	</div>
+	<div class="card mt-2 mb-3 bg-secondary">
+		<div class="card-body text-white display-4">
+			Tous les produits
+		</div>
+	</div>
+	<div class="row">
+		{% for product in allTheProducts %}
+		<div class="col-md-4 d-flex justify-content-center mb-3">
+			{% include 'partials/product-card.html.twig' %}
+		</div>
+		{% endfor %}
+	</div>
+	<div class="pagination d-flex justify-content-center mt-2">
+		{{ knp_pagination_render(allTheProducts) }}
+	</div>
+</section>
 {% endblock %}
