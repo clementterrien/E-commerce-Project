@@ -16,15 +16,12 @@ class UserEntityListener
 
         if ($entity instanceof User) {
             $list = new FavoriteList;
+            $token = random_bytes(16);
+
             $entity->setFavoriteList($list);
             $entity->setCreatedAt(new \DateTime());
             $entity->setEnabled(true);
+            $entity->setConfirmationToken($token);
         }
-    }
-
-
-    public function postPersist(LifecycleEventArgs $args)
-    {
-        $entity = $args->getEntity();
     }
 }
