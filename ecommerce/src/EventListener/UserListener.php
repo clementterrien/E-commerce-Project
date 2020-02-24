@@ -16,8 +16,7 @@ class UserEntityListener
 
         if ($entity instanceof User) {
             $list = new FavoriteList;
-            $token = random_bytes(16);
-
+            $token = urlencode(hash("sha256", random_bytes(8)));
             $entity->setFavoriteList($list);
             $entity->setCreatedAt(new \DateTime());
             $entity->setEnabled(true);
