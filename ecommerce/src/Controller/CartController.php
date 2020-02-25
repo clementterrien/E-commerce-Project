@@ -30,6 +30,8 @@ class CartController extends AbstractController
      */
     public function addToMyCart($product_id, CartService $service)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $service->add($product_id);
 
         return $this->redirectToRoute('cart_show');
@@ -40,6 +42,8 @@ class CartController extends AbstractController
      */
     public function removeOneItemFromCart($product_id, CartService $service)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $service->removeOne($product_id);
 
         return $this->redirectToRoute('cart_show');
@@ -50,6 +54,8 @@ class CartController extends AbstractController
      */
     public function removeItemFromCart($product_id, CartService $service)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $service->removeAll($product_id);
 
         return $this->redirectToRoute('cart_show');

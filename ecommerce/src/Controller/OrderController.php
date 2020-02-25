@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use Exception;
-use App\Entity\ConfirmedOrder;
 use App\Service\Cart\CartService;
 use App\Service\Order\OrderService;
-use App\Repository\AdressRepository;
 use App\Repository\ProductRepository;
 use App\Service\Adress\AdressService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,21 +17,11 @@ class OrderController extends AbstractController
     /**
      * @Route("/order", name="order_preconfirmation")
      */
-    public function preconfirmation(EntityManagerInterface $em, AdressRepository $adressRepo, SessionInterface $session, CartService $cartService, AdressService $adressService)
+    public function preconfirmation(SessionInterface $session, OrderService $orderService)
     {
-        $user = $this->getUser();
-        $adress = $adressService->getDefaultAdress();
-        $cart = serialize($session->get('cart', []));
-        $totalPrice = $cartService->getTotalPrice();
-        $order = new ConfirmedOrder;
-        $order
-            ->setCart($cart)
-            ->setUser($user)
-            ->setCreatedAt(new \DateTime())
-            ->setAdress($adress)
-            ->setTotalPrice($totalPrice);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $session->set('preorder', $order);
+        $orderService->storeCartInSession();
 
         if ($session->get('preorder', []) !== []) {
             return $this->redirectToRoute('order_confirmation');
@@ -45,6 +33,7 @@ class OrderController extends AbstractController
      */
     public function confirmation(SessionInterface $session, CartService $cartService, AdressService $adressService)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         return $this->render('order/confirmorder.html.twig', [
             'cart' => $cartService->getFullCart(),
@@ -59,6 +48,8 @@ class OrderController extends AbstractController
      */
     public function validateOrder(OrderService $orderService, CartService $cartService, SessionInterface $session)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $orderService->validateOrder();
         $cartService->removeCart();
 
@@ -66,9 +57,9 @@ class OrderController extends AbstractController
     }
 
     /**
-     * @Route("/hello", name="hello")
+     * @Route("/tele", name="tele")
      */
-    public function hello(ProductRepository $productRepo, EntityManagerInterface $em)
+    public function tele(ProductRepository $productRepo, EntityManagerInterface $em)
     {
         $products = $productRepo->findAll();
 
