@@ -13,6 +13,8 @@ class FavoriteController extends AbstractController
      */
     public function showFavoriteList()
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('favorite/showFavorite.html.twig', [
             'favoriteProducts' => $this->getUser()->getFavoriteList()->getFavoriteProducts()
         ]);
@@ -23,6 +25,8 @@ class FavoriteController extends AbstractController
      */
     public function addToFavoriteList($product_id, FavoriteService $service)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $service->add($product_id);
 
         return $this->redirectToRoute('favorite_show');
@@ -33,6 +37,8 @@ class FavoriteController extends AbstractController
      */
     public function removeFromFavoriteList($favoriteProduct_id, FavoriteService $service)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $service->remove($favoriteProduct_id);
 
         return $this->redirectToRoute('favorite_show');

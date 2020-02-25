@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\FavoriteList;
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -19,6 +19,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
         }
@@ -56,6 +57,26 @@ class SecurityController extends AbstractController
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/confirm/{id}/{token}", name="security_confirmation")
+     */
+    public function confirmRegistration($id, $token, UserRepository $userRepo, EntityManagerInterface $em)
+    {
+        $user = $userRepo->findOneBy(['id' => $id, 'confirmationToken' => $token]);
+
+        if ($user) {
+            $user->setConfirmationToken('');
+            $em->flush();
+        } else {
+            $this->redirectToRoute('app_login', [
+                'success' => 'Le lien que vous avez entré ne semble pas valide'
+            ]);
+        }
+        $this->get('session')->getFlashBag()->add('confirmation', 'Votre email a bien été validé ! Veuillez vous reconnecter.');
+
+        return $this->redirectToRoute('app_login');
     }
 
     /**

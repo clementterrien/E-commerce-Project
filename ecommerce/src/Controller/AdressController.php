@@ -30,9 +30,7 @@ class AdressController extends AbstractController
     public function addAdress(Request $request, EntityManagerInterface $em)
     {
         $adress = new Adress;
-
         $form = $this->createForm(CreateAdressType::class, $adress);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +51,7 @@ class AdressController extends AbstractController
      */
     public function setDefaultAdress(int $adress_id, AdressRepository $adressRepo, EntityManagerInterface $em)
     {
-        $adressToSetAsDefault = $adressRepo->findOneBy(['id' => $adress_id])->setActive(true);
+        $adressRepo->findOneBy(['id' => $adress_id])->setActive(true);
         $em->flush();
 
         return $this->redirectToRoute('adress_show');
