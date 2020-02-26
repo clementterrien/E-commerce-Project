@@ -1,57 +1,67 @@
-<header>
-    <div class="logo">
-        <a href="{{path('home')}}">Webways</a>
-    </div>
-    <input type="text" placeholder="Search for a product here...">
-    <div class="top-navbar">
-        <ul>
-            <li>
-                <a href="{{path('app_login')}}">
-                    <i class="fas fa-user"></i>My account
+<nav class="navbar navbar-expand-lg navbar-light bg-primary d-flex justify-content-between">
+    <a class="navbar-brand text-light pr-5 mr-5" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse pl-5 ml-5" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-light" href="#">Mon panier<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="#">Mes Favoris</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mon Compte
                 </a>
-                <div class="drop-down-container">
-                    <form class="drop-down-form" action="">
-                        <p>Already Registered ?</p>
+                <div class="dropdown-menu" style="width: 300px; padding: 1em;" aria-labelledby="navbarDropdown">
+                    <form>
                         <div class="form-group">
-                            <label for="">Email adress</label><input type="text">
-                            <label for="">Password</label><input type="text">
-                            <a href="{{path('app_login')}}" class="sign-in" type="submit">Sign in</a>
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
                         </div>
-                        <div class="to-register-form">
-                            <span>New Customer ?</span>
-                            <a href="{{path('app_registration')}}" class="register">Register</a>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
                         </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </li>
-            <li>
-                <a href="">
-                    <i class="fas fa-envelope"></i>Newsletter
+            <li class="nav-item dropdown">
+                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Newsletter
                 </a>
-            </li>
-            <li>
-                <a href="">
-                    <i class="fas fa-heart"></i>Favorites
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <i class="fas fa-shopping-bag"></i>my cart
-                </a>
+                <div class="dropdown-menu" style="width: 300px; padding: 1em;" aria-labelledby="navbarDropdown">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail2"
+                                aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
             </li>
         </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" style="width: 20em;" type="search"
+                placeholder="Cherchez un produit en particulier" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
-    <nav class="navbar">
-        <div class="home">
-            <a href="">
-                <i class="fas fa-home"></i>
-            </a>
-        </div>
-        <ul>
-            <a href="">Promos</a>
-            <a href="">vins rouge</a>
-            <a href="">vins blanc</a>
-            <a href="">champagne</a>
-        </ul>
-    </nav>
-</header>
+</nav>
