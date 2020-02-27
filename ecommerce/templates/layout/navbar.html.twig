@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary d-flex justify-content-between">
-    <a class="navbar-brand text-light pr-5 mr-5" href="#">Navbar</a>
+    <a class="navbar-brand text-light pr-5 mr-5" href="{{path('home')}}">Bonne Wine</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,19 +7,29 @@
 
     <div class="collapse navbar-collapse pl-5 ml-5" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            {% if app.user %}
             <li class="nav-item active">
-                <a class="nav-link text-light" href="#">Mon panier<span class="sr-only">(current)</span></a>
+                <a class="nav-link text-light" href="{{path('cart_show')}}">Mon panier<span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="#">Mes Favoris</a>
+                <a class="nav-link text-light" href="{{ path("favorite_show")}}">Favorites</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{{ path('adress_show') }}">Mes Adresses</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{{ path('app_registration') }}">Register</a>
+            </li>
+            {% endif %}
             <li class="nav-item dropdown">
                 <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Mon Compte
                 </a>
                 <div class="dropdown-menu" style="width: 300px; padding: 1em;" aria-labelledby="navbarDropdown">
-                    <form>
+                    <form method="post" action="{{path('app_login')}}">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1"
@@ -35,6 +45,9 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div>
+                        <div class="form-group">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
@@ -45,7 +58,7 @@
                     Newsletter
                 </a>
                 <div class="dropdown-menu" style="width: 300px; padding: 1em;" aria-labelledby="navbarDropdown">
-                    <form>
+                    <form method="post">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail2"
