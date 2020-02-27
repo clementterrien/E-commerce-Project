@@ -31,15 +31,22 @@ class OrderController extends AbstractController
     /**
      * @Route("/confirm", name="order_confirmation")
      */
-    public function confirmation(SessionInterface $session, CartService $cartService, AdressService $adressService)
+    public function confirmation(SessionInterface $session, CartService $cartService, OrderService $orderService, AdressService $adressService)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if (!empty($session->get('cart'))) {
+            $intent = $orderService->preStripePayment();
+        } else {
+            $this->redirectToRoute('cart_show');
+        }
 
         return $this->render('order/confirmorder.html.twig', [
             'cart' => $cartService->getFullCart(),
             'totalPrice' => $cartService->getTotalPrice(),
             'totalQuantity' => $cartService->getTotalQuantity(),
             'adress' => $adressService->getDefaultAdress(),
+            'intent' => $intent['client_secret']
         ]);
     }
 

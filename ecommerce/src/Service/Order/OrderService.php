@@ -79,4 +79,16 @@ class OrderService
 
         $this->session->set('preorder', $order);
     }
+
+    public function preStripePayment()
+    {
+        \Stripe\Stripe::setApiKey('sk_test_ZzEiJVT54kAAOxvzRxIyHY2K00Vr0AaYy6');
+
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $this->cartService->getTotalPrice() * 100,
+            'currency' => 'eur',
+        ]);
+
+        return $intent;
+    }
 }
