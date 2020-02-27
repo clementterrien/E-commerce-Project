@@ -43,4 +43,13 @@ class ProductService
         $products = $this->productRepo->findAll([]);
         return $products;
     }
+
+    /**
+     * Return list of products based on a criteria
+     */
+    public function getProductsByCriteria($field, $value):array
+    {
+        $products = $this->productRepo->findBy([$field => $value]);
+        return $products;
+    }
 }
