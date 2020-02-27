@@ -5,52 +5,75 @@
 
 {% block body %}
 
-	{% if cart | length > 0 %}
+{% if cart | length > 0 %}
 
-		<div class="jumbotron">
-			<p class="lead">Votre commande</p>
-			<hr class="my-4">
-		</div>
-		<h2>Mon Panier</h2>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Produit</th>
-					<th>Prix</th>
-					<th>Quantité</th>
-					<th>Total</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for item in cart %}
-					<tr>
-						<td>{{ item.product.name }}</td>
-						<td>{{ item.product.price }}€</td>
-						<td>{{ item.quantity }}</td>
-						<td>{{ item.product.price * item.quantity }}€</td>
-						<td></td>
-					</tr>
-				{% endfor %}
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="3" class="text-right">Total:</td>
-					<td>
-						{{ totalPrice }}
-						€</td>
-					<td></td>
-				</tr>
-			</tfoot>
-		</table>
-		<h2>Votre Adresse de livraison</h2>
-		{{ adress.name }}
-		{{ adress.adress1 }}
-		{{ adress.adress2 }}
-		{{ adress.postcode }}
-		{{ adress.city }}
-	</br>
-	<a href=" {{path('order_validated')}} " class="btn btn-success">Confirmer mon achat</a>
+<div class="jumbotron">
+	<p class="lead">Votre commande</p>
+	<hr class="my-4">
+</div>
+<h2>Mon Panier</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Produit</th>
+			<th>Prix</th>
+			<th>Quantité</th>
+			<th>Total</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in cart %}
+		<tr>
+			<td>{{ item.product.name }}</td>
+			<td>{{ item.product.price }}€</td>
+			<td>{{ item.quantity }}</td>
+			<td>{{ item.product.price * item.quantity }}€</td>
+			<td></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3" class="text-right">Total:</td>
+			<td>
+				{{ totalPrice }}
+				€</td>
+			<td></td>
+		</tr>
+	</tfoot>
+</table>
+{% if adress %}
+<h2>Votre Adresse de livraison</h2>
+{{ adress.name }}
+{{ adress.adress1 }}
+{{ adress.adress2 }}
+{{ adress.postcode }}
+{{ adress.city }}
 {% else %}
-	<p>Surprise c'est vide</p>
-{% endif %}{% endblock %}
+<div class="message">
+	Vous n'avez pas renseigné d'adresse valide, cliquez sur le lien ci-dessous pour en entrer une.
+</div>
+<a href="{{path('adress_add')}}">
+	<button class="btn btn-primary">Renseigner mon adresse</button>
+</a>
+{% endif %}
+
+</br>
+</br></br>
+
+<div class="payment-container">
+	{% include "partials/paymentCard.html.twig" %}
+</div>
+
+</br></br></br></br></br>
+
+{# <a href=" {{path('order_validated')}} " class="btn btn-success">Confirmer mon achat</a> #}
+{% else %}<p>Surprise c'est vide</p>{% endif %}{% endblock %}
+
+{% block javascripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+{{ encore_entry_script_tags('payment') }}
+{% endblock %}
