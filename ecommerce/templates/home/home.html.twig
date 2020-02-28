@@ -32,14 +32,29 @@
 				</div>
 			</div>
 			<div class="row">
+
+				{% if filteredProducts is defined %}
+				{% for product in filteredProducts %}
+				<div class="col-md-4 d-flex justify-content-center mb-3">
+					{% include 'partials/product-card.html.twig' %}
+				</div>
+				{% endfor %}
+
+				<div class="pagination d-flex justify-content-center mt-2">
+					{{ knp_pagination_render(allTheProducts) }}
+				</div>
+				{% else %}
+
 				{% for product in allTheProducts %}
 				<div class="col-md-4 d-flex justify-content-center mb-3">
 					{% include 'partials/product-card.html.twig' %}
 				</div>
 				{% endfor %}
-			</div>
-			<div class="pagination d-flex justify-content-center mt-2">
-				{{ knp_pagination_render(allTheProducts) }}
+
+				<div class="pagination d-flex justify-content-center mt-2">
+					{{ knp_pagination_render(allTheProducts) }}
+				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>

@@ -10,11 +10,11 @@
         </div>
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <form action="" class="form p-2">
+            <form method="get" class="form p-2">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                            value="option1" checked>
+                        <input class="form-check-input" type="radio" name="priceFilter" id="exampleRadios1"
+                            value="ascendingPrice" checked>
                         <label class="form-check-label" for="exampleRadios1">
                             Prix croissant
                         </label>
@@ -22,8 +22,8 @@
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                            value="option2">
+                        <input class="form-check-input" type="radio" name="priceFilter" id="exampleRadios2"
+                            value="decreasingPrice">
                         <label class="form-check-label" for="exampleRadios2">
                             Prix décroissant
                         </label>
@@ -46,15 +46,15 @@
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
             <div class="card-body">
-                <form>
+                <form method="get">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Example select</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>2010</option>
-                            <option>2000</option>
-                            <option>1990</option>
-                            <option>1980</option>
-                            <option>1970</option>
+                        <select class="form-control" name="yearFilter" id="exampleFormControlSelect1">
+                            <option value="2010">2010</option>
+                            <option value="2000">2000</option>
+                            <option value="1990">1990</option>
+                            <option value="1980">1980</option>
+                            <option value="1970">1970</option>
                         </select>
                     </div>
                     <div class="form-group mt-3 d-flex justify-content-center">
@@ -75,13 +75,13 @@
         </div>
         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
             <div class="card-body">
-                <form>
+                <form method="get">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Example select</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Alsace</option>
-                            <option>Beaujolais</option>
-                            <option>Bordaux</option>
+                        <select class="form-control" name="regionFilter" id="exampleFormControlSelect1">
+                            <option value="Alsace">Alsace</option>
+                            <option value="Beaujolais">Beaujolais</option>
+                            <option value="Bordaux">Bordaux</option>
                         </select>
                     </div>
                     <div class="form-group mt-3 d-flex justify-content-center">
@@ -102,12 +102,12 @@
         </div>
         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
             <div class="card-body">
-                <form>
+                <form method="get">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Example select</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>France</option>
-                            <option>Chine</option>
+                        <select class="form-control" name="countryFilter" id="exampleFormControlSelect1">
+                            <option vlaue="France">France</option>
+                            <option value="Chine">Chine</option>
                         </select>
                     </div>
                     <div class="form-group mt-3 d-flex justify-content-center">
@@ -128,13 +128,13 @@
         </div>
         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
             <div class="card-body">
-                <form>
+                <form method="get">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Example select</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Cépage 1</option>
-                            <option>Cépage 2</option>
-                            <option>Cépage 3</option>
+                        <select class="form-control" name="grappeFilter" id="exampleFormControlSelect1">
+                            <option value="cepage1">Cépage 1</option>
+                            <option value="cepage2">Cépage 2</option>
+                            <option value="cepage3">Cépage 3</option>
                         </select>
                     </div>
                     <div class="form-group mt-3 d-flex justify-content-center">
@@ -155,13 +155,13 @@
         </div>
         <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
             <div class="card-body">
-                <form>
+                <form method="get">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Example select</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>50 cl</option>
-                            <option>75 cl</option>
-                            <option>1 L</option>
+                        <select class="form-control" name="literFilter" id="exampleFormControlSelect1">
+                            <option value="50">50 cl</option>
+                            <option value="75">75 cl</option>
+                            <option value="1">1 L</option>
                         </select>
                     </div>
                     <div class="form-group mt-3 d-flex justify-content-center">
@@ -182,13 +182,13 @@
         </div>
         <div id="collapseHeight" class="collapse" aria-labelledby="headingHeight" data-parent="#accordionExample">
             <div class="card-body">
-                <form>
+                <form method="get">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Example select</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Vins Rouges</option>
-                            <option>Vins blancs</option>
-                            <option>Champagne</option>
+                        <select class="form-control" name="typeFilter" id="exampleFormControlSelect1">
+                            <option value="rouge">Vins Rouges</option>
+                            <option value="blanc">Vins blancs</option>
+                            <option value="champagne">Champagne</option>
                         </select>
                     </div>
                     <div class="form-group mt-3 d-flex justify-content-center">

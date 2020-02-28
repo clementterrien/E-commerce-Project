@@ -47,9 +47,41 @@ class ProductService
     /**
      * Return list of products based on a criteria
      */
-    public function getProductsByCriteria($field, $value):array
+    public function getProductsByCriteria($key,$value, $products = null)
     {
-        $products = $this->productRepo->findBy([$field => $value]);
+
+        if($key == "priceFilter" && $value == "decreasingPrice")
+        {
+            $products = $this->productRepo->findBy([], ['price' => 'DESC']);
+        }
+        elseif($key == "priceFilter" && $value == "ascendingPrice")
+        {
+            $products = $this->productRepo->findBy([],['price' => 'ASC']);
+        }
+        elseif($key == "yearFilter")
+        {
+            $products = $this->productRepo->findBy([],['year' => $value]);
+        }
+        elseif($key == "regionFilter")
+        {
+            $products = $this->productRepo->findBy([],['region' => $value]);
+        }
+        elseif($key == "coutryFilter")
+        {
+            $products = $this->productRepo->findBy([],['country' => $value]);
+        }
+        elseif($key == "grappeFilter")
+        {
+            $products = $this->productRepo->findBy([],['grappe' => $value]);
+        }
+        elseif($key == "literFilter")
+        {
+            $products = $this->productRepo->findBy([],['liter' => $value]);
+        }
+        elseif($key == "typeFilter")
+        {
+            $products = $this->productRepo->findBy([],['type' => $value]);
+        }
         return $products;
     }
 }

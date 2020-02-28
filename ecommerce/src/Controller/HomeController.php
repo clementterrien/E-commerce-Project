@@ -20,6 +20,18 @@ class HomeController extends AbstractController
      */
     public function home(ProductService $productService, PaginatorInterface $paginator, Request $request)
     {
+        
+        $formQuery = $request->query;
+        dump($formQuery);
+        $key = key($formQuery);
+        $value = $request->query->get($key);
+
+        dump($key, $value);
+
+        // $filteredProducts = $paginator->paginate($productService->getProductsByCriteria(key($formQuery), $formQuery->get(key($formQuery))), $request->query->getInt('page', 1));
+
+            // "filteredProducts" => $filteredProducts
+
         $topThreeProducts = $productService->getTop3MostLikedProducts();
         $allTheProducts = $paginator->paginate($productService->getAllTheProducts(), 
             $request->query->getInt('page', 1),
