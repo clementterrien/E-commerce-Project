@@ -1,13 +1,40 @@
 {% extends 'base.html.twig'%}
 
 {% block body %}
-<h1>Register</h1>
 
-{% if form is defined %}
-{{ form_start(form) }}
-{{ form_widget(form) }}
-<button type="submit" class="btn btn-success">Enregistrer</button>
-{{ form_end(form) }}
-{% endif %}
+<div class="container d-flex flex-column justify-content-center align-items-center">
+    <h1 class="mb-4 mt-4">Register Adress</h1>
+
+    {% if form is defined %}
+    {{ form_start(form, {'attr': {'class': 'form col-md-6'}}) }}
+    <div class="form-group">
+        <label for="name">Type</label>
+        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Domicile, Travail...'}}) }}
+    </div>
+    <div class="form-group">
+        <label for="name">Adress 1</label>
+        {{ form_widget(form.adress1, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+    </div>
+    <div class="form-group">
+        <label for="name">Adress 2</label>
+        {{ form_widget(form.adress2, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+    </div>
+    <div class="form-group">
+        <label for="name">Code Postal</label>
+        {{ form_widget(form.postcode, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+    </div>
+    <div class="form-group">
+        <label for="name">Ville</label>
+        {{ form_widget(form.city, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+    </div>
+    <div class="form-group">
+        <label for="name">Complement d'adresse</label>
+        {{ form_widget(form.additionalInfo, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+    </div>
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    {{ form_end(form) }}
+    {% endif %}
+
+</div>
 
 {% endblock %}

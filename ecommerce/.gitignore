@@ -23,3 +23,6 @@ templates/layout/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+# *.icloud files to be ignored
+*.icloud
