@@ -365,6 +365,7 @@ class User implements UserInterface
     }
 
 
+
     // public function __toString()
     // {
     //     return strval($this->id);

@@ -66,7 +66,7 @@ class CartService
 
     /**
      * This function return the cart content
-     * Return array with associative array // product and quantity 
+     * Return array with associative array // product object => quantity 
      */
     public function getFullCart(): array
     {
@@ -82,6 +82,10 @@ class CartService
         return $cartWithData;
     }
 
+    /**
+     * Return the cart content but the array returned is just
+     * an association // product->id => quantity // this array is serializable to be stored in DB
+     */
     public function getLightCart(): array
     {
         return $this->session->get('cart', []);

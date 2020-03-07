@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    stripe_public_key: pk_test_jSmuHaH6ydWh7tUWzQRR4exS00UxPuO6eS
+    stripe_secret_key: sk_test_ZzEiJVT54kAAOxvzRxIyHY2K00Vr0AaYy6
 
 services:
     # default configuration for services in *this* file
@@ -30,11 +32,20 @@ services:
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login'}
 
+    App\EventSubscriber\RequestSubscriber:
+        tags: 
+            - { name: 'kerner.event_subscriber', event: 'charge.succeeded'}
+
     application_backend.event_listener.user_entity:
         class: Application\BackendBundle\EventListener\UserEntityListener
         tags:
                 - { name: doctrine.event_listener, event: prePersist }
                 - { name: doctrine.event_listener, event: postPersist }
+
+    application_backend.event_listener.ConfirmedOrder_entity:
+        class: Application\BackendBundle\EventListener\ConfirmedOrderEntityListener
+        tags:
+                - { name: doctrine.event_listener, event: prePersist }
 
     application_backend.event_listener.adress_entity:
         class: Application\BackendBundle\EventListener\AdressEntityListener
@@ -49,3 +60,5 @@ services:
         autowire: true
         tags:
             - { name: doctrine.event_subscriber }
+
+

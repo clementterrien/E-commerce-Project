@@ -17,6 +17,20 @@ class HomeController extends AbstractController
      */
     public function home(ProductService $productService, PaginatorInterface $paginator, Request $request)
     {
+        
+        $formQuery = $request->query->all();
+        $key = key($formQuery);
+
+        $filteredProducts = null;
+        
+        dump($key);
+        if(!is_null($key) && $key !== "page")
+        {
+            $value = $request->query->get($key);
+            $filteredProducts = $paginator->paginate($productService->getProductsByCriteria($key, $value), $request->query->getInt('page', 1));
+        }
+
+
         $topThreeProducts = $productService->getTop3MostLikedProducts();
         $allTheProducts = $paginator->paginate(
             $productService->getAllTheProducts(),
@@ -26,7 +40,8 @@ class HomeController extends AbstractController
 
         return $this->render('/home/home.html.twig', [
             "topThreeProducts" => $topThreeProducts,
-            "allTheProducts" => $allTheProducts
+            "allTheProducts" => $allTheProducts,
+            "filteredProducts" => $filteredProducts
         ]);
     }
 

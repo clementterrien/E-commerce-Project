@@ -42,6 +42,11 @@ class ConfirmedOrder
      */
     private $TotalPrice;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $stripePaymentID;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class ConfirmedOrder
     public function setTotalPrice(int $TotalPrice): self
     {
         $this->TotalPrice = $TotalPrice;
+
+        return $this;
+    }
+
+    public function getStripePaymentID(): ?string
+    {
+        return $this->stripePaymentID;
+    }
+
+    public function setStripePaymentID(string $stripePaymentID): self
+    {
+        $this->stripePaymentID = $stripePaymentID;
 
         return $this;
     }
