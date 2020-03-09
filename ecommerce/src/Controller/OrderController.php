@@ -2,15 +2,11 @@
 
 namespace App\Controller;
 
-use Stripe\Webhook;
 use App\Service\Cart\CartService;
 use App\Form\ProceedToPaymentType;
 use App\Service\Order\OrderService;
 use App\Service\Adress\AdressService;
-use App\Service\Webhook\WebhookService;
 use App\Service\Payment\StripePaymentService;
-use Psr\Log\LoggerInterface;
-use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -59,11 +55,6 @@ class OrderController extends AbstractController
 
         \Stripe\Stripe::setApiKey($this->getParameter('stripe_secret_key'));
 
-        $endpoint = \Stripe\WebhookEndpoint::create([
-            'url' => 'https://6600cfb0.ngrok.io/webhook',
-            'enabled_events' => ['charge.failed', 'charge.succeeded'],
-        ]);
-
         return $this->render('order/thanks.html.twig');
     }
 
@@ -77,10 +68,10 @@ class OrderController extends AbstractController
         // If you are testing your webhook locally with the Stripe CLI you
         // can find the endpoint's secret by running `stripe listen`
         // Otherwise, find your endpoint's secret in your webhook settings in the Developer Dashboard
-        $endpoint_secret = 'whsec_XM1Xu97NfE18kftfJJyjjjkOxknIChBc';
+        $endpoint_secret = 'whsec_Ki2A69SIxbinDXVBLKhayrJt3AKZF6FT';
 
         $payload = @file_get_contents('php://input');
-        $sig_header = $request->server->get('HTTP_HOST');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 
         $event = null;
 
@@ -92,29 +83,41 @@ class OrderController extends AbstractController
             );
         } catch (\UnexpectedValueException $e) {
             // Invalid payload
-            http_response_code(400);
+            return new Response('Invalid Payload', http_response_code(400));
             exit();
         } catch (\Stripe\Exception\SignatureVerificationException $e) {
             // Invalid signature
-            http_response_code(400);
+            return new Response('Invalid Signature', http_response_code(400));
             exit();
         }
 
-        // // Handle the event
-        // switch ($event->type) {
-        //     case 'payment_intent.succeeded':
-        //         $paymentIntent = $event->data->object; // contains a StripePaymentIntent
-        //         break;
-        //     case 'payment_method.attached':
-        //         $paymentMethod = $event->data->object; // contains a StripePaymentMethod
-        //         break;
-        //         // ... handle other event types
-        //     default:
-        //         // Unexpected event type
-        //         http_response_code(400);
-        //         exit();
-        // }
+        // Handle the event
+        switch ($event->type) {
+            case 'charge.succeeded':
+                $paymentIntent_id = $event->data->object->payment_intent;
+                // $orderService->createOrderInDB($this->getUser(), $paymentIntent_id);
+                break;
+            case 'payment_method.attached':
+                $paymentMethod = $event->data->object; // contains a StripePaymentMethod
+                break;
+                // ... handle other event types
+            default:
+                return new Response('other case', http_response_code(400));
+                exit();
+        }
 
-        return new Response();
+        // $orderService->triggerOrder($event);
+        return new Response($paymentIntent_id, http_response_code(200));
+    }
+
+    /**
+     * @Route("/maman", name="order_encoreuntest")
+     */
+    public function maman(OrderService $orderService, CartService $cartService)
+    {
+
+        // $orderService->manageStocks(serialize($cartService->getLightCart()));
+
+        return $this->redirectToRoute('cart_show');
     }
 }
