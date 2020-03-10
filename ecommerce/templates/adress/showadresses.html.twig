@@ -6,50 +6,54 @@
 
 {% if adresses | length > 0 %}
 
-<div class="jumbotron">
-    <p class="lead">Ici, vous pouvez ajouter, modifier ou supprimer vos adresses de livraison</p>
-    <hr class="my-4">
-    <a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
+<div class="container">
+    <div class="jumbotron mt-5">
+        <p class="lead">Ici, vous pouvez ajouter, modifier ou supprimer vos adresses de livraison</p>
+        <hr class="my-4">
+        <a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Ville</th>
+                <th>Active</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adress in adresses %}
+            <tr>
+                <td>
+                    {{ adress.name }}
+                    {% if adress.active == true %}
+                    [Par défaut]
+                    {% else %}
+                    <a href="{{ path('adress_setdefault', {'adress_id': adress.id})}}"
+                        class="btn btn-primary btn-sm">Définir comme par défaut</a>
+                    {% endif %}
+                </td>
+                <td>{{ adress.city }}
+                </td>
+                <td>{{ adress.active }}</td>
+                <td>
+                    <a href="#" class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="jumbotron">
+        <p class="lead">Vous n'avez pas enregistré d'adresse... Cliquez sur le bouton ci-dessous pour le faire</p>
+        <a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
+        <hr class="my-4">
+    </div>
+    {% endif %}
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Ville</th>
-            <th>Active</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for adress in adresses %}
-        <tr>
-            <td>
-                {{ adress.name }}
-                {% if adress.active == true %}
-                [Par défaut]
-                {% else %}
-                <a href="{{ path('adress_setdefault', {'adress_id': adress.id})}}"
-                    class="btn btn-primary btn-sm">Définir comme par défaut</a>
-                {% endif %}
-            </td>
-            <td>{{ adress.city }}
-            </td>
-            <td>{{ adress.active }}</td>
-            <td>
-                <a href="#" class="btn btn-danger btn-sm">
-                    Delete
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<div class="jumbotron">
-    <p class="lead">Vous n'avez pas enregistré d'adresse... Cliquez sur le bouton ci-dessous pour le faire</p>
-    <a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
-    <hr class="my-4">
-</div>
-{% endif %}
+
 {% endblock %}
