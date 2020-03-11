@@ -15,9 +15,10 @@ class CreateAdressType extends AbstractType
             ->add('name')
             ->add('adress1')
             ->add('adress2')
+            ->add('additionalInfo')
             ->add('postcode')
             ->add('city')
-            ->add('additionalInfo');
+            ->add('country');
     }
 
     public function configureOptions(OptionsResolver $resolver)
