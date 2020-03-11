@@ -17,6 +17,7 @@ class CartController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         return $this->render('cart/cart.html.twig', [
+            'user' => $this->getUser(),
             'cart' => $cartService->getFullCart(),
             'totalPrice' => $cartService->getTotalPrice(),
             'totalQuantity' => $cartService->getTotalQuantity(),

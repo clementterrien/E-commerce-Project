@@ -19,6 +19,7 @@ class AdressController extends AbstractController
     public function showMyAdresses(AdressService $service)
     {
         return $this->render('adress/showadresses.html.twig', [
+            'user' => $this->getUser(),
             'activeAdress' => $service->getDefaultAdress(),
             'adresses' => $service->getFullAdresses()
         ]);

@@ -6,67 +6,123 @@
 {% block body %}
 
 {% if cart | length > 0 %}
+<div class="container-fluid">
+	<div class="jumbotron mb-0 p-5">
+		<p class="lead">Votre panier contient actuellement
+			{{ totalQuantity }}
+			articles</p>
+		<hr class="my-4">
+	</div>
 
-<div class="jumbotron">
-	<p class="lead">Votre panier contient actuellement
-		{{ totalQuantity }}
-		articles</p>
-	<hr class="my-4">
+	<div class="mt-0">
+		<h2>Mon Panier</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Produit</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th>X</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in cart %}
+				<tr>
+					<td>{{ item.product.name }}</td>
+					<td>{{ item.product.price }}
+						€</td>
+					<td>
+						{{ item.quantity }}
+						<a href=" {{ path( 'cart_add', {'product_id': item.product.id})}}"
+							class="btn btn-secondary btn-sm">+</a>
+						<a href=" {{ path('cart_remove_one', {'product_id': item.product.id})}}"
+							class="btn btn-secondary btn-sm">-</a>
+					</td>
+					<td>{{ item.product.price * item.quantity }}
+						€</td>
+					<td></td>
+					<td>
+						<a href="{{ path("cart_remove", {'product_id': item.product.id})}}"
+							class="btn btn-danger btn-sm">
+							Delete
+						</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3" class="text-right">Total:</td>
+					<td>
+						{{ totalPrice }}
+						€</td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div class="container-fluid mb-4 ml-0 pl-0">
+		<h2>Livraison</h2>
+
+		<div class="w100 border container-fluid d-flex justify-content-between mt-4 pl-0">
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">{{user.firstname ~ " " ~ user.lastname}}</h5>
+					<h6 class="card-subtitle mb-2 text-muted">
+						{% if defaultAdress %}
+						{{ defaultAdress.name }}
+						{% endif %}</h6>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+						card's content.</p>
+					<div class="d-flex flex-column">
+						<a href="#" class="card-link ml-1">Ajouter une adresse</a>
+						<a href="#" class="card-link ml-1">Gérer mes adresses</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-sm-6 px-5 py-4">
+				<div class="card bg-light p-0">
+					<div class="card-header d-flex">
+						<div class="font-weight-bold text-uppercase mr-3">{{ defaultAdress.name }}</div>
+					</div>
+					<div class="card-body">
+						<h5 class="card-text font-weight-bold">{{user.firstname ~ " " ~ user.lastname}}</h5>
+						<p class="card-text my-1">{{defaultAdress.adress1}}</p>
+						{% if defaultAdress.adress2 is not null %}
+						<p class="card-text my-1">{{defaultAdress.adress1}}</p>
+						{% endif %}
+						<p class="card-text my-1">{{defaultAdress.postcode}}</p>
+						<p class="card-text my-1">{{defaultAdress.city}}</p>
+					</div>
+					<div class="card-footer">
+						<a href="#"><button>Modifier mon adresse de livraison</button></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">Facturation</h5>
+					<h6 class="card-subtitle mb-2 text-muted">{{ defaultAdress.name }}</h6>
+					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+						card's content.</p>
+					<div class="d-flex flex-column">
+						<a href="#" class="card-link ml-1">Ajouter une adresse</a>
+						<a href="#" class="card-link ml-1">Gérer mes adresses</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<form action="{{path('order_preconfirmation')}}">
+		<button class="btn btn-success">Proceder au paiement</button>
+	</form>
 </div>
-<h2>Mon Panier</h2>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Produit</th>
-			<th>Prix</th>
-			<th>Quantité</th>
-			<th>Total</th>
-			<th>X</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for item in cart %}
-		<tr>
-			<td>{{ item.product.name }}</td>
-			<td>{{ item.product.price }}
-				€</td>
-			<td>
-				{{ item.quantity }}
-				<a href=" {{ path( 'cart_add', {'product_id': item.product.id})}}"
-					class="btn btn-secondary btn-sm">+</a>
-				<a href=" {{ path('cart_remove_one', {'product_id': item.product.id})}}"
-					class="btn btn-secondary btn-sm">-</a>
-			</td>
-			<td>{{ item.product.price * item.quantity }}
-				€</td>
-			<td></td>
-			<td>
-				<a href="{{ path("cart_remove", {'product_id': item.product.id})}}" class="btn btn-danger btn-sm">
-					Delete
-				</a>
-			</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="3" class="text-right">Total:</td>
-			<td>
-				{{ totalPrice }}
-				€</td>
-			<td></td>
-		</tr>
-	</tfoot>
-</table>
-{% if defaultAdress %}
-<h2>Mon adresse</h2>
-{{ defaultAdress.name }}
-{% endif %}
-</br>
-<form action="{{path('order_preconfirmation')}}" method="POST">
-	<button class="btn btn-success">Proceder au paiement</button>
-</form>
 {% else %}
 <p>Surprise c'est vide</p>
 {% endif %}{% endblock %}
