@@ -2,9 +2,11 @@
 
 namespace App\Service\Payment;
 
+use App\Entity\ConfirmedOrder;
+use App\Entity\User;
 use App\Service\Cart\CartService;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Service\Encryption\EncryptionService;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class StripePaymentService
 {
@@ -22,14 +24,20 @@ class StripePaymentService
      * Function for Stripe API // Create a PaymentIntent to Stripe 
      * Stripe returns a request with this payment 
      */
-    public function preStripePayment()
+    public function preStripePayment(ConfirmedOrder $confirmedOrder)
     {
         \Stripe\Stripe::setApiKey('sk_test_ZzEiJVT54kAAOxvzRxIyHY2K00Vr0AaYy6');
-
         $intent = \Stripe\PaymentIntent::create([
             'amount' => $this->cartService->getTotalPrice() * 100,
             'currency' => 'eur',
             'payment_method_types' => ['card'],
+            'metadata' =>
+            [
+                'user_id' => $confirmedOrder->getUser()->getId(),
+                'adress_id' => $confirmedOrder->getAdress()->getId(),
+                'cart' => $confirmedOrder->getCart(),
+                'totalprice' => $confirmedOrder->getTotalPrice()
+            ]
         ]);
 
         return $intent;

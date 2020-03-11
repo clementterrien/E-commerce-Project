@@ -25,7 +25,6 @@ class ConfirmedOrderEntityListener
 
         if ($entity instanceof ConfirmedOrder) {
             $entity->setCreatedAt(new \DateTime());
-            $this->orderService->manageStocks($entity->getCart());
             $this->cartService->removeCart();
         }
     }

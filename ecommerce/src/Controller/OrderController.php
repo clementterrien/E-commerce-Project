@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\ConfirmedOrder;
 use App\Service\Cart\CartService;
 use App\Form\ProceedToPaymentType;
+use App\Repository\UserRepository;
 use App\Service\Order\OrderService;
 use App\Service\Adress\AdressService;
 use App\Service\Payment\StripePaymentService;
@@ -27,7 +29,15 @@ class OrderController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         if (!empty($session->get('cart'))) {
-            $intent = $paymentService->preStripePayment();
+            $user = $this->getUser();
+            $preOrder = (new ConfirmedOrder)
+                ->setUser($user)
+                ->setAdress($adressService->getDefaultAdress())
+                ->setCart(serialize($cartService->getLightCart()))
+                ->setTotalPrice($cartService->getTotalPrice())
+                ->setStripePaymentID('temp');
+
+            $intent = $paymentService->preStripePayment($preOrder);
             $form = $this->createForm(ProceedToPaymentType::class, null, [
                 'attr' => ['id' => 'payment-form'],
             ]);
@@ -61,7 +71,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/webhook", name="order_stripewebhook")
      */
-    public function stripe(OrderService $orderService, Request $request)
+    public function stripe(OrderService $orderService, Request $request, UserRepository $userRepo)
     {
         \Stripe\Stripe::setApiKey($this->getParameter('stripe_secret_key'));
 
@@ -94,8 +104,8 @@ class OrderController extends AbstractController
         // Handle the event
         switch ($event->type) {
             case 'charge.succeeded':
-                $paymentIntent_id = $event->data->object->payment_intent;
-                // $orderService->createOrderInDB($this->getUser(), $paymentIntent_id);
+                // $cart = $event->data->object->metadata->cart;
+                $orderService->triggerOrder($event);
                 break;
             case 'payment_method.attached':
                 $paymentMethod = $event->data->object; // contains a StripePaymentMethod
@@ -107,7 +117,7 @@ class OrderController extends AbstractController
         }
 
         // $orderService->triggerOrder($event);
-        return new Response($paymentIntent_id, http_response_code(200));
+        return new Response($event, http_response_code(200));
     }
 
     /**

@@ -4,11 +4,13 @@ namespace App\Service\Order;
 
 use App\Entity\User;
 use App\Entity\ConfirmedOrder;
+use App\Repository\AdressRepository;
 use App\Service\Cart\CartService;
 use App\Repository\ProductRepository;
 use App\Service\Adress\AdressService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ConfirmedOrderRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -22,6 +24,8 @@ class OrderService
     public $user;
     protected $adressService;
     protected $cartService;
+    protected $userRepo;
+    protected $adressRepo;
 
     public function __construct(
         SessionInterface $session,
@@ -30,7 +34,9 @@ class OrderService
         Security $security,
         AdressService $adressService,
         CartService $cartService,
-        ConfirmedOrderRepository $orderRepo
+        ConfirmedOrderRepository $orderRepo,
+        UserRepository $userRepo,
+        AdressRepository $adressRepo
     ) {
         $this->session = $session;
         $this->em = $em;
@@ -39,6 +45,8 @@ class OrderService
         $this->adressService = $adressService;
         $this->cartService = $cartService;
         $this->orderRepo = $orderRepo;
+        $this->userRepo = $userRepo;
+        $this->adressRepo = $adressRepo;
     }
 
     public function manageStocks(string $cart)
@@ -69,14 +77,19 @@ class OrderService
         $this->session->set('preorder', $order);
     }
 
-    public function createOrderInDB(User $user, $stripePI_id)
+    public function createOrderInDB($event)
     {
-        $order_adress = $this->adressService->getDefaultAdress();
+        $user = $this->userRepo->findOneBy(['id' => $event->data->object->metadata->user_id]);
+        $adress = $this->adressRepo->findOneBy(['id' => $event->data->object->metadata->adress_id]);
+        $cart = $event->data->object->metadata->cart;
+        $totalPrice = $event->data->object->metadata->totalprice;
+        $stripePI_id = $event->data->object->payment_intent;
+
         $order = (new ConfirmedOrder())
             ->setUser($user)
-            ->setCart(serialize($this->cartService->getLightCart()))
-            ->setAdress($order_adress)
-            ->setTotalPrice($this->cartService->getTotalPrice())
+            ->setCart($cart)
+            ->setAdress($adress)
+            ->setTotalPrice($totalPrice)
             ->setStripePaymentID($stripePI_id);
 
         $this->em->persist($order);
@@ -101,9 +114,9 @@ class OrderService
     public function triggerOrder($event)
     {
         $stripePI_id = $event->data->object->payment_intent;
-        $this->manageStocks(serialize($this->cartService->getLightCart()));
-        $this->createOrderInDB($stripePI_id);
+        $this->createOrderInDB($event);
+        $this->manageStocks($event->data->object->metadata->cart);
         $order_id = $this->orderRepo->findOneBy(['stripePaymentId' => $stripePI_id])->getId();
-        // $this->storeOrderIdInStripePaymentIntent($order_id, $stripePI_id);
+        $this->storeOrderIdInStripePaymentIntent($order_id, $stripePI_id);
     }
 }
