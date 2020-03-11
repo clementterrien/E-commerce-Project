@@ -2,7 +2,6 @@
 
 namespace App\Service\Order;
 
-use App\Entity\User;
 use App\Entity\ConfirmedOrder;
 use App\Repository\AdressRepository;
 use App\Service\Cart\CartService;
@@ -31,7 +30,6 @@ class OrderService
         SessionInterface $session,
         EntityManagerInterface $em,
         ProductRepository $productRepo,
-        Security $security,
         AdressService $adressService,
         CartService $cartService,
         ConfirmedOrderRepository $orderRepo,
@@ -41,12 +39,20 @@ class OrderService
         $this->session = $session;
         $this->em = $em;
         $this->productRepo = $productRepo;
-        $this->user = $security->getUser();
         $this->adressService = $adressService;
         $this->cartService = $cartService;
         $this->orderRepo = $orderRepo;
         $this->userRepo = $userRepo;
         $this->adressRepo = $adressRepo;
+    }
+
+    public function triggerOrder($event)
+    {
+        $this->createOrderInDB($event);
+        $this->manageStocks($event->data->object->metadata->cart);
+        $stripePI_id = $event->data->object->payment_intent;
+        $order_id = $this->orderRepo->findOneBy(['stripePaymentID' => $stripePI_id])->getId();
+        $this->storeOrderIdInStripePaymentIntent($order_id, $stripePI_id);
     }
 
     public function manageStocks(string $cart)
@@ -78,14 +84,5 @@ class OrderService
 
         $this->em->persist($order);
         $this->em->flush();
-    }
-
-    public function triggerOrder($event)
-    {
-        $this->createOrderInDB($event);
-        $this->manageStocks($event->data->object->metadata->cart);
-        $stripePI_id = $event->data->object->payment_intent;
-        $order_id = $this->orderRepo->findOneBy(['stripePaymentID' => $stripePI_id])->getId();
-        $this->storeOrderIdInStripePaymentIntent($order_id, $stripePI_id);
     }
 }

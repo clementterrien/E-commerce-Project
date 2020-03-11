@@ -17,6 +17,9 @@ class CartService
         $this->productRepo = $productRepo;
     }
 
+    /**
+     * Add a specific product to the cart of the current session
+     */
     public function add(int $product_id)
     {
 
@@ -31,6 +34,9 @@ class CartService
         $this->session->set('cart', $cart);
     }
 
+    /**
+     * Remove one item specific product from the cart of the current session
+     */
     public function removeOne(int $product_id)
     {
         $cart = $this->session->get('cart', []);
@@ -48,6 +54,9 @@ class CartService
         $this->session->set('cart', $cart);
     }
 
+    /**
+     * Remove all items of a specific product from the cart of the current session
+     */
     public function removeAll(int $product_id)
     {
         $cart = $this->session->get('cart', []);
@@ -59,6 +68,9 @@ class CartService
         $this->session->set('cart', $cart);
     }
 
+    /**
+     * Remove the cart of the current session
+     */
     public function removeCart()
     {
         $this->session->remove('cart');
