@@ -66,7 +66,7 @@ class CartService
 
     /**
      * This function return the cart content
-     * Return array with associative array // product object => quantity 
+     * Return array with associative array // Entity $Product => int $quantity 
      */
     public function getFullCart(): array
     {

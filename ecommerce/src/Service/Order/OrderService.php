@@ -61,22 +61,6 @@ class OrderService
         $this->em->flush();
     }
 
-    private function storeCartInSession()
-    {
-        $adress = $this->adressService->getDefaultAdress();
-        $cart = serialize($this->session->get('cart', []));
-        $totalPrice = $this->cartService->getTotalPrice();
-        $order = new ConfirmedOrder;
-        $order
-            ->setCart($cart)
-            ->setUser($this->security->getUser())
-            ->setCreatedAt(new \DateTime())
-            ->setAdress($adress)
-            ->setTotalPrice($totalPrice);
-
-        $this->session->set('preorder', $order);
-    }
-
     public function createOrderInDB($event)
     {
         $user = $this->userRepo->findOneBy(['id' => $event->data->object->metadata->user_id]);
@@ -96,27 +80,12 @@ class OrderService
         $this->em->flush();
     }
 
-
-    // public function storeOrderIdInStripePaymentIntent(int $order_id, $stripePI_id)
-    // {
-    //     \Stripe\Stripe::setApiKey('sk_test_ZzEiJVT54kAAOxvzRxIyHY2K00Vr0AaYy6');
-
-    //     \Stripe\PaymentIntent::update(
-    //         $stripePI_id,
-    //         [
-    //             'metadata' => [
-    //                 'order_id' => $order_id
-    //             ]
-    //         ]
-    //     );
-    // }
-
     public function triggerOrder($event)
     {
-        $stripePI_id = $event->data->object->payment_intent;
         $this->createOrderInDB($event);
         $this->manageStocks($event->data->object->metadata->cart);
-        $order_id = $this->orderRepo->findOneBy(['stripePaymentId' => $stripePI_id])->getId();
+        $stripePI_id = $event->data->object->payment_intent;
+        $order_id = $this->orderRepo->findOneBy(['stripePaymentID' => $stripePI_id])->getId();
         $this->storeOrderIdInStripePaymentIntent($order_id, $stripePI_id);
     }
 }
