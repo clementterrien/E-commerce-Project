@@ -17,15 +17,14 @@ class HomeController extends AbstractController
      */
     public function home(ProductService $productService, PaginatorInterface $paginator, Request $request)
     {
-        
+
         $formQuery = $request->query->all();
         $key = key($formQuery);
 
         $filteredProducts = null;
-        
+
         dump($key);
-        if(!is_null($key) && $key !== "page")
-        {
+        if (!is_null($key) && $key !== "page") {
             $value = $request->query->get($key);
             $filteredProducts = $paginator->paginate($productService->getProductsByCriteria($key, $value), $request->query->getInt('page', 1));
         }
@@ -72,5 +71,13 @@ class HomeController extends AbstractController
         $mailer->send($email);
 
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/tester", name="test_tester")
+     */
+    public function testament()
+    {
+        return $this->render('test/test.html.twig');
     }
 }
