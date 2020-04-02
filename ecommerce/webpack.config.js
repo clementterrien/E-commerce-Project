@@ -51,10 +51,15 @@ Encore
   .configureBabelPresetEnv(config => {
     config.useBuiltIns = 'usage';
     config.corejs = 3;
-  });
+  })
 
 // enables Sass/SCSS support
 //.enableSassLoader()
+
+  .copyFiles({
+    from: './assets/images',
+    to: 'images/[path][name].[hash:8].[ext]'
+  })
 
 // uncomment if you use TypeScript
 //.enableTypeScriptLoader()

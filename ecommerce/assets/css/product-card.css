@@ -1,23 +1,117 @@
-.products-exposition{
-	display:grid;
-	height:100vh;
+.product-card {
+	display: flex;
+	border: solid black;
+	border-width: 1px;
+	height: 380px;
+	width: 360px;
+
+}
+p {
+	margin: 0;
 }
 
-.product-card{
-	margin:auto;
-	width:30vw;
-	height:auto;
-	display:flex;
-	flex-direction:column;
-	justify-content:space-between;
-	background-color: var(--light-grey);
-	box-shadow:0px 1px 10px var(--light-grey);
+.card-left-col {
+	padding-top: 20px;
+	height: 100%;
+	width: 40%;
+}
+
+.card-right-col {
+	width: 60%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.capacity {
+	border: solid lightgray 1px;
+}
+.main-infos {
+	display: flex;
+	flex-direction: column;
+	margin-top: 16px;
+	max-height: 40%;
+}
+.price-section {
+	height: 30%;
+	display: flex;
+	flex-direction: column;
+	padding-top: 20px;
+}
+.price {
+	display: flex;
+}
+.price-number {
+	font-size: 22px;
+	font-weight: 900;
+}
+.price-spec {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding-left: 0.5em;
+}
+.price-spec h5 {
+	font-size: 15px;
+	margin: 0;
+}
+.main-action {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 30%;
+}
+.product-name {
+	text-transform: uppercase;
+	font-size: 15px;
+	font-weight: 900;
+	margin: 0;
+}
+.additional-product-infos {
+	font-size: 13px;
+}
+
+.white-wine-img {
+	width: 100%;
+	height: 100%;
+}
+.img-div {
+	display: flex;
+}
+
+.bottle-img {
+	display: flex;
+	width: 100%;
+	height: 70%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.rouge {
+	background-image: url('../images/vin-rouge.png');
+}
+
+.blanc {
+	background-image: url('../images/vin-blanc.png');
+}
+
+.champagne {
+	background-image: url('../images/champagne.png');
+}
+
+.product-sub-action {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 30%;
+	padding: 30px;
 }
 
 .product-card img {
-	width:50%;
-	height:80%;
-	margin-top:1em;
+	width:30%;
+	height: auto;
 	align-self:center;
 }
 
@@ -32,7 +126,6 @@
 
 .product-title{
 	grid-column:1 / -1;
-	margin:.6em 0;
 	font-size:1.4em;
 	color:var(--primary);
 }

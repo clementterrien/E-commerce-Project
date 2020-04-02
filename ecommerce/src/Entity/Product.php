@@ -59,6 +59,11 @@ class Product
     private $capacity;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $alcool;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $price;
@@ -315,6 +320,18 @@ class Product
     public function setStock(?int $stock): self
     {
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getAlcool(): ?int
+    {
+        return $this->alcool;
+    }
+
+    public function setAlcool(int $alcool): self
+    {
+        $this->alcool = $alcool;
 
         return $this;
     }

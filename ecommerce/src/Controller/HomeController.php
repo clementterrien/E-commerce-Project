@@ -80,4 +80,12 @@ class HomeController extends AbstractController
     {
         return $this->render('test/test.html.twig');
     }
+
+    /**
+     * @Route("/tester1", name="test1_tester")
+     */
+    public function testament1()
+    {
+        return $this->render('test/test1.html.twig');
+    }
 }

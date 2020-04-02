@@ -1,16 +1,20 @@
 body {
     background-color: black;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
-
+.navbar-container {
+    width:100%
+}
 .nav {
     background-color: white;
     width: 100%;
-    height: 150px;
+    min-height: 110px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
-
-
 .max{
     display: flex;
     flex-direction: column;
@@ -18,64 +22,84 @@ body {
     justify-content: center;
     height: 100%;
 }
-
-
 .navbar-floor1 {
-    height: 60%;
+    height: 90px;
     width: 100%;
     padding-left: 5vmin;
     display: flex;
     justify-content: space-between;
 }
-
+.navbar-floor2 {
+    height: 25px;
+    width: 100%;
+    margin-top: 10px;
+    padding-left: 5vmin;
+    display: flex;
+}
 .navbar-floor1-elements {
     height: 100%;
     display: flex;
     align-items: center;
 }
-
+.navbar-floor2-elements {
+    height: 100%;
+    align-items: center;
+    margin-left: 5%;
+    font-weight: 900;
+}
 .element-search{
     width: 70%;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
-
-
+.input-group {
+    height: 40px;
+    width: 100%;
+}
 .element-logo {
     height: 100%;
 }
-
 #logo {
     width: 125px;
     height: auto;
 }
-
 .element-menu {
-    width: 500px;
+    display: flex;
+    min-width: 500px;
     padding: 7px;
 }
+.element-menu a {
+    text-decoration: none;
+    color: black;
+}
 .element-support {
-    width: 250px;
+    width: 280px;
 }
-
-
-.navbar-floor2 {
-    height: 40%;
-    width: 100%;
-}
-
 .menu-items {
-    width: 25%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
     padding: 0.8em;
     display: flex;
-    border: transparent;
-    border-width: 1px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
+.item-container {
+    width: 25%;
+    height: 90%;
+    border: solid 1px white;
+}
+.hover {
+    background-color: rgb(245, 245, 245);
+    border: solid;
+    border-color: rgb(230, 230, 230);
+    border-width: 1px;
+}
+.hover-button {
+    background-color: rgb(227, 227, 227);
+    border-color: rgb(0, 0, 0);
+}
 .item-logo-section {
     height: 70%;
     width: 100%;
@@ -83,12 +107,13 @@ body {
     display: flex;
     justify-content: center;
 }
-
 .item-logo {
     width:auto;
     height: 90%;
 }
-
+.logo-letter {
+    padding: 1px;
+}
 img {
     width: 100%;
     height: 100%;
@@ -96,28 +121,232 @@ img {
 h1 {
     color: brown ;
 }
-
+hr {
+    margin-left: 3%;
+    margin-right: 3%;
+}
 .menu-item-title{
     text-align: center;
     font-size: 11px;
 }
-
 .element-support {
+    display: none;
+    flex-direction: column;
+}
+.myaccount-container {
+    position: relative;
+}
+.newsletter-container {
+    position: relative;
+}
+.cart-container {
+    position: relative;
+}
+.inpu-group-append {
+    height: 100%;
+}
+.form-control {
+    height: 100%;
+}
+.search-button {
+    height: 100%;
+}
+.action-button {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    margin: 2rem;
+}
+.loginform-navbar {
+    display: none;
+    position: absolute;
+    padding: 1rem;
+    border: solid;
+    border-color: rgb(225, 225, 225);
+    border-width: 1px;
+    z-index: 10;
+    top: 100%;
+    right: -1px;
+    width: 300px;
+    max-height: 500px;
+    background-color:#fff;
+}
+.newsletter-box {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    padding: 1rem;
+    border: solid;
+    left: -1px;
+    border-color: rgb(225, 225, 225);
+    border-width: 1px;
+    background-color: white;
+    width: 300px;
+    height: 250px;
+}
+.cart-box {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    padding: 1rem;
+    border: solid;
+    right: -1px;
+    border-color: rgb(225, 225, 225);
+    border-width: 1px;
+    background-color: white;
+    width: 350px;
+}
+.cart-box-container {
     display: flex;
     flex-direction: column;
 }
-
-.hover {
-    background-color: lightgray;
-    border: solid;
-    border-width: 1px;
+.cart-box-container hr {
+    width: 100%;
+}
+.cart-box-product {
+    display: flex;
+}
+.cart-box-product-infos {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    font-size: 14px;
+}
+.product-infos-name {
+    text-transform: uppercase;
+    font-weight: 800;
+}
+.product-infos-other-infos {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.cart-box-product-quantity {
+    text-align: right;
+    vertical-align: top;
+    width: 15%;
+}
+.box-buttons {
+    height: 85px;
+    display: flex;
+}
+.left-box-buttons-col {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+}
+.right-box-buttons-col {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+}
+.box-buttons-button {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 8.5px;
+    border: solid lightgray 1px;
+    margin: 3px;
+}
+.box-buttons-title {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+.box-buttons-button a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: black;
+}
+.box-buttons-button p {
+    display: flex;
+    justify-content: center;
+}
+.box-myaccount {
+    height: 220px;
+}
+.box-title {
+    margin-top: 7px;
+    font-size: 17px;
+    font-weight: 900;
+    font-style: italic;
+    color: rgb(255,99,80);
+    display: flex;
+    justify-content: center;
+}
+.box-register {
+    display: flex;
+}
+.box-content {
+    font-size: 12px;
+    text-align: justify;
+}
+.buttons {
+    display: flex;
+}
+.element-home {
+    height: 100%;
+    width: 100px;
+}
+.element-home img {
+    margin-left: 20px;
+    width: auto;
+    height: 100%;
+}
+.element-home a {
+    width: 100%;
+    height: 100%;
+}
+.element-promo{
+    color: rgb(255,99,80);
+    height: 100%;
+}
+.element-vins-button {
+    display: flex;
+    height: 100%;
+    flex-direction: column-reverse;
+    box-sizing: content-box;
+}
+.element-vins-button p{
+    margin-bottom: 0;
+}
+.vins-button-hover {
+    border-bottom: solid black 3px;
 }
 
-.hello {
-    position: absolute;
-    width: 200px;
-    height: 300px;
-    background-color: turquoise;
+.floor2-text-element {
+    margin-bottom: 0;
 }
+
+@media (min-width: 992px) {
+    .element-menu{
+        width: 41.66667%;
+    }
+}
+
+@media (min-width: 1138px) {
+    .element-support {
+        display: flex;
+    }
+}
+
+
+
+@media (max-width: 991px) {
+    .element-menu{
+        width: 33.333333%;
+    }
+}
+
+
 
 

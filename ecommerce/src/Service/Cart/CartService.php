@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService
 {
-
     protected $session;
     protected $productRepo;
 
@@ -20,18 +19,16 @@ class CartService
     /**
      * Add a specific product to the cart of the current session
      */
-    public function add(int $product_id)
+    public function add(int $product_id, int $quantity)
     {
-
         $cart = $this->session->get('cart', []);
-
         if (!empty($cart[$product_id])) {
-            $cart[$product_id]++;
+            $cart[$product_id] += $quantity;
         } else {
-            $cart[$product_id] = 1;
+            $cart[$product_id] = $quantity;
         }
-
         $this->session->set('cart', $cart);
+        $this->setFullCart();
     }
 
     /**
@@ -52,6 +49,7 @@ class CartService
         }
 
         $this->session->set('cart', $cart);
+        $this->setFullCart();
     }
 
     /**
@@ -94,6 +92,12 @@ class CartService
         return $cartWithData;
     }
 
+    public function setFullCart()
+    {
+        $cartWithData = $this->getFullCart();
+        $this->session->set('fullcart', $cartWithData);
+    }
+
     /**
      * Return the cart content but the array returned is just
      * an association // product->id => quantity // this array is serializable to be stored in DB
@@ -114,6 +118,7 @@ class CartService
             $totalPrice += $item['product']->getPrice() * $item['quantity'];
         }
 
+
         return $totalPrice;
     }
 
@@ -129,5 +134,10 @@ class CartService
         }
 
         return $totalQuantity;
+    }
+
+    public function GetAvailableQuantity($product_id)
+    {
+        return $this->productRepo->findOneBy(['id' => $product_id])->getStock();
     }
 }

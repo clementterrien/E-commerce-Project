@@ -27,9 +27,12 @@ class FavoriteController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $service->add($product_id);
-
-        return $this->redirectToRoute('favorite_show');
+        if ($this->getUser() == null) {
+            $this->redirectToRoute('security_login');
+        } else {
+            $service->add($product_id);
+            return $this->redirectToRoute('favorite_show');
+        }
     }
 
     /**
