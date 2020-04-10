@@ -33,6 +33,12 @@
 	justify-content: center;
 	align-items: center;
 }
+.d-column-centered-between {
+	display: flex; flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
 body{
 	margin:0;
 	padding:0;

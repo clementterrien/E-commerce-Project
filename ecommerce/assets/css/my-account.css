@@ -65,7 +65,10 @@
     margin-bottom: 7px;
     text-align: center;
 }
-
+hr {
+    margin-left: 0; margin-right: 0;
+    width: 100% !important;
+}
 #main-section-first div.square-item {
     border: 1px lightgray;
     /* border-bottom: solid 2px lightgray; */
@@ -76,6 +79,9 @@
     justify-content: space-between;
     margin-bottom: 20px;
     border: solid 2px lightgray;
+}
+.adress-without {
+    min-height: 250px;
 }
 .main-section-floor2 {
     width: 100%;
