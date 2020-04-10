@@ -1,27 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheet %}
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/home.css') }}" />
-{% endblock %}
 {% block title %}Welcome on Wine!
 {% endblock %}
-{% block body %}
-<section class="container">
-	{% include 'partials/carousel.html.twig' %}
 
+{% block body %}
+{% for message in app.flashes('failure')%}
+{% include "partials/modal.html.twig" %}
+{% endfor %}
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('product-card')}} 
+{% endblock %}
+<section class="container-fluid">
+	<!-- {% include 'partials/carousel.html.twig' %} -->
 	<div class="row">
 		<div class="col-2">
 			{% include 'partials/sidebar.html.twig' %}
 		</div>
 		<div class="col-10">
-			<div class="card mt-2 mb-3 bg-secondary">
-				<div class="card-body text-white display-4 text-center">
-					Top Ventes
+			<div class="product-title-container bons-plans-container">
+				<div class="section-product-title-container">
+					<div class="line-title left">
+					</div>
+					<div class="title">
+						<h2>3 BONS PLANS</h2>
+					</div>
+					<div class="line-title right">
+					</div>
+				</div>
+				<div class="catch-phrase">
+					<p>Pour acheter du vin les yeux fermés</p>
+				</div>
+				<div class="section-description">
+					<p>Destockage, meilleures ventes, coups de coeur, ventes privées… Vinatis vous propose une foire aux
+						vins permanente pour acheter votre vin en toute confiance et épater vos amis lors de vos
+						réceptions.</p>
 				</div>
 			</div>
 			<div class="row">
 				{% for product in topThreeProducts %}
-				<div class="col-md-4 d-flex justify-content-center mb-3">
+				<div class="col-md-4 d-flex mb-3" id="okay">
 					{% include 'partials/product-card.html.twig' %}
 				</div>
 				{% endfor %}
@@ -32,7 +50,6 @@
 				</div>
 			</div>
 			<div class="row">
-
 				{% if filteredProducts is defined and filteredProducts is not null %}
 				{% for product in filteredProducts %}
 				<div class="col-md-4 d-flex justify-content-center mb-3">
@@ -54,7 +71,5 @@
 			</div>
 		</div>
 	</div>
-
-
 </section>
 {% endblock %}

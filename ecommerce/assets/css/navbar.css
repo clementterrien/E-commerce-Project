@@ -1,0 +1,240 @@
+
+/* ========= 1 - Navbar Generals ========= */
+/*******************************************/
+#my-navbar {
+    background-color: white;
+    width: 100%; min-height: 110px;
+    justify-content: space-around;
+}
+/* ========= 1.1 - Navbar Floor 1 ========= */
+/********************************************/
+#navbar-floor1 {
+    width: 100%; height: 90px;
+    padding-left: 5vmin;
+    justify-content: space-between;
+}
+/* ========= 1.1.1 - Navbar Floor 1 - Elements ========= */
+/*********************************************************/
+
+/* element search */
+#element-search{
+    width: 70%;
+    margin-left: 10px; margin-right: 10px;
+}
+#nav-searchbar {
+    width: 100%; height: 40px;
+}
+/* end element search */
+
+/* element menu*/
+#element-menu {
+    min-width: 500px;
+    padding: 7px;
+}
+.item-container {
+    width: 25%; height: 90%;
+    padding: 0.8em;
+    border: solid 1px white;
+}
+.hover {
+    background-color: rgb(245, 245, 245);
+    border: solid 1px rgb(230, 230, 230);
+}
+.hover-button {
+    background-color: rgb(227, 227, 227);
+    border-color: rgb(0, 0, 0);
+}
+.item-logo-section {
+    display: flex;
+    width: 100%; height: 70%;
+    padding: 3%;
+    justify-content: center;
+}
+.item-logo {
+    width:auto; height: 90%;
+}
+.menu-item-title{
+    text-align: center;
+    font-size: 11px;
+}
+.border-menu {
+    border: solid 1px rgb(225, 225, 225);
+}
+/* end element menu */
+.logo-letter {
+    padding: 1px;
+}
+#element-support {
+    width: 280px;
+}
+#brand-logo {
+    width: 125px; height: auto;
+}
+/********************************************/
+/* ========= 1.2 - Navbar Floor 2 ========= */
+/********************************************/
+#navbar-floor2 {
+    width: 100%; height: 25px;
+    margin-top: 10px; padding-left: 5vmin;
+}
+.navbar-floor2-elements {
+    align-items: center;
+    margin-left: 5%;
+    font-weight: 900;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+#account-box {
+    display: none;
+    width: 300px; max-height: 500px; 
+    padding: 1rem; top: 100%; right: -1px; z-index: 10;
+}
+#newsletter-box {
+    display: none;
+    width: 300px; height: 250px;;
+    top: 100%;left: -1px; z-index: 10;
+    padding: 1rem;
+}
+#cart-box {
+    display: none;
+    top: 100%; right: -1px; z-index: 10;
+    width: 350px;
+    padding: 1rem;
+}
+.cart-box-product-infos {
+    width: 85%;
+    font-size: 14px;
+}
+.product-infos-other-infos {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.cart-box-product-quantity {
+    width: 15%;
+    text-align: right; vertical-align: top;
+}
+.box-buttons {
+    display: flex;
+    height: 85px;
+}
+.left-box-buttons-col {
+    display: flex; flex-direction: column;
+    width: 60%; height: 100%;
+}
+.right-box-buttons-col {
+    display: flex; flex-direction: column;
+    width: 40%; height: 100%;
+}
+.box-buttons-button {
+    display: flex; flex-direction: column;
+    height: 50%;
+    margin: 3px;
+    justify-content: center; align-items: center;
+    font-size: 8.5px;
+    border: solid lightgray 1px;
+}
+.box-buttons-title {
+    display: flex; flex-direction: column;
+    width: 100%; height: 100%;
+    margin: 0;
+    align-items: center;
+}
+.box-buttons-button a {
+    width: 100%; height: 100%;
+    text-decoration: none;
+    color: black;
+}
+.box-buttons-button p {
+    display: flex;
+    justify-content: center;
+}
+#box-myaccount {
+    height: 220px;
+}
+#box-title {
+    margin-top: 7px;
+    font-size: 19px; color: rgb(255,99,80);
+    justify-content: center;
+    text-align: center;
+}
+.box-content {
+    font-size: 12px; text-align: justify;
+}
+.element-home {
+    width: 100px;
+}
+.element-home img {
+    width: auto; height: 100%;
+    margin-left: 20px;
+}
+.element-vins-button {
+    display: flex; flex-direction: column-reverse;
+    height: 100%;
+    box-sizing: content-box;
+}
+.vins-button-hover {
+    border-bottom: solid black 3px;
+}
+.floor2-text-element {
+    margin-bottom: 0;
+}
+hr {
+    width: 95%;
+}
+
+@media (min-width: 992px) and (max-width: 1137px) {
+    #navbar-container {
+        display: inline;
+    }
+    #reduced-navbar-container {
+        display: none;
+    }
+    .element-menu{
+        width: 41.6333%;
+    }
+}
+
+@media (min-width: 1138px) {
+    .element-support {
+        display: flex;
+    }
+    #reduced-navbar-container {
+        display: none;
+    }
+}
+@media (max-width: 991px) {
+    .element-menu{
+        width: 33.333333%;
+    }
+    #navbar-container {
+        display: none;
+    }
+    #reduced-navbar-container {
+        display: inline;
+    }
+    #navbar-floor1 {
+        height: 57px;
+    }
+    #my-navbar {
+        min-height: 0;
+    }
+    #element-menu {
+        width: 40%;
+        min-width: 0;
+    }
+    .item-container {
+        padding: 3px;
+        align-items: center;
+        justify-content: center;
+    }
+    .item-logo-section {
+        height: 100%;
+        padding: 4px;
+    }
+}
+
+
+
+

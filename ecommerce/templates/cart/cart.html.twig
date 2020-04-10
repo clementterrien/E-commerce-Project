@@ -63,7 +63,7 @@
 			</tfoot>
 		</table>
 	</div>
-	{% if adress is defined and adress.name is not null%}
+	{% if adress is defined and adress.name is not null %}
 	<div class="container-fluid mb-4 ml-0 pl-0">
 		<h2>Livraison</h2>
 
@@ -72,8 +72,8 @@
 				<div class="card-body">
 					<h5 class="card-title">{{user.firstname ~ " " ~ user.lastname}}</h5>
 					<h6 class="card-subtitle mb-2 text-muted">
-						{% if defaultAdress %}
-						{{ defaultAdress.name }}
+						{% if adress %}
+						{{ adress.name }}
 						{% endif %}</h6>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
 						card's content.</p>
@@ -87,16 +87,16 @@
 			<div class="col-md-6 col-sm-6 px-5 py-4">
 				<div class="card bg-light p-0">
 					<div class="card-header d-flex">
-						<div class="font-weight-bold text-uppercase mr-3">{{ defaultAdress.name }}</div>
+						<div class="font-weight-bold text-uppercase mr-3">{{ adress.name }}</div>
 					</div>
 					<div class="card-body">
 						<h5 class="card-text font-weight-bold">{{user.firstname ~ " " ~ user.lastname}}</h5>
-						<p class="card-text my-1">{{defaultAdress.adress1}}</p>
-						{% if defaultAdress.adress2 is not null %}
-						<p class="card-text my-1">{{defaultAdress.adress1}}</p>
+						<p class="card-text my-1">{{adress.adress1}}</p>
+						{% if adress.adress2 is not null %}
+						<p class="card-text my-1">{{adress.adress1}}</p>
 						{% endif %}
-						<p class="card-text my-1">{{defaultAdress.postcode}}</p>
-						<p class="card-text my-1">{{defaultAdress.city}}</p>
+						<p class="card-text my-1">{{adress.postcode}}</p>
+						<p class="card-text my-1">{{adress.city}}</p>
 					</div>
 					<div class="card-footer">
 						<a href="#"><button>Modifier mon adresse de livraison</button></a>
@@ -107,7 +107,7 @@
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">
 					<h5 class="card-title">Facturation</h5>
-					<h6 class="card-subtitle mb-2 text-muted">{{ defaultAdress.name }}</h6>
+					<h6 class="card-subtitle mb-2 text-muted">{{ adress.name }}</h6>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
 						card's content.</p>
 					<div class="d-flex flex-column">
@@ -136,5 +136,7 @@
 </div>
 {% endif %}
 {% else %}
-<p>Surprise c'est vide</p>
+<div class="cart-test">
+	Suprise, c'est vide !!
+</div>
 {% endif %}{% endblock %}

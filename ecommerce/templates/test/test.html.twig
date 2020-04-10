@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        {% block title %}Test page
+        {% endblock %}
+    </title>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{asset("build/navbar.css")}}">
+    {% endblock %}
+</head>
+
+
+<body>
+
+</body>
+
+</html>

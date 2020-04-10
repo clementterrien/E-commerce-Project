@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        {% block title %}Mon compte - Lorem Ipsum{% endblock %}
+    </title>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{asset('build/navbar.css')}}">
+    <link rel="stylesheet" href="{{asset('build/app.css')}}">
+    <link rel="stylesheet" href="{{asset('build/my-account.css')}}">
+    {% endblock %}
+    {% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('navbar') }}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{asset('build/images/favicon.ico')}}" />
+</head>
+
+<body class="bg-white">
+    {% include "layout/navbar.html.twig" %}
+    <div id="main-container" class="d-flex-column px-2">
+        <div id="message" class="full-w bg-white">
+        </div>
+        <div class="row">
+            <div id="myaccount-sidebar-container" class="hidden-xs hidden-sm col-md-3">
+                <div id="myaccount-sidebar" class="border-grey">
+                    <div id="myaccount-home" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Accueil Mon Compte
+                            </p>
+                        </div>
+                    </div>
+                    <div id="my-purchase-guide" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Mon Guide d'achat
+                            </p>
+                        </div>
+                    </div>
+                    <div id="my-orders" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Mes Commandes
+                            </p>
+                        </div>
+                    </div>
+                    <div id="my-infos" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Mes Infos
+                            </p>
+                        </div>
+                    </div>
+                    <div id="my-adresses" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Mes Adresses
+                            </p>
+                        </div>
+                    </div>
+                    <div id="my-newsletter-preferences" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Mes preferences Newsletter
+                            </p>
+                        </div>
+                    </div>
+                    <div id="my-reviews" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Mes Parrainages
+                            </p>
+                        </div>
+                    </div>
+                    <div id="my-favorite-list" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Mes Avis
+                            </p>
+                        </div>
+                    </div>
+                    <div id="myaccount-deconnexion" class="d-flex full-w myaccount-sidebar-item">
+                        <div class="sidebar-img">
+                        </div>
+                        <div class="sidebar-text">
+                            <p class="sidebar-menu-title">
+                                Deconnexion
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="myaccount-main-section" class="col-sm-12 col-md-9 d-flex-column">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

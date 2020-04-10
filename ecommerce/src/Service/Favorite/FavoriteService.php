@@ -30,10 +30,12 @@ class FavoriteService
         $this->session = $session;
         $this->security = $security;
         $this->user = $this->security->getUser();
-        $this->favoriteList = $this->user->getFavoriteList();
-        $this->favoriteProductRepo = $favoriteProductRepo;
-        $this->productRepo = $productRepo;
-        $this->em = $em;
+        if ($this->user != null) {
+            $this->favoriteList = $this->user->getFavoriteList();
+            $this->favoriteProductRepo = $favoriteProductRepo;
+            $this->productRepo = $productRepo;
+            $this->em = $em;
+        }
     }
 
     public function add(int $product_id)

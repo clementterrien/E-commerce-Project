@@ -9,14 +9,9 @@
 	</title>
 	{% block stylesheets %}
 	<link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" crossorigin="anonymous" />
-	<link rel="stylesheet" href="/app.css" crossorigin="anonymous" />
+	<link rel="stylesheet" href="{{asset('build/navbar.css')}}">
+	<link rel="stylesheet" href="{{asset('build/app.css')}}">
 	{% endblock %}
-</head>
-
-<body class="bg-white">
-	{% include "layout/navbar.html.twig" %}
-	{% block body %}{% endblock %}
-
 	{% block javascripts %}
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -27,7 +22,16 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	{{ encore_entry_script_tags('app') }}
+	{{ encore_entry_script_tags('navbar') }}
 	{% endblock %}
+	<link rel="icon" type="image/x-icon" href="{{asset('build/images/favicon.ico')}}" />
+</head>
+
+<body class="bg-white">
+	{% include "layout/navbar.html.twig" %}
+	{% block body %}{% endblock %}
 </body>
 
 </html>

@@ -9,8 +9,18 @@
 import '../css/app.css';
 import '../css/product-card.css';
 import '../css/sidebar.css';
-
+import '../css/navbar.css';
+import '../css/my-account.css';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
+import $ from 'jquery';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+$(window).on('load', function() {
+    let sidebarItem = $('.myaccount-sidebar-item');
+
+    sidebarItem.mouseenter(function(){
+        $(this).addClass('myaccount-sidebar-item-hover');
+    })
+    sidebarItem.mouseleave(function(){
+        $(this).removeClass('myaccount-sidebar-item-hover');
+    })
+});

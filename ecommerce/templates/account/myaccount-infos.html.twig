@@ -1,0 +1,65 @@
+{% extends "base-myaccount.html.twig" %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('account_home')}}">Accueil du compte</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Mes Informations Personnelles</li>
+    </ol>
+</nav>
+<div id="" class="">
+    <div class="alertes">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% for message in app.flashes('failure') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    <p class="title-account courgette font-color-orange">
+        Mes Informations Personelles
+    </p>
+    <p class="subtitle-account">N'hésitez pas à modifier vos informations personnelles si celles-ci ont changé.
+    </p>
+</div>
+<div class="personal-infos-form">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="form-infos-input-section d-flex">
+        <label class="label-margin" for="">Titre</label>
+        {{ form_widget(form.sex) }}
+    </div>
+    <div class="form-infos-input-section label-margin">
+        <label for=""><span class="font-color-orange">*</span> Prénom</label>
+        {{ form_widget(form.firstname) }}
+    </div>
+    <div class="form-infos-input-section label-margin">
+        <label for=""><span class="font-color-orange">*</span> Nom</label>
+        {{ form_widget(form.lastname) }}
+    </div>
+    <div class="form-infos-input-section label-margin d-flex">
+        <div id="birthdate-form" class="d-flex">
+            <label id="birthdate-form" for=""> Date de Naissance</label>
+            {{ form_widget(form.birthDate) }}
+        </div>
+    </div>
+    <div class="form-infos-input-section label-margin">
+        <label for=""><span class="font-color-orange">*</span> Adresse Email</label>
+        {{ form_widget(form.email) }}
+    </div>
+    <div class="form-infos-input-section label-margin">
+        <label for=""><span class="font-color-orange">*</span> Mot de Passe Actuel</label>
+        {{ form_widget(form.plainPassword) }}
+    </div>
+    <div id="submit-infosform-button" class="form-infos-input-section label-margin">
+        {{ form_widget(form.submit, { 'label': 'Sauvegarder' }) }}
+        <p><span class="font-color-orange">*</span>Champs Requis</p>
+    </div>
+    {{form_end(form)}}
+</div>
+</div>
+{% endblock body %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\Adress\AdressService;
 use App\Service\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
@@ -21,7 +22,7 @@ class CartController extends AbstractController
             'cart' => $cartService->getFullCart(),
             'totalPrice' => $cartService->getTotalPrice(),
             'totalQuantity' => $cartService->getTotalQuantity(),
-            'defaultAdress' => $adressService->getDefaultAdress(),
+            'adress' => $adressService->getDefaultAdress(),
             'adresses' => $adressService->getFullAdresses()
         ]);
     }
@@ -29,12 +30,20 @@ class CartController extends AbstractController
     /**
      * @Route("/addtomycart/{product_id}", name="cart_add")
      */
-    public function addToMyCart($product_id, CartService $service)
+    public function addToMyCart($product_id, CartService $service, Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $service->add($product_id);
-
+        if ($request->isMethod('POST')) {
+            $expectedQuantity = $request->request->get('quantity');
+            $availableQuantity = $service->GetAvailableQuantity($product_id);
+            if ($availableQuantity >= $expectedQuantity) {
+                $service->add($product_id, $expectedQuantity);
+            } else {
+                $this->addFlash("failure", "Vous ne pouvez commander plus de " . $availableQuantity . " bouteille(s) pour cette référence");
+                return $this->redirectToRoute('home');
+            }
+        }
         return $this->redirectToRoute('cart_show');
     }
 
