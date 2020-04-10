@@ -10,26 +10,28 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200323190216 extends AbstractMigration
+final class Version20200407104305 extends AbstractMigration
 {
-    public function getDescription(): string
+    public function getDescription() : string
     {
         return '';
     }
 
-    public function up(Schema $schema): void
+    public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE catalogue');
-        $this->addSql('ALTER TABLE product ADD alcool INT NOT NULL');
+        $this->addSql('ALTER TABLE product DROP capacity, CHANGE enabled enabled TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE user ADD sex TINYINT(1) NOT NULL');
     }
 
-    public function down(Schema $schema): void
+    public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        $this->addSql('ALTER TABLE product DROP alcool');
+
+        $this->addSql('ALTER TABLE product ADD capacity INT DEFAULT NULL, CHANGE enabled enabled TINYINT(1) DEFAULT \'1\' NOT NULL');
+        $this->addSql('ALTER TABLE user DROP sex');
     }
 }

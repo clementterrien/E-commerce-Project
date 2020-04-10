@@ -56,11 +56,6 @@ class Product
     /**
      * @ORM\Column(type="integer")
      */
-    private $capacity;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $alcool;
 
     /**
@@ -189,18 +184,6 @@ class Product
     public function setLiter(string $liter): self
     {
         $this->liter = $liter;
-
-        return $this;
-    }
-
-    public function getCapacity(): ?int
-    {
-        return $this->capacity;
-    }
-
-    public function setCapacity(int $capacity): self
-    {
-        $this->capacity = $capacity;
 
         return $this;
     }

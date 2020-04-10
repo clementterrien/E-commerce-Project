@@ -1,28 +1,29 @@
 import '../css/navbar.css';
 
 window.onload = function () {
+    var itemContainer = $('.item-container');
 
-    var myaccount = $('.myaccount-container');
+    var myaccount = $('#myaccount-container');
         myaccount.mouseenter(function () {
             myaccount.addClass('hover');
-            $('.loginform-navbar').show();
+            $('#account-box').show();
         });
         myaccount.mouseleave(function () {
             myaccount.removeClass('hover');
-            $('.loginform-navbar').hide();
+            $('#account-box').hide();
         })
 
-    var newsletter  = $('.newsletter-container');
+    var newsletter  = $('#newsletter-container');
         newsletter.mouseover(function () {
             newsletter.addClass('hover');
-            $('.newsletter-box').show();
+            $('#newsletter-box').show();
         });
         newsletter.mouseout(function () {
             newsletter.removeClass('hover');
-            $('.newsletter-box').hide();
+            $('#newsletter-box').hide();
         })
 
-    var favorite = $('.favorite-container');
+    var favorite = $('#favorite-container');
         favorite.mouseover(function () {
             favorite.addClass('hover');
         });
@@ -30,14 +31,14 @@ window.onload = function () {
             favorite.removeClass('hover');
         })
 
-    var cart = $('.cart-container');
+    var cart = $('#cart-container');
         cart.mouseover(function () {
             cart.addClass('hover');
-            $('.cart-box').show();
+            $('#cart-box').show();
         });
         cart.mouseout(function () {
             cart.removeClass('hover');
-            $('.cart-box').hide();
+            $('#cart-box').hide();
         })
 
     var adress = $('.adress-button');
@@ -106,6 +107,5 @@ window.onload = function () {
     
     $('.myaccount-container').click(function(){
     })
-
-    
+  
 }

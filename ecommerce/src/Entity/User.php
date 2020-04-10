@@ -105,6 +105,11 @@ class User implements UserInterface
      */
     private $confirmationToken;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Sex;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
@@ -360,6 +365,18 @@ class User implements UserInterface
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getSex(): ?bool
+    {
+        return $this->Sex;
+    }
+
+    public function setSex(bool $Sex): self
+    {
+        $this->Sex = $Sex;
 
         return $this;
     }

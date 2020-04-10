@@ -1,9 +1,14 @@
 .product-card {
 	display: flex;
-	border: solid black;
+	border: solid  rgb(148, 148, 148);
 	border-width: 1px;
 	height: 380px;
 	width: 360px;
+}
+.product-hover {
+	background-color: rgb(247, 247, 247);
+	box-shadow: 0px 0px 3px 3px rgba(220, 220, 220, 1.75);
+	transition: box-shadow 0.2s ease-in-out;
 
 }
 p {

@@ -1,170 +1,163 @@
-<div class="navbar-container">
-    <div id="test" style="background-color: rgb(150,0,106) ; width: 100%; height: 35px;">
+<div id="navbar-container" class="full-w">
+    <div id="top-navbar-stripe" class="full-w" style="background-color: rgb(150,0,106) ; height: 35px;">
     </div>
-    <nav class="nav">
-        <div class="navbar-floor1">
-            <div class="navbar-floor1-elements element-logo">
+    <nav id="my-navbar" class="d-column">
+        <div id="navbar-floor1" class="d-flex">
+            <div id="element-logo" class="d-flex-centered full-h">
                 <a href="{{path('home')}}">
-                    <img id="logo" src="{{asset('build/images/logo.png')}}" alt="">
+                    <img id="brand-logo" src="{{asset('build/images/logo.png')}}" alt="">
                 </a>
             </div>
-            <div class="navbar-floor1-elements element-search">
-                <div class="input-group">
-                    <input class="form-control rounded-0" type="search" placeholder="Cherchez un produit en particulier"
-                        aria-label="Search" aria-describedby="button-addon2">
-                    <div class="inpu-group-append m-0">
-                        <button class="btn btn-outline-secondary search-button rounded-0" type="submit">Search</button>
+            <div id="element-search" class="d-flex-centered full-h">
+                <div id="nav-searchbar" class="input-group">
+                    <input class="form-control full-h rounded-0" type="search"
+                        placeholder="Cherchez un produit en particulier" aria-label="Search"
+                        aria-describedby="button-addon2">
+                    <div class="full-h m-0">
+                        <button class="btn btn-outline-secondary full-h rounded-0" type="submit">Search</button>
                     </div>
                 </div>
             </div>
-            <div class="navbar-floor1-elements element-menu">
-                <div class="item-container myaccount-container">
-                    <div class="menu-items myaccount-item">
+            <div id="element-menu" class="d-flex-centered full-h">
+                <div id="myaccount-container" class="item-container position-relative">
+                    <a href="{{path('account_home')}}">
                         <div class="item-logo-section">
-                            <img class="item-logo" src="{{asset('build/images/user.png')}}" alt="">
-                        </div>
-                        <p class="mb-0 mt-1 menu-item-title">MON COMPTE</p>
-                        <div class="loginform-navbar">
-                            {% if app.user %}
-                            <div class="box-myaccount">
-                                <div class="box-title">
-                                    <h3 class="box-title">Bienvenue {{app.user.firstname}} !</h3>
-                                </div>
-                                <hr>
-                                <div class="box-buttons">
-                                    <div class="left-box-buttons-col">
-                                        <div class="box-buttons-button order-button">
-                                            <a href="#">
-                                                <div class="box-buttons-title">
-                                                    <p class="box-buttons-title">COMMANDES</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="box-buttons-button personal-information-button">
-                                            <a href="{{path('adress_show')}}">
-                                                <div class="box-buttons-title">
-                                                    <p class="box-buttons-title">INFORMATIONS PERSONNELLES</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="right-box-buttons-col">
-                                        <div class="box-buttons-button adress-button">
-                                            <a href="{{path('adress_show')}}">
-                                                <div class="box-buttons-title">
-                                                    <p class="box-buttons-title">ADRESSES</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="box-buttons-button reduction-button">
-                                            <a href="#">
-                                                <div class="box-buttons-title">
-                                                    <p class="box-buttons-title">BON DE REDUCTIONS</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <hr>
-                                <div class="box-logout">
-                                    <a href="{{path('app_logout')}}">
-                                        <button
-                                            class="btn btn-outline-secondary btn-block rounded-0">DECONNEXION</button>
-                                    </a>
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="box-title">
-                                <h2>Déja Client ? </h2>
-                                <hr>
-                            </div>
-                            <div class="box-loginform">
-                                <form method="post" action="{{path('app_login')}}">
-                                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                                    <label for="inputEmail" class="sr-only">Email</label>
-                                    <input type="email" value="" name="email" id="inputEmail" class="form-control"
-                                        placeholder="Email" required autofocus>
-                                    <label for="inputPassword" class="sr-only">Password</label>
-                                    <input type="password" name="password" id="inputPassword" class="form-control"
-                                        placeholder="Password" required>
-                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                    <button class="btn btn-lg btn-primary" type="submit">
-                                        Sign in
-                                    </button>
-                                </form>
-                                <hr class="my-5">
-                            </div>
-                            <div class="box-register">
-                                <p>Nouveau Client ?</p>
-                                <button>S'inscrire</button>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="item-container newsletter-container">
-                    <div class="menu-items newsletter-item">
-                        <div class="item-logo-section">
-                            <img class="item-logo logo-letter" src="{{asset('build/images/letter.png')}}" alt="">
-                        </div>
-                        <p class="mb-0 mt-1 menu-item-title">NEWSLETTER</p>
-                        <div class="newsletter-box">
-                            <div class="box-title">
-                                <h3 class="box-title">S'incrire à la newsletter</h3>
-                            </div>
-                            <hr>
-                            <div class="box-content">
-                                <p>
-                                    Recevez en avant-première nos ventes privées, nos bons de réduction et tentez de
-                                    gagner un magnum chaque semaine !
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="box-newsletter-form">
-                                <div class="input-group input-group-sm">
-                                    <input class="form-control rounded-0" type="search"
-                                        placeholder="Votre adresse email" aria-label="Search"
-                                        aria-describedby="button-addon2">
-                                    <div class="inpu-group-append m-0 input-group-sm">
-                                        <button class="btn btn-outline-secondary search-button rounded-0"
-                                            type="submit">OK</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-container favorite-container">
-                    <a href="{{path('favorite_show')}}">
-                        <div class="menu-items favorite-item">
-                            <div class="item-logo-section">
-                                <img class="item-logo" src="{{asset('build/images/like.png')}}" alt="">
-                            </div>
-                            <p class="mb-0 menu-item-title">FAVORIS</p>
+                            <img id="account-logo" class="item-logo" src="{{asset('build/images/user.png')}}" alt="">
                         </div>
                     </a>
-                </div>
-                <div class="item-container cart-container">
-                    <a href="{{path('cart_show')}}">
-                        <div class="menu-items cart-item">
-                            <div class="item-logo-section">
-                                <img class="item-logo" src="{{asset('build/images/bag.png')}}" alt="">
+                    <p class="mb-0 mt-1 menu-item-title">MON COMPTE</p>
+                    <div id="account-box" class="position-absolute border-menu bg-white">
+                        {% if app.user %}
+                        <div class="box-myaccount">
+                            <div id="box-title" class="box-title">
+                                <h3 id="box-title" class="courgette">Bienvenue {{app.user.firstname}} !</h3>
                             </div>
-                            <p class="mb-0 mt-1 menu-item-title">PANIER</p>
+                            <hr>
+                            <div class="box-buttons">
+                                <div class="left-box-buttons-col">
+                                    <div class="box-buttons-button order-button">
+                                        <a href="#">
+                                            <div class="box-buttons-title">
+                                                <p class="box-buttons-title">COMMANDES</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="box-buttons-button personal-information-button">
+                                        <a href="{{path('account_infos')}}">
+                                            <div class="box-buttons-title">
+                                                <p class="box-buttons-title">INFORMATIONS PERSONNELLES</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="right-box-buttons-col">
+                                    <div class="box-buttons-button adress-button">
+                                        <a href="{{path('adress_show')}}">
+                                            <div class="box-buttons-title">
+                                                <p class="box-buttons-title">ADRESSES</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="box-buttons-button reduction-button">
+                                        <a href="#">
+                                            <div class="box-buttons-title">
+                                                <p class="box-buttons-title">BON DE REDUCTIONS</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div class="box-logout">
+                                <a href="{{path('app_logout')}}">
+                                    <button class="btn btn-outline-secondary btn-block rounded-0">DECONNEXION</button>
+                                </a>
+                            </div>
                         </div>
+                        {% else %}
+                        <div class="box-title">
+                            <h2 class="courgette">Déja Client ? </h2>
+                            <hr>
+                        </div>
+                        <div class="box-loginform">
+                            <form method="post" action="{{path('app_login')}}">
+                                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                                <label for="inputEmail" class="sr-only">Email</label>
+                                <input type="email" value="" name="email" id="inputEmail" class="form-control"
+                                    placeholder="Email" required autofocus>
+                                <label for="inputPassword" class="sr-only">Password</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control"
+                                    placeholder="Password" required>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <button class="btn btn-lg btn-primary" type="submit">
+                                    Sign in
+                                </button>
+                            </form>
+                            <hr class="my-5">
+                        </div>
+                        <div id="box-register" class="d-flex">
+                            <p class="courgette">Nouveau Client ?</p>
+                            <a href="{{path('app_registration')}}"><button>S'inscrire</button></a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="newsletter-container" class="item-container position-relative">
+                    <div class="item-logo-section">
+                        <img class="item-logo logo-letter" src="{{asset('build/images/letter.png')}}" alt="">
+                    </div>
+                    <p class="mb-0 mt-1 menu-item-title">NEWSLETTER</p>
+                    <div id="newsletter-box" class="border-menu position-absolute bg-white">
+                        <div id="box-title">
+                            <h3 id="box-title" class="courgette">S'incrire à la newsletter</h3>
+                        </div>
+                        <hr>
+                        <div class="box-content">
+                            <p>
+                                Recevez en avant-première nos ventes privées, nos bons de réduction et tentez de
+                                gagner un magnum chaque semaine !
+                            </p>
+                        </div>
+                        <hr>
+                        <div class="box-newsletter-form">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control rounded-0" type="search" placeholder="Votre adresse email"
+                                    aria-label="Search" aria-describedby="button-addon2">
+                                <div class="inpu-group-append m-0 input-group-sm">
+                                    <button class="btn btn-outline-secondary search-button rounded-0"
+                                        type="submit">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="favorite-container" class="item-container position-relative">
+                    <a href="{{path('favorite_show')}}">
+                        <div class="item-logo-section">
+                            <img class="item-logo" src="{{asset('build/images/like.png')}}" alt="">
+                        </div>
+                        <p class="mb-0 mt-1 menu-item-title">FAVORIS</p>
+                    </a>
+                </div>
+                <div id="cart-container" class="item-container position-relative">
+                    <a href="{{path('cart_show')}}">
+                        <div class="item-logo-section">
+                            <img class="item-logo" src="{{asset('build/images/bag.png')}}" alt="">
+                        </div>
+                        <p class="mb-0 mt-1 menu-item-title">PANIER</p>
                     </a>
                     {% if app.session.get('fullcart') %}
-                    <div class="cart-box">
-                        <div class="cart-box-container">
+                    <div id="cart-box" class="cart-box border-menu position-absolute bg-white">
+                        <div class="d-column">
                             {% for element in app.session.get('fullcart') %}
                             <a href="{{path('product_details', {'product_id': element.product.id})}}">
-                                <div class="cart-box-product">
-                                    <div class="cart-box-product-infos">
-                                        <div class="product-infos-name">
-                                            {{ element.product.name}}
+                                <div class="d-flex">
+                                    <div id="cart-box-product-infos" class="d-column">
+                                        <div id="product-infos-name" class="">
+                                            <p class="font-weight-bold text-uppercase">{{ element.product.name}}</p>
                                         </div>
-                                        <div class="product-infos-other-infos">
+                                        <div id="" class="product-infos-other-infos">
                                             Vin {{ element.product.type}} / {{ element.product.region}} /
                                             {{ element.product.designation}} / {{ element.product.alcool}} % VOL
                                         </div>
@@ -174,7 +167,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <hr>
+                            <hr class="full-w">
                             {% endfor %}
                             <div class="cart-box-order-button">
                                 <button class="btn btn-light btn-block">COMMANDER</button>
@@ -184,34 +177,33 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="navbar-floor1-elements element-support">
+            <div id="element-support" class="d-column-centered full-h">
                 <p>Support</p>
                 <h5>02 00 02 00 02</h5>
             </div>
         </div>
-
-        <div class="navbar-floor2">
+        <div id="navbar-floor2" class="d-flex">
             <a href="{{path('home')}}">
-                <div class="navbar-floor2-elements element-home">
+                <div class="navbar-floor2-elements full-h element-home">
                     <img src="{{asset('build/images/home.png')}}" alt="">
                 </div>
             </a>
-            <div class="navbar-floor2-elements ml-0">
-                <div class="element-promo element-vins-button">
-                    <p class="floor2-text-element">PROMOS</p>
+            <div class="navbar-floor2-elements full-h ml-0">
+                <div class="element-vins-button">
+                    <p class="mb-0 font-color-orange mb-0">PROMOS</p>
                 </div>
             </div>
-            <div class="navbar-floor2-elements">
+            <div class="navbar-floor2-elements full-h">
                 <div class="element-vin-blanc element-vins-button">
                     <p>VINS BLANCS</p>
                 </div>
             </div>
-            <div class="navbar-floor2-elements">
+            <div class="navbar-floor2-elements full-h">
                 <div class="element-vin-rouge element-vins-button">
                     VINS ROUGES
                 </div>
             </div>
-            <div class="navbar-floor2-elements">
+            <div class="navbar-floor2-elements full-h">
                 <div class="element-champagne element-vins-button">
                     CHAMPAGNES
                 </div>
@@ -220,3 +212,74 @@
         <hr>
     </nav>
 </div>
+<nav id="reduced-navbar-container" class="d-flex-column">
+    <div id="top-navbar-stripe" class="full-w" style="background-color: rgb(150,0,106) ; height: 35px;">
+    </div>
+    <div id="my-navbar">
+        <div id="navbar-floor1" class="d-flex">
+            <div id="element-logo" class="d-flex-centered full-h">
+                <a href="{{path('home')}}">
+                    <img id="brand-logo" src="{{asset('build/images/logo-texte.png')}}" alt="">
+                </a>
+            </div>
+            <div id="element-menu" class="d-flex-centered full-h">
+                <div id="search-container" class="item-container">
+                    <a href="{{path('account_home')}}">
+                        <div class="item-logo-section full-h">
+                            <img id="account-logo" class="item-logo" src="{{asset('build/images/user.png')}}" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div id="myaccount-container" class="item-container">
+                    <a href="{{path('account_home')}}">
+                        <div class="item-logo-section">
+                            <img id="account-logo" class="item-logo" src="{{asset('build/images/user.png')}}" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div id="favorite-container" class="item-container">
+                    <a href="{{path('favorite_show')}}">
+                        <div class="item-logo-section">
+                            <img class="item-logo" src="{{asset('build/images/like.png')}}" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div id="cart-container" class="item-container">
+                    <a href="{{path('cart_show')}}">
+                        <div class="item-logo-section">
+                            <img class="item-logo" src="{{asset('build/images/bag.png')}}" alt="">
+                        </div>
+                    </a>
+                    {% if app.session.get('fullcart') %}
+                    <div id="cart-box" class="cart-box border-menu position-absolute bg-white">
+                        <div class="d-column">
+                            {% for element in app.session.get('fullcart') %}
+                            <a href="{{path('product_details', {'product_id': element.product.id})}}">
+                                <div class="d-flex">
+                                    <div id="cart-box-product-infos" class="d-column">
+                                        <div id="product-infos-name" class="">
+                                            <p class="font-weight-bold text-uppercase">{{ element.product.name}}</p>
+                                        </div>
+                                        <div id="" class="product-infos-other-infos">
+                                            Vin {{ element.product.type}} / {{ element.product.region}} /
+                                            {{ element.product.designation}} / {{ element.product.alcool}} % VOL
+                                        </div>
+                                    </div>
+                                    <div class="cart-box-product-quantity">
+                                        x{{element.quantity}}
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="full-w">
+                            {% endfor %}
+                            <div class="cart-box-order-button">
+                                <button class="btn btn-light btn-block">COMMANDER</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

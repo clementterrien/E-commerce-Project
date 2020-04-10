@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 :root{
 	--primary:#192a56;
 	--color: #fbc531;
@@ -11,7 +11,28 @@
 * {
 	font-family: 'Roboto', sans-serif;
 }
-
+.full-size {
+	width: 100%; height: 100%;
+}
+.full-w {
+	width: 100%;
+}
+.full-h {
+	height: 100%;
+}
+.d-column {
+	display: flex; flex-direction: column;
+}
+.d-flex-centered {
+	display: flex;
+	align-items: center;;
+	justify-content: space-around;
+}
+.d-column-centered {
+	display: flex; flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 body{
 	margin:0;
 	padding:0;
@@ -236,4 +257,84 @@ header input {
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, auto);
 	grid-gap:3em;
+}
+
+/*====== Home Section ======*/
+
+.product-title-container {
+	margin-bottom: 25px;
+}
+.section-product-title-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.section-product-title-container .title{
+	display: flex;
+	justify-content: center;
+}
+.section-product-title-container .title h2{
+	margin: 0;
+	font-weight: 900;
+	font-size: 34px;
+	color: rgb(150, 0, 106);
+	white-space: nowrap;
+}
+.line-title {
+	width: 33%;
+	height: 1px;
+	background-color: lightgray;
+}
+.line-title.right {
+	padding-left: 3%;
+}
+.line-title.left {
+	padding-right: 3%;
+}
+.catch-phrase {
+	margin-top: 5px;
+	text-align: center;
+}
+.catch-phrase p{
+	text-align: center;
+	font-weight: 900;
+	font-size: 18px;
+}
+.section-description {
+	margin-top: 6px;
+	text-align: center;
+	font-style: italic;
+	color: grey;
+}
+
+/* Font */
+.font-bold {
+	font-weight: 900;
+}
+.font-color-orange {
+	color: rgb(255,99,80);
+}
+.font-color-grey {
+	color: rgb(65, 65, 65);
+}
+p.title-account {
+	font-size: 33px;
+}
+.courgette {
+	font-family: 'Courgette';
+}
+.square-item-title {
+	font-size: 25px;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	text-decoration: none;
+	color: black;
+}
+/* Border */
+.border-grey {
+	border: solid 1px rgb(184, 184, 184)
 }
