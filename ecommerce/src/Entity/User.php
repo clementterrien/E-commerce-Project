@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -49,8 +49,11 @@ class User implements UserInterface
 
     /**
      * A non-persisted field that's used to create the encoded password.
-     *
      * @var string
+     * @SecurityAssert\UserPassword(
+     *     message = "Vous devez entrer votre mot de passe actuel",
+     *     groups = {"update"}
+     * )
      */
     private $plainPassword;
 
@@ -173,7 +176,7 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-        $this->plainPassword = $password;
+        // $this->plainPassword = $password;
 
         return $this;
     }
@@ -380,6 +383,17 @@ class User implements UserInterface
 
         return $this;
     }
+
+    // public static function loadValidatorMetadata(ClassMetadata $metadata)
+    // {
+    //     $metadata->addPropertyConstraint(
+    //         'password',
+    //         new SecurityAssert\UserPassword([
+    //             'message' => 'Vous devez entrer votre mot de passe actuel',
+    //             'groups' => 'update'
+    //         ])
+    //     );
+    // }
 
 
 

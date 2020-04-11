@@ -17,72 +17,50 @@
     <hr>
     {% if adresses | length > 0 %}
     <div class="adress-show">
-        <div class="jumbotron py-4 px-4 bg-light">
-            <p class="lead">Ici, vous pouvez ajouter, modifier ou supprimer vos adresses de livraison</p>
-            <hr class="my-4">
-            <a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
+        <div class="py-4 px-4 bg-light">
+            <p class="mb-2">Choisissez vos adresses de facturation et de livraison. Ces dernières seront
+                présélectionnées lors de vos
+                commandes. Vous pouvez également ajouter d'autres adresses, ce qui est particulièrement intéressant pour
+                envoyer des cadeaux ou recevoir votre commande au bureau.
+            </p>
+            <p class="mb-2">
+                Vos adresses sont listées ci-dessous.
+            </p>
+            <p>
+                Pensez à les tenir à jour si ces dernières venaient à changer.</p>
+            </p>
+            <hr class="mb-0">
         </div>
-        <h4>Mes adresses</h4>
-        <hr class="my-4">
-        <p>Choisissez vos adresses de facturation et de livraison. Ces dernières seront présélectionnées lors de vos
-            commandes. Vous pouvez également ajouter d'autres adresses, ce qui est particulièrement intéressant pour
-            envoyer des cadeaux ou recevoir votre commande au bureau.</p>
-        <p>Vos adresses sont listées ci-dessous.</p>
-        <p>Pensez à les tenir à jour si ces dernières venaient à changer.</p>
-
-
-        <div class="container row">
+        <div class="row">
             {% for adress in adresses %}
-            <div class="col-md-6 col-sm-6 px-5 py-4">
-                <div class="card bg-light p-0">
-                    <div class="card-header d-flex">
-                        <div class="font-weight-bold text-uppercase mr-3">{{ adress.name }}</div>
-                        {% if adress.active == true %}
-                        <div><button class="btn btn-sm btn-info" disabled="disabled">Adresse de livraison
-                                actuelle</button>
-                        </div>
-                        {% else %}
-                        <a href="{{ path('adress_setdefault', {'adress_id': adress.id})}}"
-                            class="btn btn-outline-warning btn-sm ml-1 pl-2">Utiliser cette adresse</a>
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-text font-weight-bold">{{user.firstname ~ " " ~ user.lastname}}</h5>
-                        <p class="card-text my-1">{{adress.adress1}}</p>
-                        {% if adress.adress2 is not null %}
-                        <p class="card-text my-1">{{adress.adress1}}</p>
-                        {% endif %}
-                        <p class="card-text my-1">{{adress.postcode}}</p>
-                        <p class="card-text my-1">{{adress.city}}</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#"><button>Modifier cette adresse</button></a>
-                        <a href="#"><button>Supprimer cette adresse</button></a>
-
-                    </div>
-                </div>
+            <div class="col-md-6 justify-content-center m-0">
+                {% include 'partials/adressbox.html.twig' %}
             </div>
             {% endfor %}
         </div>
     </div>
-    {% else %}
-    <div class="adress-without d-column-centered-between">
-        <div class="subtitle">
-            <p>Choisissez vos adresses de facturation et de livraison. Ces dernières seront présélectionnées
-                lors de vos commandes. Vous pouvez également ajouter d'autres adresses, ce qui est particulièrement
-                intéressant pour envoyer des cadeaux ou recevoir votre commande au bureau.
-            </p>
-        </div>
-        <div class="alert alert-warning full-w">
-            <p>Vous n'avez renseigné aucune adresse, cliquez sur le boutton ci-dessous pour le faire.</p>
-        </div>
-        <div class="adress-action d-flex full-w justify-content-between">
-            <a href="{{ path("adress_add")}}" class="btn btn-secondary"><span class="text-uppercase"> Enregistrer une
-                    nouvelle adresse</span></a>
-            <a href="{{path("cart_show")}}" class="btn btn-danger"><span class="text-uppercase">Finaliser ma
-                    commande</span></a>
-        </div>
-        <hr>
+</div>
+<a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
+</div>
+{% else %}
+<div class="adress-without d-column-centered-between">
+    <div class="subtitle">
+        <p>Choisissez vos adresses de facturation et de livraison. Ces dernières seront présélectionnées
+            lors de vos commandes. Vous pouvez également ajouter d'autres adresses, ce qui est particulièrement
+            intéressant pour envoyer des cadeaux ou recevoir votre commande au bureau.
+        </p>
     </div>
-    {% endif %}
-    {% endblock %}
+    <div class="alert alert-warning full-w">
+        <p>Vous n'avez renseigné aucune adresse, cliquez sur le boutton ci-dessous pour le faire.</p>
+    </div>
+    <div class="adress-action d-flex full-w justify-content-between">
+        <a href="{{ path("adress_add")}}" class="btn btn-secondary"><span class="text-uppercase"> Enregistrer une
+                nouvelle adresse</span></a>
+        <a href="{{path("cart_show")}}" class="btn btn-danger"><span class="text-uppercase">Finaliser ma
+                commande</span></a>
+    </div>
+    <hr>
+</div>
+{% endif %}
+</div>
+{% endblock %}

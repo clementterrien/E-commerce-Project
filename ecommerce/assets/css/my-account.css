@@ -80,6 +80,25 @@ hr {
     margin-bottom: 20px;
     border: solid 2px lightgray;
 }
+/*******************************
+********* ADRESS PART **********
+********************************/
+.adress-card-box {
+    width: 100%;
+    margin-bottom: 20px;
+}
+/*******************************
+******* END ADRESS PART ********
+********************************/
+
+
+
+
+
+
+
+
+
 .adress-without {
     min-height: 250px;
 }
@@ -102,7 +121,6 @@ hr {
     color: white !important;
 }
 button.account-action-button {
-
 }
 #secondmainsection-firstfloor {
     height: 80px;
