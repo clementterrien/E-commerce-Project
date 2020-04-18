@@ -7,9 +7,16 @@ use App\Service\Adress\AdressService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends AbstractController
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
     /**
      * @Route("/mon-compte", name="account_home")
      */
@@ -32,9 +39,12 @@ class AccountController extends AbstractController
 
         $form = $this->createForm(UserModificationType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted()) {
-            dd($form->isValid());
+            $enteredPassword = $request->request->get('user_modification')['plainPassword'];
+            $passwordEncoder = $this->passwordEncoder;
+            if ($passwordEncoder->isPasswordValid($user, $enteredPassword)) {
+                dd('okay');
+            }
         }
 
         return $this->render('account/myaccount-infos.html.twig', [
