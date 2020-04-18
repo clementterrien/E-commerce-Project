@@ -8,11 +8,18 @@
     </ol>
 </nav>
 <div id="" class="">
-    {% for message in app.flashes('success') %}
-    <div class="alert alert-warning">
-        {{ message }}
+    <div class="alertes">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% for message in app.flashes('failure') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
     <p class="title-account courgette font-color-orange">
         Mes Informations Personelles
     </p>
