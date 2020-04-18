@@ -6,7 +6,6 @@
 	font-family:'Roboto', sans-serif;
 	background-color: var(--light-grey);
 }
-
 .sidebar-title{
 	display:flex;
 	justify-content:center;
