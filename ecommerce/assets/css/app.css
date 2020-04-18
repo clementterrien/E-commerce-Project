@@ -33,6 +33,12 @@
 	justify-content: center;
 	align-items: center;
 }
+.d-column-centered-between {
+	display: flex; flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
 body{
 	margin:0;
 	padding:0;
@@ -317,14 +323,15 @@ header input {
 .font-color-grey {
 	color: rgb(65, 65, 65);
 }
+.font-color-lightgrey {
+	color: rgb(153, 153, 153)
+}
+
 p.title-account {
 	font-size: 33px;
 }
 .courgette {
 	font-family: 'Courgette';
-}
-.square-item-title {
-	font-size: 25px;
 }
 a {
 	text-decoration: none;
