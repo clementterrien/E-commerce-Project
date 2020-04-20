@@ -6,55 +6,103 @@
         Bonjour {{app.user.firstname}} {{app.user.lastname}}
     </p>
 </div>
-<div id="main-section-first" class="d-flex main-section-floor">
-    <div class="square-item">
-        <p class="courgette font-color-grey square-item-title">
-            Mes Infos
-        </p>
+<div id="main-section-first" class="d-flex full-w main-section-floor">
+    <div class="square-item border-right d-flex-column">
+        <div class="square-item-title">
+            <p class="courgette font-color-lightgrey square-item-title mt-1">
+                Mes Infos
+            </p>
+        </div>
+        <div class="square-item-infos">
+            <p class="font-color-lightgrey">Mon adresse email</p>
+            <p class="font-color-orange">{{ app.user.email }}</p>
+        </div>
+        <div class="square-item-action mb-0">
+            <button class=>Modifier</button>
+        </div>
     </div>
-    <div class="square-item">
-        <p class="courgette font-color-grey square-item-title">
-            Mes Adresses
-        </p>
+    <div class="square-item border-right d-flex-column">
+        <div class="square-item-title">
+            <p class="courgette font-color-lightgrey square-item-title mt-1">
+                Mes Adresses
+            </p>
+        </div>
+        <div class="square-item-infos">
+            {% if defaultAdress is not null %}
+            <p> {{defaultAdress.name}} </p>
+            {% else %}
+            <p class="font-color-lightgrey text-uppercase"> Aucune adresse enregistrée </p>
+            {% endif %}
+        </div>
+        <div class="square-item-action mb-0">
+            {% if defaultAdress is not null %}
+            <button>Modifier </button>
+            {% else %}
+            <button class="mb-1">Cliquer ici pour entrer une adresse</button>
+            {% endif %}
+        </div>
     </div>
-    <div class="square-item">
-        <p class="courgette font-color-grey square-item-title">
-            Besoin d'Aide ?
-        </p>
+    <div id="support-square" class="square-item">
+        <div class="square-item-title">
+            <p class="courgette square-item-title mt-1">
+                Besoin d'Aide ?
+            </p>
+        </div>
+        <div class="square-item-action">
+            <button class="mb-1 account-action-button btn rounded-0 btn-outline-light">
+                <span class="text-white">Contacter le service client</span>
+            </button>
+        </div>
     </div>
 </div>
-<div id="main-section-second" class="d-flex main-section-floor">
-    <div class="square-item">
-        <p class="courgette font-color-grey square-item-title">
-            Mes Infos
-        </p>
+<div id="main-section-second" class="d-flex-column main-section-floor2">
+    <div id="secondmainsection-firstfloor" class="d-flex">
+        <div class="d-flex-centered full-w">
+            <p>
+                Points et crédits cumulés: U
+            </p>
+            <button class="account-action-button btn rounded-0 btn-outline-light">Utiliser</button>
+        </div>
     </div>
-    <div class="square-item">
-        <p class="courgette font-color-grey square-item-title">
-            Mes Adresses
-        </p>
-    </div>
-    <div class="square-item">
-        <p class="courgette font-color-grey square-item-title">
-            Besoin d'Aide ?
-        </p>
+    <div id="secondmainsection-secondfloor" class="d-flex">
+        <div class="square-item">
+            <p class="courgette square-item-title">
+                Parrainage
+            </p>
+            <button class="account-action-button btn rounded-0 btn-outline-light">Parrainer un ami</button>
+        </div>
+        <div class="square-item">
+            <p class="courgette square-item-title">
+                Avis validés
+            </p>
+            <button class="account-action-button btn rounded-0 btn-outline-light">Noter mes produits achetés</button>
+        </div>
+        <div class="square-item border-0">
+            <p class="courgette square-item-title">
+                Bons d'achat
+            </p>
+            <button class="account-action-button btn rounded-0 btn-outline-light">Voir</button>
+        </div>
     </div>
 </div>
 <div id="main-section-third" class="d-flex main-section-floor">
     <div class="square-item">
         <p class="courgette font-color-grey square-item-title">
-            Mes Infos
+            Ma liste de favoris
         </p>
+        <button class="account-action-button btn rounded-0 btn-outline-light">Voir</button>
     </div>
     <div class="square-item">
         <p class="courgette font-color-grey square-item-title">
-            Mes Adresses
+            Mes Alertes Produits
         </p>
+        <button class="account-action-button btn rounded-0 btn-outline-light">Modifier</button>
     </div>
     <div class="square-item">
         <p class="courgette font-color-grey square-item-title">
-            Besoin d'Aide ?
+            Mon guide d'achat
         </p>
+        <button class="account-action-button btn rounded-0 btn-outline-light">Voir</button>
     </div>
 </div>
 {% endblock %}
