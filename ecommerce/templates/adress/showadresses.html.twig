@@ -3,7 +3,6 @@
 {% block title %}Mes adresses{% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{path('account_home')}}">Accueil du compte</a></li>
@@ -64,59 +63,4 @@
 </div>
 {% endif %}
 </div>
-=======
-
-{% if adresses | length > 0 %}
-
-<div class="container">
-    <div class="jumbotron mt-5">
-        <p class="lead">Ici, vous pouvez ajouter, modifier ou supprimer vos adresses de livraison</p>
-        <hr class="my-4">
-        <a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
-    </div>
-
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nom</th>
-                <th>Ville</th>
-                <th>Active</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for adress in adresses %}
-            <tr>
-                <td>
-                    {{ adress.name }}
-                    {% if adress.active == true %}
-                    [Par défaut]
-                    {% else %}
-                    <a href="{{ path('adress_setdefault', {'adress_id': adress.id})}}"
-                        class="btn btn-primary btn-sm">Définir comme par défaut</a>
-                    {% endif %}
-                </td>
-                <td>{{ adress.city }}
-                </td>
-                <td>{{ adress.active }}</td>
-                <td>
-                    <a href="#" class="btn btn-danger btn-sm">
-                        Delete
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <div class="jumbotron">
-        <p class="lead">Vous n'avez pas enregistré d'adresse... Cliquez sur le bouton ci-dessous pour le faire</p>
-        <a href="{{ path("adress_add")}}" class="btn btn-primary">Enregistrer une nouvelle adresse</a>
-        <hr class="my-4">
-    </div>
-    {% endif %}
-</div>
-
-
->>>>>>> 2c98c9c2bbe4640424b4062ae99d08791dd4e93b
 {% endblock %}

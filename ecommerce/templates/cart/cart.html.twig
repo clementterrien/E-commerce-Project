@@ -5,7 +5,6 @@
 
 {% block body %}
 
-<<<<<<< HEAD
 {% if cart | length > 0 %}
 <div class="container-fluid">
 	<div class="jumbotron mb-0 p-5">
@@ -141,67 +140,3 @@
 	Suprise, c'est vide !!
 </div>
 {% endif %}{% endblock %}
-=======
-<div class="container">
-	<h2 class="mt-5">Mon Panier</h2>
-	{% if cart | length > 0 %}
-
-	<div class="jumbotron mt-2">
-		<p class="lead">Votre panier contient actuellement
-			{{ totalQuantity }}
-			articles</p>
-		<hr class="my-4">
-	</div>
-	<table class="table">
-		<thead class="thead-dark">
-			<tr>
-				<th>Produit</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Total</th>
-				<th>Supprimer article</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for item in cart %}
-			<tr>
-				<td>{{ item.product.name }}</td>
-				<td>{{ item.product.price }}
-					€</td>
-				<td>
-					{{ item.quantity }}
-					<a href=" {{ path( 'cart_add', {'product_id': item.product.id})}}"
-						class="btn btn-warning btn-sm">+</a>
-					<a href=" {{ path('cart_remove_one', {'product_id': item.product.id})}}"
-						class="btn btn-warning btn-sm">-</a>
-				</td>
-				<td>{{ item.product.price * item.quantity }}
-					€</td>
-				<td>
-					<a href="{{ path("cart_remove", {'product_id': item.product.id})}}" class="btn btn-danger btn-sm">
-						Delete
-					</a>
-				</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="3" class="text-right h5">Total:</td>
-				<td class="table-warning" colspan="2">
-					{{ totalPrice }}
-					€</td>
-				<td></td>
-			</tr>
-		</tfoot>
-	</table>
-	<h2>Mon adresse</h2>
-	{{ defaultAdress.name }}
-	</br>
-	<a href=" {{path('order_preconfirmation')}}" class="btn btn-success">Commander</a>
-	{% else %}
-	<p>Surprise c'est vide</p>
-	{% endif %}
-</div>
-{% endblock %}
->>>>>>> 2c98c9c2bbe4640424b4062ae99d08791dd4e93b

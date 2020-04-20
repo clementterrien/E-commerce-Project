@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\Model\ChangePassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -45,7 +46,7 @@ class UserModificationType extends AbstractType
                     'class' => 'input-infos-form'
                 ]
             ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', ChangePassword::class, [
                 'attr' => [
                     'class' => 'input-infos-form'
                 ],
