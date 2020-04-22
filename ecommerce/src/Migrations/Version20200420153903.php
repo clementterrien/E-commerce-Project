@@ -10,26 +10,26 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200304162123 extends AbstractMigration
+final class Version20200420153903 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE confirmed_order ADD stripe_payment_id VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE product CHANGE enabled enabled TINYINT(1) NOT NULL');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE confirmed_order DROP stripe_payment_id');
+        $this->addSql('ALTER TABLE product CHANGE enabled enabled TINYINT(1) DEFAULT \'1\' NOT NULL');
     }
 }

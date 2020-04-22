@@ -9,8 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class RegistrationType extends AbstractType
+class TestType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,14 +26,15 @@ class RegistrationType extends AbstractType
                 ]
             ])
             ->add('email')
-            ->add('password', PasswordType::class)
-            ->add('confirm_password', PasswordType::class);
+            ->add('plainPassword', PasswordType::class)
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'validation_groups' => 'update'
         ]);
     }
 }

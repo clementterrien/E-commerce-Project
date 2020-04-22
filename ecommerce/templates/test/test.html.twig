@@ -15,7 +15,14 @@
 
 
 <body>
-
+    {% block body %}
+    {% for message in app.flashes('failure') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {{form(form)}}
+    {% endblock %}
 </body>
 
 </html>

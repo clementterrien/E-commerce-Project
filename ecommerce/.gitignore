@@ -13,7 +13,6 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
 src/Controller/HelloController.php
 templates/hello/
 templates/layout/
