@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Form\UserModificationType;
-use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,30 +33,25 @@ class AccountController extends AbstractController
     /**
      * @Route("/mes-infos", name="account_infos")
      */
-    public function showMyInfos(Request $request, UserRepository $userRepo)
+    public function showMyInfos(Request $request, EntityManagerInterface $em)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $dbUser = $userRepo->findOneBy(['id' => 13]);
         $user = $this->getUser();
-        $form = $this->createForm(UserModificationType::class, $this->getUser());
+        $form = $this->createForm(UserModificationType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $enteredPassword = $request->request->get('user_modification')['plainPassword'];
-            $passwordEncoder = $this->passwordEncoder;
-            $manager = $this->getDoctrine()->getManager();
-
-            // dd($user, $dbUser);
-
-            if ($passwordEncoder->isPasswordValid($user, $enteredPassword)) {
-                $this->addFlash('success', 'Vos informations ont bien été modifiées');
-                $manager->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $em->flush();
+                $this->addFlash('success', 'Vos informations ont bien été modifiées !');
                 return $this->redirectToRoute('account_infos');
             } else {
-                dd('It\'s not!!!!');
+                $this->addFlash('failure', 'Vous devez confirmer votre mot de passe pour modifier vos informations');
+                return $this->redirectToRoute('account_infos');
             }
         }
+
         return $this->render('account/myaccount-infos.html.twig', [
             'form' => $form->createView()
         ]);
