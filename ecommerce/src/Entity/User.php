@@ -178,7 +178,6 @@ class User implements UserInterface
     public function setPassword(string $password)
     {
         $this->password = $password;
-        $this->plainPassword = $password;
 
         return $this;
     }
