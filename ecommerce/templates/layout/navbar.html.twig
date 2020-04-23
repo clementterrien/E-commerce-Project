@@ -76,28 +76,30 @@
                             </div>
                         </div>
                         {% else %}
-                        <div class="box-title">
-                            <h2 class="courgette">Déja Client ? </h2>
+                        <div class="box-title px-4">
+                            <h2 id="box-title" class="courgette">Déja Client ? </h2>
                             <hr>
                         </div>
-                        <div class="box-loginform">
-                            <form method="post" action="{{path('app_login')}}">
-                                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                                <label for="inputEmail" class="sr-only">Email</label>
-                                <input type="email" value="" name="email" id="inputEmail" class="form-control"
-                                    placeholder="Email" required autofocus>
-                                <label for="inputPassword" class="sr-only">Password</label>
-                                <input type="password" name="password" id="inputPassword" class="form-control"
-                                    placeholder="Password" required>
+                        <div class="box-loginform px-4">
+                            <form method="post" class="d-column-centered full-w" action="{{path('app_login')}}">
+                                <div class="d-column-centered full-w">
+                                    <label for="inputEmail" class="mt-1">Email</label>
+                                    <input type="email" value="" name="email" id="inputEmail" class="full-w" required
+                                        autofocus>
+                                </div>
+                                <div class="d-column-centered full-w">
+                                    <label for="inputPassword" class="mt-2">Mot de Passe</label>
+                                    <input type="password" name="password" id="inputPassword" class="full-w" required>
+                                </div>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                <button class="btn btn-lg btn-primary" type="submit">
-                                    Sign in
+                                <button class="btn btn-primary mt-3" type="submit">
+                                    OK
                                 </button>
+                                <hr class="mt-4">
                             </form>
-                            <hr class="my-5">
                         </div>
-                        <div id="box-register" class="d-flex">
-                            <p class="courgette">Nouveau Client ?</p>
+                        <div id="box-register" class="d-flex-centered justify-content-between px-1">
+                            <h2 id="box-title" class="courgette">Nouveau Client ?</h2>
                             <a href="{{path('app_registration')}}"><button>S'inscrire</button></a>
                         </div>
                         {% endif %}
@@ -110,7 +112,7 @@
                     <p class="mb-0 mt-1 menu-item-title">NEWSLETTER</p>
                     <div id="newsletter-box" class="border-menu position-absolute bg-white">
                         <div id="box-title">
-                            <h3 id="box-title" class="courgette">S'incrire à la newsletter</h3>
+                            <h3 id="box-title" class="courgette font-color-orange">S'incrire à la newsletter</h3>
                         </div>
                         <hr>
                         <div class="box-content">

@@ -155,7 +155,7 @@ a {
 }
 #box-title {
     margin-top: 7px;
-    font-size: 19px; color: rgb(255,99,80);
+    font-size: 19px;
     justify-content: center;
     text-align: center;
 }
@@ -182,6 +182,15 @@ a {
 }
 hr {
     width: 95%;
+}
+
+
+/** 
+************ FONT ***************
+*/
+
+#box-title-black {
+
 }
 
 @media (min-width: 992px) and (max-width: 1137px) {

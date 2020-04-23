@@ -25,7 +25,7 @@
 }
 .d-flex-centered {
 	display: flex;
-	align-items: center;;
+	align-items: center;
 	justify-content: space-around;
 }
 .d-column-centered {
@@ -329,6 +329,9 @@ header input {
 }
 .font-color-lightgrey {
 	color: rgb(153, 153, 153)
+}
+.text-black {
+	color: black;
 }
 
 p.title-account {
