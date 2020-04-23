@@ -13,6 +13,7 @@
 {% endfor %}
 {% block javascripts %}
 {{ parent() }}
+{{ encore_entry_script_tags('home') }}
 {{ encore_entry_script_tags('product-card')}} 
 {% endblock %}
 <section class="container-fluid">
@@ -43,7 +44,7 @@
 			</div>
 			<div class="row">
 				{% for product in topThreeProducts %}
-				<div class="col-md-4 d-flex mb-3" id="okay">
+				<div id="uuu" class="col-md-4 d-flex mb-3" id="okay">
 					{% include 'partials/product-card.html.twig' %}
 				</div>
 				{% endfor %}

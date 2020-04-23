@@ -11,6 +11,7 @@ import '../css/product-card.css';
 import '../css/sidebar.css';
 import '../css/navbar.css';
 import '../css/my-account.css';
+import '../css/home.css';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 
