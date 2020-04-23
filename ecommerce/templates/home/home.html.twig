@@ -2,6 +2,10 @@
 
 {% block title %}Welcome on Wine!
 {% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{asset('build/home.css')}}">
+{% endblock %}
 
 {% block body %}
 {% for message in app.flashes('failure')%}

@@ -16,7 +16,7 @@
         "symfony/form": "5.0.*",
         "symfony/framework-bundle": "5.0.*",
         "symfony/http-client": "5.0.*",
-        "symfony/intl": "5.0.*",
+        "symfony/intl": "4.4.*",
         "symfony/mailer": "5.0.*",
         "symfony/monolog-bundle": "^3.5",
         "symfony/notifier": "5.0.*",
@@ -33,7 +33,8 @@
         "symfony/yaml": "5.0.*",
         "knplabs/knp-paginator-bundle": "^5.1",
         "stripe/stripe-php": "^7.25",
-        "paragonie/sodium_compat": "^1.12"
+        "paragonie/sodium_compat": "^1.12",
+        "twig/intl-extra": "^3.0"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

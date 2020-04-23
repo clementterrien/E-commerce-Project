@@ -37,6 +37,7 @@ class UserModificationType extends AbstractType
             ])
             ->add('birthDate', BirthdayType::class, [
                 'format' => 'dd-MMMM-yyyy',
+                'view_timezone' => 'Europe/Paris',
                 'attr' => [
                     'class' => 'input-infos-form'
                 ]
