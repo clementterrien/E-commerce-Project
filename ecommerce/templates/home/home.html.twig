@@ -1,23 +1,27 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Welcome on Wine!
+{% block title %}Welcome on Wine!{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
 {% endblock %}
-
 {% block body %}
 {% for message in app.flashes('failure')%}
 {% include "partials/modal.html.twig" %}
 {% endfor %}
 {% block javascripts %}
 {{ parent() }}
-{{ encore_entry_script_tags('product-card')}} 
+{{ encore_entry_script_tags('product-card')}}
+{{ encore_entry_script_tags('home') }}
 {% endblock %}
-<section class="container-fluid">
-	<!-- {% include 'partials/carousel.html.twig' %} -->
-	<div class="row">
-		<div class="col-2">
+
+<section id="home-container" class="container-fluid mt-5">
+	<div id="homeMenu-section">
+		<div id="homeMenu">
 			{% include 'partials/sidebar.html.twig' %}
 		</div>
-		<div class="col-10">
+	</div>
+	<div id="homeProducts-section" class="pl-2 d-column-centered">
+		<button id="home-filterButton" class="mb-3">Filtrer</button>
+		<section id="top3product-section">
 			<div class="product-title-container bons-plans-container">
 				<div class="section-product-title-container">
 					<div class="line-title left">
@@ -37,39 +41,50 @@
 						réceptions.</p>
 				</div>
 			</div>
-			<div class="row">
+			<div id="top3products-wrapper">
 				{% for product in topThreeProducts %}
-				<div class="col-md-4 d-flex mb-3" id="okay">
-					{% include 'partials/product-card.html.twig' %}
-				</div>
+				{% include 'partials/product-card.html.twig' %}
 				{% endfor %}
 			</div>
-			<div class="card mt-2 mb-3 bg-secondary">
-				<div class="card-body text-white display-4 text-center">
-					Tous les produits
+		</section>
+		<div id="allproducts-title" class="product-title-container bons-plans-container">
+			<div class="section-product-title-container">
+				<div class="line-title left">
+				</div>
+				<div class="title">
+					<h2>TOUS LES PRODUITS</h2>
+				</div>
+				<div class="line-title right">
 				</div>
 			</div>
-			<div class="row">
-				{% if filteredProducts is defined and filteredProducts is not null %}
-				{% for product in filteredProducts %}
-				<div class="col-md-4 d-flex justify-content-center mb-3">
-					{% include 'partials/product-card.html.twig' %}
-				</div>
-				{% endfor %}
-				{% else %}
-
-				{% for product in allTheProducts %}
-				<div class="col-md-4 d-flex justify-content-center mb-3">
-					{% include 'partials/product-card.html.twig' %}
-				</div>
-				{% endfor %}
-
-				{% endif %}
-			</div>
-			<div class="pagination d-flex justify-content-center mt-2">
-				{{ knp_pagination_render(allTheProducts) }}
+			<div class="section-description">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus est quibusdam et laboriosam sed
+					ut ad nihil doloremque odit excepturi recusandae repellendus dolorem dignissimos quam nobis,
+					dolorum accusantium. Recusandae reprehenderit qui, delectus sequi ex consequatur non quibusdam
+					facere eos! Magnam.</p>
 			</div>
 		</div>
+		<div class="row">
+			{% if filteredProducts is defined and filteredProducts is not null %}
+			{% for product in filteredProducts %}
+			<div class="col-md-4 d-flex justify-content-center mb-3">
+				{% include 'partials/product-card.html.twig' %}
+			</div>
+			{% endfor %}
+			{% else %}
+
+			{% for product in allTheProducts %}
+			<div class="col-md-4 d-flex justify-content-center mb-3">
+				{% include 'partials/product-card.html.twig' %}
+			</div>
+			{% endfor %}
+
+			{% endif %}
+		</div>
+		<div class="pagination d-flex justify-content-center mt-2">
+			{{ knp_pagination_render(allTheProducts) }}
+		</div>
+	</div>
 	</div>
 </section>
 {% endblock %}

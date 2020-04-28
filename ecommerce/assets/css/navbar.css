@@ -88,7 +88,7 @@ a {
 }
 #account-box {
     display: none;
-    width: 300px; max-height: 500px; 
+    width: 350px; max-height: 500px; 
     padding: 1rem; top: 100%; right: -1px; z-index: 10;
 }
 #newsletter-box {
@@ -132,8 +132,8 @@ a {
     height: 50%;
     margin: 3px;
     justify-content: center; align-items: center;
-    font-size: 8.5px;
-    border: solid lightgray 1px;
+    font-size: 11px;
+    border: solid rgb(169, 169, 169) 1px;
 }
 .box-buttons-title {
     display: flex; flex-direction: column;
@@ -155,7 +155,7 @@ a {
 }
 #box-title {
     margin-top: 7px;
-    font-size: 19px; color: rgb(255,99,80);
+    font-size: 19px;
     justify-content: center;
     text-align: center;
 }
@@ -182,6 +182,15 @@ a {
 }
 hr {
     width: 95%;
+}
+
+
+/** 
+************ FONT ***************
+*/
+
+#box-title-black {
+
 }
 
 @media (min-width: 992px) and (max-width: 1137px) {

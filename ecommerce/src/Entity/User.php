@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\Adress;
+use App\Entity\FavoriteList;
+use App\Entity\ConfirmedOrder;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
@@ -38,7 +40,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8", minMessage="Your password must contain at least 8 characters")
+     * @Assert\Length(min="8", minMessage="pas bon")
+     * 
+     * 
      */
     private $password;
 
@@ -59,6 +63,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="4")
      */
     private $firstname;
 
@@ -165,18 +170,14 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getPassword()
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password)
     {
         $this->password = $password;
-        // $this->plainPassword = $password;
 
         return $this;
     }
@@ -283,7 +284,6 @@ class User implements UserInterface
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
-        $this->password = null;
     }
 
     public function getEnabled(): ?bool
@@ -383,19 +383,6 @@ class User implements UserInterface
 
         return $this;
     }
-
-    // public static function loadValidatorMetadata(ClassMetadata $metadata)
-    // {
-    //     $metadata->addPropertyConstraint(
-    //         'password',
-    //         new SecurityAssert\UserPassword([
-    //             'message' => 'Vous devez entrer votre mot de passe actuel',
-    //             'groups' => 'update'
-    //         ])
-    //     );
-    // }
-
-
 
     // public function __toString()
     // {

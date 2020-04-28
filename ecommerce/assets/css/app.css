@@ -25,7 +25,7 @@
 }
 .d-flex-centered {
 	display: flex;
-	align-items: center;;
+	align-items: center;
 	justify-content: space-around;
 }
 .d-column-centered {
@@ -270,6 +270,10 @@ header input {
 .product-title-container {
 	margin-bottom: 25px;
 }
+
+#allproducts-title {
+	margin-top: 60px; margin-bottom: 35px;
+}
 .section-product-title-container {
 	display: flex;
 	justify-content: space-between;
@@ -317,7 +321,7 @@ header input {
 .font-bold {
 	font-weight: 900;
 }
-.font-color-orange {
+.font-orange {
 	color: rgb(255,99,80);
 }
 .font-color-grey {
@@ -325,6 +329,9 @@ header input {
 }
 .font-color-lightgrey {
 	color: rgb(153, 153, 153)
+}
+.text-black {
+	color: black;
 }
 
 p.title-account {
@@ -337,6 +344,7 @@ a {
 	text-decoration: none;
 	color: black;
 }
+
 a:hover{
 	text-decoration: none;
 	color: black;

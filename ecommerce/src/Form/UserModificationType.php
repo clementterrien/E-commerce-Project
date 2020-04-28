@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\Model\ChangePassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,6 +37,7 @@ class UserModificationType extends AbstractType
             ])
             ->add('birthDate', BirthdayType::class, [
                 'format' => 'dd-MMMM-yyyy',
+                'view_timezone' => 'Europe/Paris',
                 'attr' => [
                     'class' => 'input-infos-form'
                 ]
@@ -49,7 +51,6 @@ class UserModificationType extends AbstractType
                 'attr' => [
                     'class' => 'input-infos-form'
                 ],
-                'mapped' => false
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-lg']

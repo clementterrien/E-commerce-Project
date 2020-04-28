@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\Asset\Package;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
@@ -14,20 +15,9 @@ class HelloController extends AbstractController
     /**
      * @Route("/hello", name="hello")
      */
-    public function index()
+    public function hello()
     {
-        $images = [];
-        $package = new Package(new EmptyVersionStrategy());
-
-        // Absolute path
-        $images[] = $package->getUrl('/images/champagne.png');
-        $images[] = $package->getUrl('/images/vin-blanc.png');
-        $images[] = $package->getUrl('/images/vin-rouge.png');
-        // result: image.png
-        return $this->render('hello/index.html.twig', [
-            'controller_name' => 'HelloController',
-            'images' => $images
-        ]);
+        return $this->render('/hello/index.html.twig');
     }
 
     /**
