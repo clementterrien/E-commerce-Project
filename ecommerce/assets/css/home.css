@@ -1,0 +1,82 @@
+/***********************************************/
+/* ============ 1 - Home Generals ============ */
+/***********************************************/
+
+#home-container {
+    display: flex;
+}
+
+#homeMenu-section {
+    margin-top: 0;
+    display: block;
+    padding-right: 0.5em;
+    width: 25%;
+}
+
+#homeProducts-section {
+    width: 75%;
+}
+
+/* ===== 1.1 - Product Section Generals ====== */
+
+#home-filterButton {
+    display: none;
+    width: 60%;
+    height: 50px;
+    background-color: gray;
+    color: white;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 1.5em;
+}
+
+#top3products-wrapper {
+    margin-right: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+}
+
+/***********************************************/
+/* === 1.0 - Responsive and Media Queries ==== */
+/***********************************************/
+
+/**************  Tablet Device  ****************/
+@media (min-width: 768px) and (max-width: 991px) {
+    #homeMenu-section {
+        width: 33.333%;
+    }
+    #homeMenu {
+        display: block;
+    }
+    #homeProducts-section {
+        width: 66.666%;
+    }
+}
+
+/**************  Phone Landscape  ***************/
+/**************  Phone Portrait  ***************/
+@media (min-width: 20px) and (max-width: 767px) {
+    #home-filterButton {
+        display: block;
+    }
+    #home-container {
+        flex-direction: column;
+    }
+    #homeMenu-section {
+        width: 100%;
+        padding: 0;
+    }
+    #homeMenu {
+        display: none;
+    }
+    #homeProducts-section {
+        width: 100%;
+    }
+    #top3products-wrapper {
+        grid-template-columns: 1fr;
+        grid-column-gap: 0;
+        grid-row-gap: 10px;
+    }
+}
