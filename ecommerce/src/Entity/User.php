@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Adress;
 use App\Entity\FavoriteList;
+use Webmozart\Assert\Assert;
 use App\Entity\ConfirmedOrder;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
@@ -41,7 +42,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8", minMessage="pas bon")
-     * 
      * 
      */
     private $password;
