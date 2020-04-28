@@ -1,7 +1,8 @@
 import '../css/home.css';
+require('bootstrap');
+require('bootstrap-star-rating');
 
 $(window).on('load', function() {
-    
     let homeFilterButton = $("#home-filterButton");
     let homeMenu = $("#homeMenu");
     homeFilterButton.click(function(){  
@@ -10,6 +11,15 @@ $(window).on('load', function() {
         } else {
         homeMenu.show();
         }
-    }
-    )
+    })
+    
+    let toggle = $("#color-collapse-button");
+    let collapse = $('#color-collapse');
+    var button = $( '#color-collapse-button' );
+    console.log(button);
+
+    $('.homeMenu-button').click(function() {
+       $(this).children(".arrow").toggleClass('rotated');
+       $('.collapse').collapse();
+    });
 });

@@ -1,24 +1,85 @@
 /***********************************************/
-/* ============ 1 - Home Generals ============ */
+/* =========== 1.0 - Home Generals =========== */
 /***********************************************/
 
 #home-container {
     display: flex;
 }
-
+#homeMenu {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
 #homeMenu-section {
     margin-top: 0;
     display: block;
     padding-right: 0.5em;
-    width: 25%;
-}
+    width: 20%;
 
+}
 #homeProducts-section {
-    width: 75%;
+    width: 80%;
+}
+p {
+    margin-bottom: 0;
 }
 
-/* ===== 1.1 - Product Section Generals ====== */
+/* ====== 2.1 - Menu Section ======== */
 
+.homeMenu-button {
+    position: relative;
+    border: none;
+    box-shadow:none;
+    height: 50px;
+    text-transform: uppercase;
+    align-content: flex-start;
+    font-weight: 900;
+    font-size: 1rem;
+}
+.homeMenu-button:active,
+.homeMenu-button:focus,
+.homeMenu-button:focus:active {
+  background-image: none;
+  outline: 0;
+  box-shadow: none;
+}
+img.arrow {
+    position: absolute;
+    top: 50%; bottom: 50%;
+    left: 85%; 
+    height: 0.8rem;
+    width: auto;
+    margin-right: 0;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.rotated {    
+    transform: translateX(-50%) translateY(-50%) rotate(180deg) !important; 
+}
+
+.homeMenu-filterselector {
+    font-size: 12px;
+    border-top: solid 0.8px lightgray;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+
+}
+.homeMenu-section {
+    border-bottom: solid 1px black;
+}
+
+.card {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+
+/* ====== 2.2 - Product Section ===== */
 #home-filterButton {
     display: none;
     width: 60%;
