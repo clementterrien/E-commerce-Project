@@ -18,12 +18,11 @@
 		<div id="homeMenu">
 			{# {% include 'partials/sidebar.html.twig' %} #}
 			<div id="homeMenu-section-price" class="homeMenu-section">
-				<button class="homeMenu-button collapsed full-w text-left ml-2" type="button" data-toggle="collapse"
-					data-target="#price-collapse" aria-expanded="false" aria-controls="price-collapse">
+				<button class="homeMenu-button full-w text-left ml-2" type="button">
 					Prix
 					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
 				</button>
-				<div class="collapse" id="price-collapse">
+				<div id="price-collapse" class="my-collapse">
 					<div class="card card-body">
 						<div class="homeMenu-filterselector d-flex">
 							<input type="checkbox" name="" id="" class="ml-3">
@@ -49,12 +48,11 @@
 				</div>
 			</div>
 			<div id="homeMenu-section-type" class="homeMenu-section">
-				<button class="homeMenu-button full-w text-left ml-2" type="button" data-toggle="collapse"
-					data-target="#type-collapse" aria-expanded="false" aria-controls="type-collapse">
+				<button class="homeMenu-button full-w text-left ml-2" type="button">
 					Type
 					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
 				</button>
-				<div class="collapse" id="type-collapse">
+				<div class="my-collapse" id="type-collapse">
 					<div class="card card-body">
 						<div class="homeMenu-filterselector d-flex">
 							<input type="checkbox" name="" id="" class="ml-3">
@@ -68,13 +66,11 @@
 				</div>
 			</div>
 			<div id="homeMenu-section-country" class="homeMenu-section">
-				<button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button"
-					data-toggle="collapse" data-target="#country-collapse" aria-expanded="false"
-					aria-controls="country-collapse">
+				<button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button">
 					Pays
 					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
 				</button>
-				<div class="collapse" id="country-collapse">
+				<div class="my-collapse" id="country-collapse">
 					<div class="card card-body">
 						<div class="homeMenu-filterselector d-flex">
 							<input type="checkbox" name="" id="" class="ml-3">
@@ -102,7 +98,7 @@
 					Couleur
 					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
 				</button>
-				<div class="collapse" id="color-collapse">
+				<div class="my-collapse" id="color-collapse">
 					<div class="card card-body">
 						<div class="homeMenu-filterselector d-flex">
 							<input type="checkbox" name="" id="" class="ml-3">
@@ -124,6 +120,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<div id="homeProducts-section" class="pl-2 d-column-centered">
 		<button id="home-filterButton" class="mb-3">Filtrer</button>

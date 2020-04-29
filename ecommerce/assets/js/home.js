@@ -20,6 +20,7 @@ $(window).on('load', function() {
 
     $('.homeMenu-button').click(function() {
        $(this).children(".arrow").toggleClass('rotated');
-       $('.collapse').collapse();
+       $(this).next().toggleClass('show-collapse');
     });
+
 });
