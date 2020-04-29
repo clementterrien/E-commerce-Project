@@ -12,11 +12,6 @@ $(window).on('load', function() {
         homeMenu.show();
         }
     })
-    
-    let toggle = $("#color-collapse-button");
-    let collapse = $('#color-collapse');
-    var button = $( '#color-collapse-button' );
-    console.log(button);
 
     $('.homeMenu-button').click(function() {
        $(this).children(".arrow").toggleClass('rotated');

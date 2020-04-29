@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Adress;
 use App\Entity\FavoriteList;
-use Webmozart\Assert\Assert;
 use App\Entity\ConfirmedOrder;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\Common\Collections\Collection;

@@ -1,126 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block title %}Welcome on Wine!{% endblock %}
-{% block stylesheets %}
-{{ parent() }}
-{% endblock %}
-{% block body %}
-{% for message in app.flashes('failure')%}
-{% include "partials/modal.html.twig" %}
-{% endfor %}
 {% block javascripts %}
 {{ parent() }}
 {{ encore_entry_script_tags('product-card')}}
 {{ encore_entry_script_tags('home') }}
 {% endblock %}
+{% block body %}
+{% for message in app.flashes('failure')%}
+{% include "partials/modal.html.twig" %}
+{% endfor %}
 
 <section id="home-container" class="container-fluid mt-5">
 	<div id="homeMenu-section">
 		<div id="homeMenu">
-			{# {% include 'partials/sidebar.html.twig' %} #}
-			<div id="homeMenu-section-price" class="homeMenu-section">
-				<button class="homeMenu-button full-w text-left ml-2" type="button">
-					Prix
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div id="price-collapse" class="my-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Moins de 10€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">De 10€ à 20€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">De 20€ à 50€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">De 50€ à 100€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Plus de 100€</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="homeMenu-section-type" class="homeMenu-section">
-				<button class="homeMenu-button full-w text-left ml-2" type="button">
-					Type
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div class="my-collapse" id="type-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Vins</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Champagne</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="homeMenu-section-country" class="homeMenu-section">
-				<button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button">
-					Pays
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div class="my-collapse" id="country-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rouge</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Blanc</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rosé</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Champagne</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="homeMenu-section-color" class="homeMenu-section">
-				<button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button"
-					data-toggle="collapse" data-target="#color-collapse" aria-expanded="false"
-					aria-controls="color-collapse">
-					Couleur
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div class="my-collapse" id="color-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rouge</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Blanc</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rosé</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Champagne</p>
-						</div>
-					</div>
-				</div>
-			</div>
+			{% include 'partials/sidebar.html.twig' %}
 		</div>
-
 	</div>
 	<div id="homeProducts-section" class="pl-2 d-column-centered">
 		<button id="home-filterButton" class="mb-3">Filtrer</button>
