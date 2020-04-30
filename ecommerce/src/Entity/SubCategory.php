@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TagsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SubCategoryRepository")
  */
-class Tags
+class SubCategory
 {
     /**
      * @ORM\Id()
@@ -24,13 +24,18 @@ class Tags
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="tags")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="subCategories")
      */
-    private $Product;
+    private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="subCategories")
+     */
+    private $product;
 
     public function __construct()
     {
-        $this->Product = new ArrayCollection();
+        $this->product = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,18 +55,30 @@ class Tags
         return $this;
     }
 
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Product[]
      */
     public function getProduct(): Collection
     {
-        return $this->Product;
+        return $this->product;
     }
 
     public function addProduct(Product $product): self
     {
-        if (!$this->Product->contains($product)) {
-            $this->Product[] = $product;
+        if (!$this->product->contains($product)) {
+            $this->product[] = $product;
         }
 
         return $this;
@@ -69,8 +86,8 @@ class Tags
 
     public function removeProduct(Product $product): self
     {
-        if ($this->Product->contains($product)) {
-            $this->Product->removeElement($product);
+        if ($this->product->contains($product)) {
+            $this->product->removeElement($product);
         }
 
         return $this;

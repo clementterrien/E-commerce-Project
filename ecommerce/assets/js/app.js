@@ -12,6 +12,7 @@ import '../css/sidebar.css'
 import '../css/navbar.css'
 import '../css/home.css'
 import '../css/my-account.css'
+import '../css/search.css'
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 

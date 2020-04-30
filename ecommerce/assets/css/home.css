@@ -23,8 +23,13 @@ p {
     margin-bottom: 0;
 }
 
+/**************************************/
 /* ====== 2.1 - Menu Section ======== */
-
+/**************************************/
+.homeMenu-section {
+    border-bottom: solid 1px black;
+}
+/****** 2.1.1.1 - Menu Buttons ********/
 .homeMenu-button {
     position: relative;
     border: none;
@@ -35,9 +40,7 @@ p {
     font-weight: 900;
     font-size: 1rem;
 }
-.homeMenu-button:active,
-.homeMenu-button:focus,
-.homeMenu-button:focus:active {
+.homeMenu-button:active, .homeMenu-button:focus, .homeMenu-button:focus:active {
   background-image: none;
   outline: 0;
   box-shadow: none;
@@ -65,14 +68,6 @@ img.arrow {
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
 }
-.homeMenu-section {
-    border-bottom: solid 1px black;
-}
-.card {
-    border: none;
-    border-radius: 0;
-    padding: 0;
-}
 .my-collapse.show-collapse {
     max-height: 800px;
     height: auto;
@@ -85,7 +80,10 @@ img.arrow {
     max-height:0px;
 }
 
-/* ====== 2.2 - Product Section ===== */
+/******************************************/
+/* ======= 2.2 - Product Section ======== */
+/******************************************/
+
 #home-filterButton {
     display: none;
     width: 60%;
@@ -97,7 +95,6 @@ img.arrow {
     font-weight: bold;
     border-radius: 1.5em;
 }
-
 #top3products-wrapper {
     margin-right: 10px;
     display: grid;
@@ -106,7 +103,7 @@ img.arrow {
 }
 
 /***********************************************/
-/* === 1.0 - Responsive and Media Queries ==== */
+/* === 3.0 - Responsive and Media Queries ==== */
 /***********************************************/
 
 /**************  Laptop Device  ****************/
@@ -135,7 +132,8 @@ img.arrow {
 }
 
 /**************  Phone Landscape  ***************/
-/**************  Phone Portrait  ***************/
+/**************        &&         ***************/
+/**************  Phone Portrait  ****************/
 @media (min-width: 20px) and (max-width: 767px) {
     #home-filterButton {
         display: block;

@@ -1,87 +1,116 @@
-{% extends 'base.html.twig' %}
-{% block title %}Welcome on Wine!{% endblock %}
-{% block javascripts %}
-{{ parent() }}
-{{ encore_entry_script_tags('product-card')}}
-{{ encore_entry_script_tags('home') }}
-{% endblock %}
-{% block body %}
-{% for message in app.flashes('failure')%}
-{% include "partials/modal.html.twig" %}
-{% endfor %}
+<!DOCTYPE html>
+<html>
 
-<section id="home-container" class="container-fluid mt-5">
-	<div id="homeMenu-section">
-		<div id="homeMenu">
-			{% include 'partials/sidebar.html.twig' %}
+<head>
+	<meta charset="UTF-8" />
+	<title>
+		{% block title %}Bonne Wine{% endblock %}
+	</title>
+	{% block stylesheets %}
+	<link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" crossorigin="anonymous" />
+	<link rel="stylesheet" href="{{asset('build/navbar.css')}}">
+	<link rel="stylesheet" href="{{asset('build/app.css')}}">
+	{% endblock %}
+	{% block javascripts %}
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	{{ encore_entry_script_tags('app') }}
+	{{ encore_entry_script_tags('navbar') }}
+	{{ encore_entry_script_tags('product-card')}}
+	{{ encore_entry_script_tags('home') }}
+	{% endblock %}
+	<link rel="icon" type="image/x-icon" href="{{asset('build/images/favicon.ico')}}" />
+</head>
+
+<body class="bg-white">
+	{% include "layout/navbar.html.twig" %}
+	{% for message in app.flashes('failure')%}
+	{% include "partials/modal.html.twig" %}
+	{% endfor %}
+	<section id="home-container" class="container-fluid mt-5">
+		<div id="homeMenu-section">
+			<div id="homeMenu">
+				{% include 'partials/sidebar.html.twig' %}
+			</div>
 		</div>
-	</div>
-	<div id="homeProducts-section" class="pl-2 d-column-centered">
-		<button id="home-filterButton" class="mb-3">Filtrer</button>
-		<section id="top3product-section">
-			<div class="product-title-container bons-plans-container">
+		<div id="homeProducts-section" class="pl-2 d-column-x-centered">
+			{% block body %}
+			<button id="home-filterButton" class="mb-3">Filtrer</button>
+			<section id="top3product-section">
+				<div class="product-title-container bons-plans-container">
+					<div class="section-product-title-container">
+						<div class="line-title left">
+						</div>
+						<div class="title">
+							<h2>3 BONS PLANS</h2>
+						</div>
+						<div class="line-title right">
+						</div>
+					</div>
+					<div class="catch-phrase">
+						<p>Pour acheter du vin les yeux fermés</p>
+					</div>
+					<div class="section-description">
+						<p>Destockage, meilleures ventes, coups de coeur, ventes privées… Vinatis vous propose une foire
+							aux
+							vins permanente pour acheter votre vin en toute confiance et épater vos amis lors de vos
+							réceptions.</p>
+					</div>
+				</div>
+				<div id="top3products-wrapper">
+					{% for product in topThreeProducts %}
+					{% include 'partials/product-card.html.twig' %}
+					{% endfor %}
+				</div>
+			</section>
+			<div id="allproducts-title" class="product-title-container bons-plans-container">
 				<div class="section-product-title-container">
 					<div class="line-title left">
 					</div>
 					<div class="title">
-						<h2>3 BONS PLANS</h2>
+						<h2>TOUS LES PRODUITS</h2>
 					</div>
 					<div class="line-title right">
 					</div>
 				</div>
-				<div class="catch-phrase">
-					<p>Pour acheter du vin les yeux fermés</p>
-				</div>
 				<div class="section-description">
-					<p>Destockage, meilleures ventes, coups de coeur, ventes privées… Vinatis vous propose une foire aux
-						vins permanente pour acheter votre vin en toute confiance et épater vos amis lors de vos
-						réceptions.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus est quibusdam et laboriosam sed
+						ut ad nihil doloremque odit excepturi recusandae repellendus dolorem dignissimos quam nobis,
+						dolorum accusantium. Recusandae reprehenderit qui, delectus sequi ex consequatur non quibusdam
+						facere eos! Magnam.</p>
 				</div>
 			</div>
-			<div id="top3products-wrapper">
-				{% for product in topThreeProducts %}
-				{% include 'partials/product-card.html.twig' %}
+			<div class="row">
+				{% if filteredProducts is defined and filteredProducts is not null %}
+				{% for product in filteredProducts %}
+				<div class="col-md-4 d-flex justify-content-center mb-3">
+					{% include 'partials/product-card.html.twig' %}
+				</div>
 				{% endfor %}
-			</div>
-		</section>
-		<div id="allproducts-title" class="product-title-container bons-plans-container">
-			<div class="section-product-title-container">
-				<div class="line-title left">
-				</div>
-				<div class="title">
-					<h2>TOUS LES PRODUITS</h2>
-				</div>
-				<div class="line-title right">
-				</div>
-			</div>
-			<div class="section-description">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus est quibusdam et laboriosam sed
-					ut ad nihil doloremque odit excepturi recusandae repellendus dolorem dignissimos quam nobis,
-					dolorum accusantium. Recusandae reprehenderit qui, delectus sequi ex consequatur non quibusdam
-					facere eos! Magnam.</p>
-			</div>
-		</div>
-		<div class="row">
-			{% if filteredProducts is defined and filteredProducts is not null %}
-			{% for product in filteredProducts %}
-			<div class="col-md-4 d-flex justify-content-center mb-3">
-				{% include 'partials/product-card.html.twig' %}
-			</div>
-			{% endfor %}
-			{% else %}
+				{% else %}
 
-			{% for product in allTheProducts %}
-			<div class="col-md-4 d-flex justify-content-center mb-3">
-				{% include 'partials/product-card.html.twig' %}
-			</div>
-			{% endfor %}
+				{% for product in allTheProducts %}
+				<div class="col-md-4 d-flex justify-content-center mb-3">
+					{% include 'partials/product-card.html.twig' %}
+				</div>
+				{% endfor %}
 
-			{% endif %}
+				{% endif %}
+			</div>
+			<div class="pagination d-flex justify-content-center mt-2">
+				{{ knp_pagination_render(allTheProducts) }}
+			</div>
+			{% endblock  %}
 		</div>
-		<div class="pagination d-flex justify-content-center mt-2">
-			{{ knp_pagination_render(allTheProducts) }}
-		</div>
-	</div>
-	</div>
-</section>
-{% endblock %}
+	</section>
+</body>
+
+</html>

@@ -84,11 +84,6 @@ class Product
     private $favoriteProducts;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tags", mappedBy="Product")
-     */
-    private $tags;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $stock;
@@ -96,7 +91,7 @@ class Product
     public function __construct()
     {
         $this->favoriteProducts = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -262,34 +257,6 @@ class Product
             if ($favoriteProduct->getProduct() === $this) {
                 $favoriteProduct->setProduct(null);
             }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tags[]
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tags $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-            $tag->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tags $tag): self
-    {
-        if ($this->tags->contains($tag)) {
-            $this->tags->removeElement($tag);
-            $tag->removeProduct($this);
         }
 
         return $this;

@@ -1,5 +1,18 @@
-{% extends 'base.html.twig' %}
-
+{% extends './home/home.html.twig' %}
+{% block title %}Recherche de vins{% endblock %}
+{% block javascripts %}
+{{ encore_entry_script_tags('search') }}
+{% endblock javascripts %}
 {% block body %}
-
-{% endblock body %}
+{% for message in app.flashes('failure')%}
+{% include "partials/modal.html.twig" %}
+{% endfor %}
+<div id="search-header" class="full-w mt-0">
+    <h1 id="search-header-title">Recherche</h1>
+    <hr>
+</div>
+{# <div class="pagination d-flex justify-content-center mt-2">
+                {{ knp_pagination_render(allTheProducts) }}
+            </div> #}
+</section>
+{% endblock %}

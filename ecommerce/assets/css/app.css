@@ -28,9 +28,13 @@
 	align-items: center;
 	justify-content: space-around;
 }
-.d-column-centered {
+.d-column-xy-centered {
 	display: flex; flex-direction: column;
 	justify-content: center;
+	align-items: center;
+}
+.d-column-x-centered {
+	display: flex; flex-direction: column;
 	align-items: center;
 }
 .d-column-centered-between {
