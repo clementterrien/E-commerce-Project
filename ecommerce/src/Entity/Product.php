@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Exception;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Error;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -284,5 +286,21 @@ class Product
         $this->alcool = $alcool;
 
         return $this;
+    }
+
+    public function __get(string $attribute)
+    {
+        $allAttributes = $this->getAttributes();
+
+        if (!empty($allAttributes[$attribute])) {
+            return $allAttributes[$attribute];
+        } else {
+            throw new Error("Invalid field entered !");
+        }
+    }
+
+    public function getAttributes()
+    {
+        return get_object_vars($this);
     }
 }

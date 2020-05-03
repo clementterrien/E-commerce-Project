@@ -24,7 +24,7 @@ class SubCategory
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="subCategories")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="subCategories", cascade={"persist"})
      */
     private $category;
 
