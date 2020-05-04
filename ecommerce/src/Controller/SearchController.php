@@ -14,17 +14,13 @@ class SearchController extends AbstractController
     /**
      * @Route("/search", name="search")
      */
-    public function search(ProductRepository $repo)
+    public function search(ProductRepository $productRepo)
     {
-        $products = $repo->findAll();
-        $nbDesignation = 0;
-        $testedDesignation = "";
-        $designation = "";
-        $counter = 1;
+        $products = $productRepo->findSearch();
 
-        dump($nbDesignation);
-
-        return $this->render('search/search.html.twig', []);
+        return $this->render('search/search.html.twig', [
+            'products' => $products
+        ]);
     }
 
     /**

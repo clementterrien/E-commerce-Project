@@ -1,8 +1,12 @@
 {% extends './home/home.html.twig' %}
+
 {% block title %}Recherche de vins{% endblock %}
+
 {% block javascripts %}
+{{ parent() }}
 {{ encore_entry_script_tags('search') }}
 {% endblock javascripts %}
+
 {% block body %}
 {% for message in app.flashes('failure')%}
 {% include "partials/modal.html.twig" %}
@@ -11,8 +15,9 @@
     <h1 id="search-header-title">Recherche</h1>
     <hr>
 </div>
-{# <div class="pagination d-flex justify-content-center mt-2">
-                {{ knp_pagination_render(allTheProducts) }}
-            </div> #}
-</section>
+<div id="product-section">
+    {% for product in products %}
+    {% include 'partials/product-card.html.twig' %}
+    {% endfor %}
+</div>
 {% endblock %}
