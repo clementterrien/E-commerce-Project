@@ -24,13 +24,23 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SubCategory", mappedBy="category", cascade={"persist"})
+     * @ORM\Column(type="string", length=255)
      */
-    private $subCategories;
+    private $value;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product", inversedBy="categories", cascade={"persist"})
+     */
+    private $products;
 
     public function __construct()
     {
-        $this->subCategories = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,32 +60,51 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection|SubCategory[]
-     */
-    public function getSubCategories(): Collection
+    public function getValue(): ?string
     {
-        return $this->subCategories;
+        return $this->value;
     }
 
-    public function addSubCategory(SubCategory $subCategory): self
+    public function setValue(string $value): self
     {
-        if (!$this->subCategories->contains($subCategory)) {
-            $this->subCategories[] = $subCategory;
-            $subCategory->setCategory($this);
+        $this->value = $value;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
         }
 
         return $this;
     }
 
-    public function removeSubCategory(SubCategory $subCategory): self
+    public function removeProduct(Product $product): self
     {
-        if ($this->subCategories->contains($subCategory)) {
-            $this->subCategories->removeElement($subCategory);
-            // set the owning side to null (unless already changed)
-            if ($subCategory->getCategory() === $this) {
-                $subCategory->setCategory(null);
-            }
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
         }
 
         return $this;

@@ -30,19 +30,15 @@ class SearchController extends AbstractController
     /**
      * @Route("/addCategory", name="addCategory")
      */
-    public function addCategory(EntityManagerInterface $em, SubCategoryRepository $subRepo, ProductRepository $productRepo)
+    public function addCategory(EntityManagerInterface $em, ProductRepository $productRepo, CategoryService $service)
     {
         // $service->addSubCategoriesBasedOnProductFields();
         // $service->categorizeAllProducts(array('region', 'grape', 'year'));
-        // dd($service->test());
 
         // Delas Hermitage Les Bessards 1996 Magnum
 
-        $product = $productRepo->findOneBy(['id' => 4022]);
-        $subCategory = 0;
-        dd($subRepo->findOneBy(['name' => '1997', 'category' => 5]));
-
-
+        // dd($service->howAProductAttributeIsCategorized('region'));
+        $service->createCategoriesByEntityAttributes(array('liter'));
 
         return $this->render('search/search.html.twig', []);
     }

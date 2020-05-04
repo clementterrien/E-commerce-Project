@@ -2,264 +2,193 @@
 
 namespace App\Service\Product;
 
-use Error;
+use Exception;
 use App\Entity\Product;
 use App\Entity\Category;
-use App\Entity\SubCategory;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\SubCategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
-use phpDocumentor\Reflection\Types\Boolean;
-use Symfony\Component\Console\Helper\Dumper;
-use Symfony\Component\Validator\Constraints\IsFalseValidator;
 
 class CategoryService
 {
-
+    /**
+     * @var ProductRepository
+     */
     protected $productRepo;
+    /**
+     * @var CategoryRepository
+     *
+     * @var mixed
+     */
     protected $categoryRepo;
-    protected $subCategoryRepo;
 
-    public function __construct(CategoryRepository $categoryRepo, ProductRepository $productRepo, EntityManagerInterface $em, SubCategoryRepository $subCategoryRepo)
+    /**
+     * __construct
+     *
+     * @param  CategoryRepository $categoryRepo
+     * @param  ProductRepository $productRepo
+     * @param  EntityManagerInterface $em
+     * @return void
+     */
+    public function __construct(CategoryRepository $categoryRepo, ProductRepository $productRepo, EntityManagerInterface $em)
     {
         $this->productRepo = $productRepo;
         $this->categoryRepo = $categoryRepo;
-        $this->subCategoryRepo = $subCategoryRepo;
         $this->em = $em;
     }
 
     /**
-     * Add the specified category to the specified product
+     * Identifies how can be grouped Categories with specified product attributes. It identifies all possible
+     * combinations of the product field (ex: region, type, designation, grape etc...)
+     * Example: createCategoriesByProductAttributes("product" ,array('region'));
+     * If there are two products coming from "Alsace" Region this function will 
+     * create and store a new Category if it doesn't exists each;
+     *      
+     *
+     * @param string[] $productAttributes
+     * 
+     * @return void
      */
-    public function addSubCategoriesBasedOnProductFields()
+    public function createCategoriesByEntityAttributes(array $productAttributes): void
     {
-        $product_subCategories = [];
-        $products = $this->productRepo->findAll();
-        $designation = "";
+        $categories = $this->categoryRepo->findAll();
 
-        foreach ($products as $key => $product) {
-            if ($product->getDesignation() !== $designation) {
-                $designation = $product->getDesignation();
-                array_push($product_subCategories, $designation);
-            }
+        foreach ($productAttributes as $key => $attribute) {
+            (array) $neededCategorization = $this->howToCategorizeAProductAttribute($attribute);
+            (array) $actualCategorization = $this->howAProductAttributeIsCategorized($attribute);
+            $this->createAndFillMissingCategories($attribute, $neededCategorization, $actualCategorization);
         }
-
-        $designationCategory = $this->categoryRepo->findOneBy(['name' => 'designation']);
-
-        foreach ($product_subCategories as $key => $subCategories) {
-            $subCategory = (new SubCategory())->setName($subCategories);
-            $designationCategory->addSubCategory($subCategory);
-            $this->em->persist($subCategory);
-        }
-        $this->em->persist($designationCategory);
-        $this->em->flush();
-    }
-
-    public function setSub()
-    {
-        $subCategory = (new SubCategory())->setName('Alsace');
-        $designationCategory = $this->categoryRepo->findBy(['name' => 'designation']);
-        $designationCategory[0]->addSubCategory($subCategory);
-        $this->em->persist($designationCategory[0]);
-        $this->em->persist($subCategory);
-        $this->em->flush();
-    }
-
-    public function getter()
-    {
-        $object = $this->productRepo->findOneBy(['id' => 18]);
-        return $object->__get('askip');
     }
 
     /**
-     * This function creates a new Category and his subCategories if the category's
-     * name match with an entity attribute 
-     * Example: createCategoryandHisSubCategories("designation"); will:
-     *          1. create a designation Category (checking if exists or not)
-     *          2. check if "designation" his an attribute of the existinf entity
-     *          3. create allSubCategories based on all different values contained in DB
-     *             & affecting all corresponding product for the subCategories created
+     * createAndFillMissingCategories is the main function of createCategoriesByEntityAttributes
+     *
+     * @param  mixed $productAttribute
+     * @param  mixed $neededCategorization
+     * @param  mixed $actualCategorization
+     * @return void
      */
-    public function createCategoryandHisSubCategories(string $categoryToCreate)
+    public function createAndFillMissingCategories(string $productAttribute, array $neededCategorization, array $actualCategorization): void
     {
-        $productAttributes = (new Product())->getAttributes();
-        if (array_key_exists($categoryToCreate, $productAttributes)) {
-            $this->createAndFillSubCategories($categoryToCreate);
-        } else {
-            throw new Exception("Your Category isn't based on a product attribute, 
-            your Category will be empty..");
-        }
-    }
-
-    public function createAndFillSubCategories(String $CategoryToCreate)
-    {
-        $category = $this->categoryRepo->findOneBy(['name' => $CategoryToCreate]);
         $allProducts = $this->productRepo->findAll();
-        $existingSubCategories = $category->getSubCategories();
-        $attribute = $CategoryToCreate;
-        $testedSub = "";
-
-        foreach ($allProducts as $key => $product) {
-            $fieldValue = $product->__get($attribute);
-            if ($testedSub !== $fieldValue) {
-                $Sub = (new SubCategory())
-                    ->setName($product->__get($attribute))
-                    ->setCategory($category);
-                $Sub->addProduct($product);
-                $this->em->persist($Sub, $category);
-                $this->em->persist($product);
-                $this->em->flush();
+        $categories = $this->categoryRepo->findBy(['name' => $productAttribute]);
+        /**
+         * $key ='Alsace' ; $product_id = 1 ; neededproducts = array(1....36) ; 
+         */
+        foreach ($neededCategorization as $key => $neededproducts) {
+            if ($categories === []) {
+                $category = (new Category)
+                    ->setName($productAttribute)
+                    ->setValue($key)
+                    ->setType('product-attribute');
+                $actualCategorization[$key] = [];
             } else {
-                $Sub = $this->subCategoryRepo->findOneBy(['name' => $fieldValue]);
-                $Sub->addProduct($product);
-                $this->em->persist($Sub);
-                $this->em->persist($product);
+                $category = $this->getCategoryByProductValue($categories, $productAttribute, $key);
             }
-            $testedSub = $Sub->getName();
-        }
-        $this->em->flush();
-    }
 
-    public function categorizeAllProducts(array $categorizeBy)
-    {
-        // Step 1. The list of all possible Categorization
-        $neededCategorization = $this->listSubCategoriesOfSelectedCategories($categorizeBy);
-        // Step 2. Make the Categorization well stored in DB.
-        $this->categorize($neededCategorization);
-        // Step 3. Make the SubCategorization well stored in DB.
-        foreach ($neededCategorization as $categoryName => $neededSubCategories) {
-            $this->subcategorize($categoryName, $neededSubCategories);
-        }
-        /***************************************************************
-         *** THE DATABASE CATEGORIZATION IS WELL ORGANIZED AND STORED ** 
-         **************************************************************/
+            foreach ($neededproducts as $subkey => $product_id) {
 
-        // Step 4. List All Products
-        $allProducts = $this->productRepo->findAll();
-        // Boucle sur les catégories recherchées 
-        foreach ($categorizeBy as $categoryName => $subCategoriesName) {
-            $category = $this->categoryRepo->findBy(['name' => $categoryName]);
-            $subCategories = $category->getSubCategories();
-            // Objet Produits qui ont dans la categorie concernées la valeur d'une sous categorie
-            // ex: $category = 'region' $subCategorie = 'Rhône' => va donner les produits ayant pour region
-            // le rhone
-            foreach ($subCategories as $key => $subCategory) {
-                $matchingroducts = $this->getAllElementsWithASpecifiedAttribute($allProducts, $categoryName, $subCategory->getName());
-                foreach ($matchingroducts as $key => $product) {
-                    $this->subcategorizeAProduct($product, $subCategory);
+                if (!in_array($product_id, $actualCategorization[$key])) {
+                    $message = 'product: ' . $product_id . ' is missing in the ' . $key . ' catégorie';
+                    // ajouter le produit manquant
+                    $product = $this->getProductByID($allProducts, $product_id);
+                    $product->addCategory($category);
+                    $category->addProduct($product);
+                    $this->em->persist($product);
+                    $this->em->persist($category);
                 }
             }
         }
-    }
-
-
-    /**
-     * This function Compares if the Needed Categories are well stored in DB.
-     * If not it creates missed ones.
-     */
-    public function categorize(array $neededCategories)
-    {
-        $storedCategories = $this->transformObjectArrayInStringArray($this->categoryRepo->findAll());
-
-        foreach ($neededCategories as $neededCategory => $value) {
-            if (!in_array($neededCategory, $storedCategories)) {
-                $newCategory = (new Category())->setName($neededCategory);
-                $this->em->persist($newCategory);
-            }
-        }
         $this->em->flush();
     }
 
     /**
-     * This function Compares if the Needed SubCategories are well stored in DB.
-     * If not it creates missed ones.
+     * howToCategorizeAProductAttribute returns an array of arrays with all possible combinations of product
+     * example: howToCategorizeAProductAttribute('region)
+     * returns array([Bordeaux] => $bordeauxProducts, [Bourgogne] => $bourgogneProducts) 
+     * where $bordeauxProducts = array(5, 6, 7, 8, 9, 10 etc) => values are products ID's.
+     *
+     * @param  mixed $attributeName
+     * @return array[]
      */
-    public function subcategorize(string $categoryName, array $neededSubCategories)
+    public function howToCategorizeAProductAttribute(string $attributeName): array
     {
-        $storedCategory = $this->categoryRepo->findOneBy(['name' => $categoryName]);
-        $storedSubcategories = $this->transformObjectArrayInStringArray($storedCategory->getSubCategories());
+        (array) $productAttributes = (new Product())->getAttributes();
+        (array) $allProducts = $this->productRepo->findAll();
 
-        foreach ($neededSubCategories as $key => $neededSubcategoryName) {
-            if (!in_array($neededSubcategoryName, $storedSubcategories)) {
-                $this->createAndStoreSubCategory($storedCategory, $neededSubcategoryName);
+        if (array_key_exists($attributeName, $productAttributes)) {
+
+            $categories = [];
+            foreach ($allProducts as $key => $product) {
+                $attributeName = $attributeName;
+                $attributeVal = $product->__get($attributeName);
+
+                if (empty($categories[$attributeVal])) {
+                    $categories[$attributeVal] = array($product->getId());
+                } else {
+                    array_push($categories[$attributeVal], $product->getId());
+                }
             }
+            return $categories;
+        } else {
+            throw new Exception("The attribute your trying to analyse isn't a product attribute.");
         }
-    }
-
-
-    public function transformObjectArrayInStringArray($objectArray)
-    {
-        $stringArray = [];
-
-        foreach ($objectArray as $key => $object) {
-            $objectName = $object->getName();
-            array_push($stringArray, $objectName);
-        }
-
-        return $stringArray;
-    }
-
-
-
-    public function listSubCategoriesOfSelectedCategories(array $categorizeBy): array
-    {
-        $list = [];
-
-        foreach ($categorizeBy as $key => $categoryName) {
-
-            if (!array_key_exists($categoryName, $list)) {
-                $possibleSubCategories = $this->listAllPossibleSubCategories($categoryName);
-                $list[$categoryName] = $possibleSubCategories;
-            }
-        }
-
-        return $list;
     }
 
     /**
-     * This function returns an array with all possible SubCategorization
+     * howAProductAttributeIsCategorized returns the same form of array than the howToCategorizeAProductAttribute function
+     * This one will make an overview of the actual mapping stored in DB. This function is used jointly 
+     * the howToCategorize function. It allows to not make any unnecessary query to the DB storing product linked 
+     * to the category
+     *
+     * @param  string $attribute -> is the attribute you want a see the actual's organization
+     * ex: $attribute = 'region'
+     *   
+     * @return array
      */
-    public function listAllPossibleSubCategories(string $category): array
+    public function howAProductAttributeIsCategorized(string $attribute): array
     {
-        $allProducts = $this->productRepo->findAll();
-        $allPossibleCategories = [];
-
-        foreach ($allProducts as $key => $product) {
-            $value = $product->__get($category);
-            if (!in_array($value, $allPossibleCategories)) {
-                array_push($allPossibleCategories, $value);
-            }
+        $categorization = $this->categoryRepo->findBy(['name' => $attribute]);
+        $result = [];
+        foreach ($categorization as $key => $category) {
+            $value = $category->getValue();
+            $products = $this->getAllProductsId($category);
+            $result[$value] = $products;
         }
-        return $allPossibleCategories;
+        return $result;
     }
 
-
-    public function createAndStoreSubCategory(Category $category, $newSubcategoryName)
+    /**
+     * getAllProductsId
+     * Returns an array with allProducts Id of a specified Category
+     * 
+     *
+     * @param  Category $category
+     * @return array
+     */
+    public function getAllProductsId(Category $category): array
     {
-        $newSubCategory = (new SubCategory())->setName($newSubcategoryName)->setCategory($category);
-        $category->addSubCategory($newSubCategory);
-        $this->em->persist($category, $newSubCategory);
-        $this->em->flush();
+        $products = $category->getProducts();
+        $result = [];
+        foreach ($products as $key => $product) {
+            array_push($result, $product->getId());
+        }
+        return $result;
     }
 
-    public function addCategory($categoryName)
-    {
-        $newCategory = (new Category())->setName($categoryName);
-        $this->em->persist($newCategory);
-        $this->em->flush();
-    }
-
-    public function test()
-    {
-        $productList = $this->productRepo->findAll();
-        $attribute = 'region';
-        $val = 'Rhône';
-
-        return $this->getAllElementsWithASpecifiedAttribute($productList, $attribute, $val);
-    }
-    public function getAllElementsWithASpecifiedAttribute(array $productList, string $attribute, string $val): array
+    /**
+     * getProductsBy Returns a products array
+     * This function works like a productRepository but in a Collection
+     *
+     * @param  array $productList 
+     * ex: $productList = $this->productRepo->findAll();
+     * @param  string $attribute
+     * ex: $attribute = 'region'
+     * @param  mixed $val
+     * ex: $val = 'Bordeaux';
+     * @return array
+     */
+    public function getProductsBy(array $productList, string $attribute, string $val): array
     {
         $resultList = [];
 
@@ -272,26 +201,44 @@ class CategoryService
         return $resultList;
     }
 
-    // public function addMatchingProductsInMatchingSubCategory(array $productList, array $subCategories) 
-    // {
-    //     foreach ($subCategories as $key => $subCategory) {
-
-    //     }
-    // }
-
-
-    public function subcategorizeAProductIfItsNot(Product $product, SubCategory $subCategory)
+    /**
+     * getProductByID Returns the searched product in a collection. Useful to avoid unnecessary queries when 
+     * you already have a product array.
+     *
+     * @param  Products[] $allProducts
+     * @param  int $product_id
+     * 
+     * @return Product
+     */
+    public function getProductByID(array $allProducts, int $product_id): object
     {
-        if ($this->isSubCategorized($product, $subCategory) === false) {
-            $subCategory->addProduct($product);
+        foreach ($allProducts as $key => $product) {
+            if ($product->getId() === $product_id) {
+                break;
+            }
         }
+
+        return $product;
     }
-    public function isSubCategorized($product, $subCategory)
+
+    /**
+     * getCategoryByProductValue Returns a Category needed in a Category Collection. Useful to avoid unnecessary queries when 
+     * you already have a category array.
+     *
+     * @param  Category[] $allCategories
+     * @param  string $productAttribute
+     * @param  string $attribute
+     * @return null|Category
+     */
+    public function getCategoryByProductValue(array $allCategories, $productAttribute, $attribute)
     {
-        if (in_array($product, $subCategory->getProduct())) {
-            return true;
-        } else {
-            return false;
+        foreach ($allCategories as $key => $category) {
+            if ($category->getName() == $productAttribute && $category->getValue() == $attribute) {
+                break;
+            } else {
+                return null;
+            }
         }
+        return $category;
     }
 }

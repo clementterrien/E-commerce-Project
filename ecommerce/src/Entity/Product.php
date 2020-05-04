@@ -90,6 +90,11 @@ class Product
      */
     private $stock;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="products")
+     */
+    private $categories;
+
     public function __construct()
     {
         $this->favoriteProducts = new ArrayCollection();
@@ -302,5 +307,33 @@ class Product
     public function getAttributes()
     {
         return get_object_vars($this);
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeProduct($this);
+        }
+
+        return $this;
     }
 }
