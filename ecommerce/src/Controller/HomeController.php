@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
+use App\Form\SearchType;
+use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Product\ProductService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,32 +17,15 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(ProductService $productService, PaginatorInterface $paginator, Request $request)
+    public function home(ProductRepository $productRepo)
     {
-
-        $formQuery = $request->query->all();
-        $key = key($formQuery);
-
-        $filteredProducts = null;
-
-        dump($key);
-        if (!is_null($key) && $key !== "page") {
-            $value = $request->query->get($key);
-            $filteredProducts = $paginator->paginate($productService->getProductsByCriteria($key, $value), $request->query->getInt('page', 1));
-        }
-
-
-        $topThreeProducts = $productService->getTop3MostLikedProducts();
-        $allTheProducts = $paginator->paginate(
-            $productService->getAllTheProducts(),
-            $request->query->getInt('page', 1),
-            12
-        );
+        $data = new SearchData();
+        $form = $this->createForm(SearchType::class, $data);
+        $products = $productRepo->findSearch();
 
         return $this->render('/home/home.html.twig', [
-            "topThreeProducts" => $topThreeProducts,
-            "allTheProducts" => $allTheProducts,
-            "filteredProducts" => $filteredProducts
+            'products' => $products,
+            'form' => $form->createView()
         ]);
     }
 
@@ -71,21 +56,5 @@ class HomeController extends AbstractController
         $mailer->send($email);
 
         return $this->redirectToRoute('home');
-    }
-
-    /**
-     * @Route("/tester", name="test_tester")
-     */
-    public function testament()
-    {
-        return $this->render('test/test.html.twig');
-    }
-
-    /**
-     * @Route("/tester1", name="test1_tester")
-     */
-    public function testament1()
-    {
-        return $this->render('test/test1.html.twig');
     }
 }

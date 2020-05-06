@@ -15,9 +15,11 @@
     <h1 id="search-header-title">Recherche</h1>
     <hr>
 </div>
-<div id="product-section">
+<div id="product-section" class="row">
     {% for product in products %}
-    {% include 'partials/product-card.html.twig' %}
+    <div class="col-md-4 d-flex justify-content-center mb-3">
+        {% include 'partials/product-card.html.twig' %}
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
