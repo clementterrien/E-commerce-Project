@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Data\SearchData;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,8 +25,26 @@ class ProductRepository extends ServiceEntityRepository
      *
      * @return Product[]
      */
-    public function findSearch(): array
+    public function findSearch(SearchData $search): array
     {
-        return $this->findBy(['region' => 'Alsace']);
+        $query = $this
+            ->createQueryBuilder('p')
+            ->select('c', 'p')
+            ->join('p.categories', 'c');
+
+        if (!empty($search->q)) {
+            $query = $query
+                ->where('p.name LIKE :q')
+                ->setParameter('q', "%{$search->q}%");
+        }
+
+        if (!empty($search->regionCategories)) {
+            $query = $query
+                ->andwhere('c.id IN (:regionCategories)')
+                ->setParameter('regionCategories', $search->regionCategories);
+            // dd($query->getQuery(), $search->regionCategories, $query->getQuery()->getResult());
+        }
+
+        return $query->getQuery()->getResult();
     }
 }

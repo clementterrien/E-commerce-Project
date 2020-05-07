@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SearchType extends AbstractType
 {
@@ -31,6 +32,7 @@ class SearchType extends AbstractType
                 'class' => Category::class,
                 'expanded' => true,
                 'multiple' => true,
+                'block_name' => 'custom_name',
                 'query_builder' => function (EntityRepository $repo) {
                     return $repo->findPopularRegion();
                 }
@@ -54,22 +56,22 @@ class SearchType extends AbstractType
                 'query_builder' => function (EntityRepository $repo) {
                     return $repo->findPopularTypes();
                 }
-            ])
-
-            ->add('min', NumberType::class, [
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Prix Min'
-                ]
-            ])
-            ->add('max', NumberType::class, [
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Prix Max'
-                ]
             ]);
+
+        // ->add('min', NumberType::class, [
+        //     'label' => false,
+        //     'required' => false,
+        //     'attr' => [
+        //         'placeholder' => 'Prix Min'
+        //     ]
+        // ])
+        // ->add('max', NumberType::class, [
+        //     'label' => false,
+        //     'required' => false,
+        //     'attr' => [
+        //         'placeholder' => 'Prix Max'
+        //     ]
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

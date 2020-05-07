@@ -57,6 +57,11 @@
                         <button type="submit">AJOUTER AU PANIER</button>
                     </form>
                 </div>
+                <div class="product-categories">
+                    {% for c in product.categories %}
+                    <em class="text-muted text-primary text-italic">#{{c.name}}</em>
+                    {% endfor %}
+                </div>
                 <!-- <a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au
                     panier</a> -->
                 <a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">En Savoir plus</a>

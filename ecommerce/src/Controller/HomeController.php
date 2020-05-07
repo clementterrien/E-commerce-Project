@@ -17,11 +17,13 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(ProductRepository $productRepo)
+    public function home(ProductRepository $productRepo, Request $request)
     {
         $data = new SearchData();
         $form = $this->createForm(SearchType::class, $data);
-        $products = $productRepo->findSearch();
+        $form->handleRequest($request);
+
+        $products = $productRepo->findSearch($data);
 
         return $this->render('/home/home.html.twig', [
             'products' => $products,
