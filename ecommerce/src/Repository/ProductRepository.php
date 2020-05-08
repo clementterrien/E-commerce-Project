@@ -42,7 +42,12 @@ class ProductRepository extends ServiceEntityRepository
             $query = $query
                 ->andwhere('c.id IN (:regionCategories)')
                 ->setParameter('regionCategories', $search->regionCategories);
-            // dd($query->getQuery(), $search->regionCategories, $query->getQuery()->getResult());
+        }
+
+        if (!empty($search->grapeCategories)) {
+            $query = $query
+                ->andwhere('c.id IN (:grapeCategories)')
+                ->setParameter('grapeCategories', $search->grapeCategories);
         }
 
         return $query->getQuery()->getResult();

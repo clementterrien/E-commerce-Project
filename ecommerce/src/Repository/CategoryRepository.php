@@ -34,7 +34,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->groupBy('c')
             ->having('SIZE(c.products) > :minimum')
             ->setParameter('region', $region)
-            ->setParameter('minimum', 20);
+            ->setParameter('minimum', 10);
 
 
         //  SELECT category.*,COUNT(*) 
@@ -58,7 +58,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->groupBy('c')
             ->having('SIZE(c.products) > :minimum')
             ->setParameter('name', $name)
-            ->setParameter('minimum', 30);
+            ->setParameter('minimum', 20);
 
         return $qb;
     }

@@ -1,51 +1,66 @@
-.sidebar {
-	grid-column:1/2;
-	width:100%;
-	height:100vh;
-	border-right:1px solid #718093;
-	font-family:'Roboto', sans-serif;
-	background-color: var(--light-grey);
+/**************************************/
+/* ====== 2.1 - Menu Section ======== */
+/**************************************/
+.homeMenu-section {
+    border-bottom: solid 1px black;
 }
-.sidebar-title {
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	font-size:1.5rem;
-	padding:.8em 0;
+/****** 2.1.1 - Menu Buttons ********/
+.homeMenu-button {
+    position: relative;
+    border: none;
+    box-shadow:none;
+    height: 50px;
+    text-transform: uppercase;
+    align-content: flex-start;
+    font-weight: 900;
+    font-size: 1rem;
 }
-
-.side-list {
-	height:100%;
-	width:100%;
-	display:flex;
-	flex-direction:column;
-	justify-content:space-between;
+.homeMenu-button:active, .homeMenu-button:focus, .homeMenu-button:focus:active {
+  background-image: none;
+  outline: 0;
+  box-shadow: none;
 }
-
-.sidebar-items{
-	list-style-type:none;
-	width: 100%;
-	height:100%;
-	display:flex;
+img.arrow {
+    position: absolute;
+    top: 50%; bottom: 50%;
+    left: 85%; 
+    height: 0.8rem;
+    width: auto;
+    margin-right: 0;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
-
-.sidebar-link:hover{
-	background-color: #fbc531;
-}
-
-.sidebar-link {
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	width:100%;
-	height:100%;
-	font-size: 1.1em;
-	text-decoration: none;
-	text-transform: uppercase;
-	border-bottom: 1px solid #718093;
-	text-align:center;
+.rotated {    
+    transform: translateX(-50%) translateY(-50%) rotate(180deg) !important; 
 }
 
-.sidebar-link:nth-child(1){
-	border-top:1px solid #718093;
+/****** 2.1. - Menu Collapses *******/
+.homeMenu-filterselector {
+    font-size: 12px;
+    border-top: solid 0.8px lightgray;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
 }
+.my-collapse.show-collapse {
+    max-height: 800px;
+    height: auto;
+    transition:max-height 0.7s ease-in-out;
+}
+.my-collapse {
+    overflow:hidden;
+    transition:max-height 0.5s ease-out; 
+    height:auto;
+    max-height:0px;
+}
+.my-collapse-scroll {
+	overflow: scroll;
+	max-height: 300px;
+}
+ div.homeMenu-filterselector:first-child {
+	border-top: solid black 1px;
+}
+

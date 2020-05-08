@@ -1,0 +1,20 @@
+{% extends '/home/base_home.html.twig' %}
+{% block body %}
+<section class="search-title d-column mb-2">
+    <h1 class="courgette">Ma Selection</h1>
+    <hr>
+    <div class="search-infos full-w">
+        {{ products|length}} articles
+        <hr>
+    </div>
+</section>
+<section id="search-product">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 d-flex justify-content-center mb-3">
+            {% include 'partials/product-card.html.twig' with {product: product} only %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock body %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Data\SearchData;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
+use App\Service\Product\ProductService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,18 +18,27 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(ProductRepository $productRepo, Request $request)
+    public function home(ProductRepository $productRepo, Request $request, ProductService $productService)
     {
         $data = new SearchData();
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
 
-        $products = $productRepo->findSearch($data);
-
-        return $this->render('/home/home.html.twig', [
-            'products' => $products,
-            'form' => $form->createView()
-        ]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $products = $productRepo->findSearch($data);
+            return $this->render('/home/home_search.html.twig', [
+                'products' => $products,
+                'form' => $form->createView()
+            ]);
+        } else {
+            $products = $productRepo->findBy(['region' => 'Corse']);
+            return $this->render('/home/home.html.twig', [
+                'top3GoodPlans' => $productService->getTop3GoodPlans(),
+                'top3RedWineSelection' => $productService->getTop3RedWineSelection(),
+                'top3GrandsCrusSelection' => $productService->getTop3GrandsCrusSelection(),
+                'form' => $form->createView()
+            ]);
+        }
     }
 
     /**

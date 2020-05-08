@@ -26,6 +26,21 @@ class ProductService
         return $products;
     }
 
+    public function getTop3GoodPlans()
+    {
+        return $this->productRepo->findBy([], ['likeCounter' => 'DESC'], 3);
+    }
+
+    public function getTop3RedWineSelection()
+    {
+        return $this->productRepo->findBy(['type' => 'rouge'], ['likeCounter' => 'DESC'], 3);
+    }
+
+    public function getTop3GrandsCrusSelection()
+    {
+        return $this->productRepo->findBy([], ['price' => 'DESC'], 3);
+    }
+
     /**
      * Return the 3 most liked products
      */
@@ -38,7 +53,7 @@ class ProductService
     /**
      * Return list of all the products
      */
-    public function getAllTheProducts():array
+    public function getAllTheProducts(): array
     {
         $products = $this->productRepo->findAll([]);
         return $products;
@@ -50,36 +65,21 @@ class ProductService
     public function getProductsByCriteria($key, $value, $products = null)
     {
 
-        if($key == "priceFilter" && $value == "decreasingPrice")
-        {
+        if ($key == "priceFilter" && $value == "decreasingPrice") {
             $products = $this->productRepo->findBy([], ['price' => 'DESC']);
-        }
-        elseif($key == "priceFilter" && $value == "ascendingPrice")
-        {
-            $products = $this->productRepo->findBy([],['price' => 'ASC']);
-        }
-        elseif($key == "yearFilter")
-        {
+        } elseif ($key == "priceFilter" && $value == "ascendingPrice") {
+            $products = $this->productRepo->findBy([], ['price' => 'ASC']);
+        } elseif ($key == "yearFilter") {
             $products = $this->productRepo->findByYear(['year' => $value]);
-        }
-        elseif($key == "regionFilter")
-        {
+        } elseif ($key == "regionFilter") {
             $products = $this->productRepo->findByRegion(['region' => $value]);
-        }
-        elseif($key == "coutryFilter")
-        {
+        } elseif ($key == "coutryFilter") {
             $products = $this->productRepo->findByCountry(['country' => $value]);
-        }
-        elseif($key == "grappeFilter")
-        {
+        } elseif ($key == "grappeFilter") {
             $products = $this->productRepo->findByGrappe(['grappe' => $value]);
-        }
-        elseif($key == "literFilter")
-        {
+        } elseif ($key == "literFilter") {
             $products = $this->productRepo->findByLiter(['liter' => $value]);
-        }
-        elseif($key == "typeFilter")
-        {
+        } elseif ($key == "typeFilter") {
             $products = $this->productRepo->findByType(['type' => $value]);
         }
         return $products;

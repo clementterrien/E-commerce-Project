@@ -1,75 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends '/home/base_home.html.twig' %}
 
-{% block title %}Welcome on Wine!{% endblock %}
-
-{% block stylesheets %}
-{{ parent() }}
-{% endblock %}
-
-{% block javascripts %}
-{{ parent() }}
-{{ encore_entry_script_tags('product-card')}}
-{{ encore_entry_script_tags('home') }}
-{% endblock %}
 {% block body %}
-{% for message in app.flashes('failure')%}
-{% include "partials/modal.html.twig" %}
-{% endfor %}
-<section id="home-container" class="container-fluid mt-5">
-	<div id="homeMenu-section">
-		<div id="homeMenu">
-			{% include 'partials/sidebar.html.twig' with {form: form} only %}
+{% if top3GoodPlans is defined and top3GoodPlans is not null %}
+<section id="top3-goodplans" class="top3-section mb-3">
+	<div class="top3-infos mb-3">
+		<div class="top3-title section-product-title-container">
+			<div class="line-title left">
+			</div>
+			<div class="title">
+				<h2>3 BONS PLANS</h2>
+			</div>
+			<div class="line-title right">
+			</div>
+		</div>
+		<div class="catch-phrase">
+			<p>Pour acheter du vin les yeux fermés</p>
+		</div>
+		<div class="section-description">
+			<p>Destockage, meilleures ventes, coups de coeur, ventes privées… Vinatis vous propose une foire aux
+				vins permanente pour acheter votre vin en toute confiance et épater vos amis lors de vos
+				réceptions.</p>
 		</div>
 	</div>
-	<div id="homeProducts-section" class="pl-2 d-column-centered">
-		<button id="home-filterButton" class="mb-3">Filtrer</button>
-		{% if topThreeProducts is defined and topThreeProducts is not null %}
-		<section id="top3product-section">
-			<div class="product-title-container bons-plans-container">
-				<div class="section-product-title-container">
-					<div class="line-title left">
-					</div>
-					<div class="title">
-						<h2>3 BONS PLANS</h2>
-					</div>
-					<div class="line-title right">
-					</div>
-				</div>
-				<div class="catch-phrase">
-					<p>Pour acheter du vin les yeux fermés</p>
-				</div>
-				<div class="section-description">
-					<p>Destockage, meilleures ventes, coups de coeur, ventes privées… Vinatis vous propose une foire aux
-						vins permanente pour acheter votre vin en toute confiance et épater vos amis lors de vos
-						réceptions.</p>
-				</div>
-			</div>
-			<div id="top3products-wrapper">
-				{% for product in topThreeProducts %}
-				{% include 'partials/product-card.html.twig' %}
-				{% endfor %}
-			</div>
-		</section>
-		{% endif %}
-		<div id="allproducts-title" class="product-title-container bons-plans-container">
-			<div class="section-product-title-container">
-				<div class="line-title left">
-				</div>
-				<div class="title">
-					<h2>TOUS LES PRODUITS</h2>
-				</div>
-				<div class="line-title right">
-				</div>
-			</div>
-			<div class="section-description">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus est quibusdam et laboriosam sed
-					ut ad nihil doloremque odit excepturi recusandae repellendus dolorem dignissimos quam nobis,
-					dolorum accusantium. Recusandae reprehenderit qui, delectus sequi ex consequatur non quibusdam
-					facere eos! Magnam.</p>
-			</div>
-		</div>
+	<div class="top3-products full-w">
 		<div class="row">
-			{% for product in products %}
+			{% for product in top3GoodPlans %}
 			<div class="col-md-4 d-flex justify-content-center mb-3">
 				{% include 'partials/product-card.html.twig' with {product: product} only %}
 			</div>
@@ -77,4 +32,69 @@
 		</div>
 	</div>
 </section>
+{% endif %}
+{% if top3RedWineSelection is defined and top3RedWineSelection is not null %}
+<section id="top3-red-wine-selection" class="top3-section my-5">
+	<div class="top3-infos mb-3">
+		<div class="top3-title section-product-title-container">
+			<div class="line-title left">
+			</div>
+			<div class="title">
+				<h2>TOP 3 SELECTION VINS ROUGES</h2>
+			</div>
+			<div class="line-title right">
+			</div>
+		</div>
+		<div class="catch-phrase">
+			<p>Notre sélection des meilleurs vins Rouges</p>
+		</div>
+		<div class="section-description">
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda similique alias ex nostrum vitae?
+				Laudantium iusto odio praesentium a, rem dicta qui reiciendis, totam molestias provident dolor expedita
+				ducimus illum id! Perferendis tempora ea nostrum a iusto quibusdam unde. Reiciendis!</p>
+		</div>
+	</div>
+	<div class="top3-products full-w">
+		<div class="row">
+			{% for product in top3RedWineSelection %}
+			<div class="col-md-4 d-flex justify-content-center mb-3">
+				{% include 'partials/product-card.html.twig' with {product: product} only %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endif %}
+{% if top3GrandsCrusSelection is defined and top3GrandsCrusSelection is not null %}
+<section id="top3-grands-crus-selection" class="top3-section my-5">
+	<div class="top3-infos mb-3">
+		<div class="top3-title section-product-title-container">
+			<div class="line-title left">
+			</div>
+			<div class="title">
+				<h2>TOP 3 SELECTION GRANDS CRUS</h2>
+			</div>
+			<div class="line-title right">
+			</div>
+		</div>
+		<div class="catch-phrase">
+			<p>Notre sélection de nos meilleurs Grands Crus</p>
+		</div>
+		<div class="section-description">
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda similique alias ex nostrum vitae?
+				Laudantium iusto odio praesentium a, rem dicta qui reiciendis, totam molestias provident dolor expedita
+				ducimus illum id! Perferendis tempora ea nostrum a iusto quibusdam unde. Reiciendis!</p>
+		</div>
+	</div>
+	<div class="top3-products full-w">
+		<div class="row">
+			{% for product in top3GrandsCrusSelection %}
+			<div class="col-md-4 d-flex justify-content-center mb-3">
+				{% include 'partials/product-card.html.twig' with {product: product} only %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endif %}
 {% endblock body %}

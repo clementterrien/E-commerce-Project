@@ -23,65 +23,8 @@ p {
     margin-bottom: 0;
 }
 
-/**************************************/
-/* ====== 2.1 - Menu Section ======== */
-/**************************************/
-.homeMenu-section {
-    border-bottom: solid 1px black;
-}
-/****** 2.1.1.1 - Menu Buttons ********/
-.homeMenu-button {
-    position: relative;
-    border: none;
-    box-shadow:none;
-    height: 50px;
-    text-transform: uppercase;
-    align-content: flex-start;
-    font-weight: 900;
-    font-size: 1rem;
-}
-.homeMenu-button:active, .homeMenu-button:focus, .homeMenu-button:focus:active {
-  background-image: none;
-  outline: 0;
-  box-shadow: none;
-}
-img.arrow {
-    position: absolute;
-    top: 50%; bottom: 50%;
-    left: 85%; 
-    height: 0.8rem;
-    width: auto;
-    margin-right: 0;
-    transform: translateX(-50%) translateY(-50%);
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}
-.rotated {    
-    transform: translateX(-50%) translateY(-50%) rotate(180deg) !important; 
-}
-.homeMenu-filterselector {
-    font-size: 12px;
-    border-top: solid 0.8px lightgray;
-    align-items: center;
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-}
-.my-collapse.show-collapse {
-    max-height: 800px;
-    height: auto;
-    transition:max-height 0.7s ease-in-out;
-}
-.my-collapse {
-    overflow:hidden;
-    transition:max-height 0.5s ease-out; 
-    height:auto;
-    max-height:0px;
-}
-
 /******************************************/
-/* ======= 2.2 - Product Section ======== */
+/* ======= 2.0- Product Section ======== */
 /******************************************/
 
 #home-filterButton {
