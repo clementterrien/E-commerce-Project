@@ -4,13 +4,17 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Form\SearchType;
+use App\Data\StructureData;
+use App\Data\SearchStructure;
+use App\Service\Data\DataService;
 use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use App\Service\Product\ProductService;
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -18,27 +22,55 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(ProductRepository $productRepo, Request $request, ProductService $productService)
+    public function home(Request $request, ProductService $productService, ProductRepository $productRepo)
     {
-        $data = new SearchData();
-        $form = $this->createForm(SearchType::class, $data);
+        $searchData = new SearchData;
+        $searchData->page = $request->get('page', 1);
+
+
+        $form = $this->createForm(SearchType::class, $searchData);
+        $form->handleRequest($request);
+        [$min, $max] = $productRepo->findMinMaxPrice($searchData);
+
+
+        return $this->render('/home/home.html.twig', [
+            'top3GoodPlans' => $productService->getTop3GoodPlans(),
+            'top3RedWineSelection' => $productService->getTop3RedWineSelection(),
+            'top3GrandsCrusSelection' => $productService->getTop3GrandsCrusSelection(),
+            'form' => $form->createView(),
+            'min' => $min,
+            'max' => $max,
+            'searchData' => $searchData
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="home_search")
+     */
+    public function homeSearch(
+        ProductRepository $productRepo,
+        Request $request,
+        ProductService $productService,
+        CategoryRepository $catRepo,
+        DataService $dataService,
+        SessionInterface $session
+    ) {
+        $dataSearch = new SearchData;
+        $dataSearch->page = $request->get('page', 1);
+
+        $form = $this->createForm(SearchType::class, $dataSearch);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $products = $productRepo->findSearch($data);
-            return $this->render('/home/home_search.html.twig', [
-                'products' => $products,
-                'form' => $form->createView()
-            ]);
-        } else {
-            $products = $productRepo->findBy(['region' => 'Corse']);
-            return $this->render('/home/home.html.twig', [
-                'top3GoodPlans' => $productService->getTop3GoodPlans(),
-                'top3RedWineSelection' => $productService->getTop3RedWineSelection(),
-                'top3GrandsCrusSelection' => $productService->getTop3GrandsCrusSelection(),
-                'form' => $form->createView()
-            ]);
-        }
+        [$min, $max] = $productRepo->findMinMaxPrice($dataSearch);
+        $products = $productRepo->findSearch($dataSearch);
+
+        return $this->render('/home/home_search.html.twig', [
+            'products' => $products,
+            'form' => $form->createView(),
+            'min' => $min,
+            'max' => $max,
+            'searchData' => $dataSearch
+        ]);
     }
 
     /**

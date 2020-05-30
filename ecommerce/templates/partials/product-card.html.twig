@@ -59,7 +59,7 @@
                 </div>
                 <div class="product-categories">
                     {% for c in product.categories %}
-                    <em class="text-muted text-primary text-italic">#{{c.name}}</em>
+                    <em class="text-muted text-primary text-italic">#{{c.value}}</em>
                     {% endfor %}
                 </div>
                 <!-- <a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au

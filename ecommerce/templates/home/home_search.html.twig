@@ -4,7 +4,7 @@
     <h1 class="courgette">Ma Selection</h1>
     <hr>
     <div class="search-infos full-w">
-        {{ products|length}} articles
+        {{ products.getTotalItemCount }} articles
         <hr>
     </div>
 </section>
@@ -15,6 +15,8 @@
             {% include 'partials/product-card.html.twig' with {product: product} only %}
         </div>
         {% endfor %}
-    </div>
+        <div id="pagination">
+            {{ knp_pagination_render(products) }}
+        </div>
 </section>
 {% endblock body %}

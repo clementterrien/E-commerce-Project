@@ -1,9 +1,11 @@
+@import "~nouislider/distribute/nouislider.css";
 /**************************************/
 /* ====== 2.1 - Menu Section ======== */
 /**************************************/
 .homeMenu-section {
-    border-bottom: solid 1px black;
+	border-bottom: solid 1px black;
 }
+
 /****** 2.1.1 - Menu Buttons ********/
 .homeMenu-button {
     position: relative;
@@ -13,7 +15,7 @@
     text-transform: uppercase;
     align-content: flex-start;
     font-weight: 900;
-    font-size: 1rem;
+	font-size: 1rem;
 }
 .homeMenu-button:active, .homeMenu-button:focus, .homeMenu-button:focus:active {
   background-image: none;
@@ -48,19 +50,18 @@ img.arrow {
 .my-collapse.show-collapse {
     max-height: 800px;
     height: auto;
-    transition:max-height 0.7s ease-in-out;
+	transition:max-height 0.7s ease-in-out;
+
 }
 .my-collapse {
     overflow:hidden;
     transition:max-height 0.5s ease-out; 
     height:auto;
-    max-height:0px;
+	max-height:0px;
 }
 .my-collapse-scroll {
 	overflow: scroll;
 	max-height: 300px;
 }
- div.homeMenu-filterselector:first-child {
-	border-top: solid black 1px;
-}
+
 

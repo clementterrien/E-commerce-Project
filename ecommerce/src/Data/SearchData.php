@@ -2,8 +2,17 @@
 
 namespace App\Data;
 
+/**
+ * SearchData
+ */
 class SearchData
 {
+    /**
+     * page
+     *
+     * @var integer
+     */
+    public $page = 1;
 
     /**
      * q
@@ -32,6 +41,34 @@ class SearchData
      * @var Category[]
      */
     public $typeCategories = [];
+
+    /**
+     * Year Categories (Categories with name = "year")
+     *
+     * @var Category[]
+     */
+    public $yearCategories = [];
+
+    /**
+     * designationCategories
+     *
+     * @var Category[]
+     */
+    public $designationCategories = [];
+
+    /**
+     * literCategories
+     *
+     * @var Category[]
+     */
+    public $literCategories = [];
+
+    /**
+     * alcoolCategories
+     *
+     * @var Category[]
+     */
+    public $alcoolCategories = [];
 
     /**
      * max

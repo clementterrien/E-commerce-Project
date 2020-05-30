@@ -35,7 +35,7 @@
     <section id="home-container" class="container-fluid mt-5">
         <div id="homeMenu-section">
             <div id="homeMenu">
-                {% include 'partials/sidebar.html.twig' with {form: form} only %}
+                {% include 'partials/sidebar.html.twig' with {form: form, min: min, max: max, search: searchData} only %}
             </div>
         </div>
         <div id="homeProducts-section" class="pl-2 d-column-centered">

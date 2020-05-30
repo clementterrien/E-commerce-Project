@@ -1,5 +1,51 @@
-{{ form_start(form) }}
-{{form_row(form.q)}}
+{{ form_start(form, {'action': path('home_search')}) }}
+{{form_widget(form.q, {'attr': {'class':'mb-2 full-w'}})}}
+<div id="activeFilter-section">
+    {% if search.regionCategories %}
+    {% for region in search.regionCategories %}
+    <p id="region-active-filter" class="active-filter">
+        Region: {{region.value}}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+    {% if search.grapeCategories %}
+    {% for grape in search.grapeCategories %}
+    <p id="grape-active-filter" class="active-filter">
+        Cépage: {{grape.value}}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+    {% if search.designationCategories %}
+    {% for designation in search.designationCategories %}
+    <p id="designation-active-filter" class="active-filter">
+        Appelation: {{designation.value}}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+    {% if search.typeCategories %}
+    {% for type in search.typeCategories %}
+    <p id="type-active-filter" class="active-filter">
+        {% if type.value == "Rouge" %}
+        Type: {{type.value}}
+        {% endif %}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+    {% if search.alcoolCategories %}
+    {% for alcool in search.alcoolCategories %}
+    <p id="type-active-filter" class="active-filter">
+        {% if alcool.value == "Rouge" %}
+        Alcool: {{alcool.value}}
+        {% endif %}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+</div>
 <div id="homeMenu-section-region" class="homeMenu-section">
     <button class="homeMenu-button full-w text-left" type="button">
         <p class="ml-2">Region</p>
@@ -9,10 +55,10 @@
         <div class="my-collapse-scroll">
             {% for child in form.regionCategories|filter(child => not child.rendered) %}
             <div class="homeMenu-filterselector full-w">
+                {{ form_errors(child) }}
                 {{ form_widget(child, {'attr': {'class':'mr-2'}}) }}
                 {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }}
                 {{ form_help(child) }}
-                {{ form_errors(child) }}
             </div>
             {% endfor %}
         </div>
@@ -25,7 +71,25 @@
     </button>
     <div id="grape-collapse" class="my-collapse d-column">
         <div class="my-collapse-scroll">
-            {% for child in form.grapeCategories|filter(child => not child.rendered) %}
+            {% for child in form.grapeCategories | filter(child => not child.rendered) %}
+            <div class="homeMenu-filterselector full-w">
+                {{ form_widget(child, {'attr': {'class':'mr-2'}}) }}
+                {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }}
+                {{ form_help(child) }}
+                {{ form_errors(child) }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div id="homeMenu-section-designation" class="homeMenu-section">
+    <button class="homeMenu-button full-w text-left" type="button">
+        <p class="ml-2">Appelation</p>
+        <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
+    </button>
+    <div id="designation-collapse" class="my-collapse d-column">
+        <div class="my-collapse-scroll">
+            {% for child in form.designationCategories | filter(child => not child.rendered) %}
             <div class="homeMenu-filterselector full-w">
                 {{ form_widget(child, {'attr': {'class':'mr-2'}}) }}
                 {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }}
@@ -37,11 +101,11 @@
     </div>
 </div>
 <div id="homeMenu-section-type" class="homeMenu-section">
-    <button class="homeMenu-button full-w text-left ml-2" type="button">
-        Type
+    <button class="homeMenu-button full-w text-left" type="button">
+        <p class="ml-2">Type</p>
         <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
     </button>
-    <div id="grape-collapse" class="my-collapse d-column">
+    <div id="type-collapse" class="my-collapse d-column">
         {# {{ form_widget(form.regionCategories, {'attr': {'class': 'homeMenu-filterselector d-flex full-w'}})}} #}
         {% for child in form.typeCategories|filter(child => not child.rendered) %}
         <div class="homeMenu-filterselector full-w">
@@ -53,107 +117,43 @@
         {% endfor %}
     </div>
 </div>
+<div id="homeMenu-section-liter" class="homeMenu-section">
+    <button class="homeMenu-button full-w text-left" type="button">
+        <p class="ml-2">Alcool</p>
+        <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
+    </button>
+    <div id="alcool-collapse" class="my-collapse d-column">
+        {# {{ form_widget(form.regionCategories, {'attr': {'class': 'homeMenu-filterselector d-flex full-w'}})}} #}
+        {% for child in form.alcoolCategories|filter(child => not child.rendered) %}
+        <div class="homeMenu-filterselector full-w">
+            {{ form_widget(child, {'attr': {'class':'mr-2'}}) }}
+            {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }}
+            {{ form_help(child) }}
+            {{ form_errors(child) }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div id="homeMenu-section-liter" class="homeMenu-section">
+    <button class="homeMenu-button full-w text-left" type="button">
+        <p class="ml-2">Contenance</p>
+        <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
+    </button>
+    <div id="liter-collapse" class="my-collapse d-column">
+        {# {{ form_widget(form.regionCategories, {'attr': {'class': 'homeMenu-filterselector d-flex full-w'}})}} #}
+        {% for child in form.literCategories|filter(child => not child.rendered) %}
+        <div class="homeMenu-filterselector full-w">
+            {{ form_widget(child, {'attr': {'class':'mr-2'}}) }}
+            {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }}
+            {{ form_help(child) }}
+            {{ form_errors(child) }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div id="homeMenu-section-price" class="homeMenu-section">
+    <div id="price-slider" data-min="{{ min }}" data-max="{{ max }}">
+    </div>
+</div>
 <button type="submit" class="btn btn-primary">Soumettre</button>
 {{ form_end(form) }}
-{# 
-<div id="homeMenu-section-price" class="homeMenu-section">
-    <button class="homeMenu-button full-w text-left ml-2" type="button">
-        Prix
-        <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-    </button>
-    <div id="price-collapse" class="my-collapse">
-        <div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Moins de 10€</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">De 10€ à 20€</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">De 20€ à 50€</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">De 50€ à 100€</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Plus de 100€</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="homeMenu-section-type" class="homeMenu-section">
-    <button class="homeMenu-button full-w text-left ml-2" type="button">
-        Type
-        <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-    </button>
-    <div class="my-collapse" id="type-collapse">
-        <div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Vins</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Champagne</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="homeMenu-section-country" class="homeMenu-section">
-    <button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button">
-        Pays
-        <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-    </button>
-    <div class="my-collapse" id="country-collapse">
-        <div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Rouge</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Blanc</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Rosé</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Champagne</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="homeMenu-section-color" class="homeMenu-section">
-    <button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button"
-        data-toggle="collapse" data-target="#color-collapse" aria-expanded="false" aria-controls="color-collapse">
-        Couleur
-        <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-    </button>
-    <div class="my-collapse" id="color-collapse">
-        <div class="">
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Rouge</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Blanc</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Rosé</p>
-            </div>
-            <div class="homeMenu-filterselector d-flex">
-                <input type="checkbox" name="" id="" class="ml-3">
-                <p class="ml-2">Champagne</p>
-            </div>
-        </div>
-    </div>
-</div> #}
