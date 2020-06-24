@@ -8,3 +8,25 @@
 #search-header-title {
     font-size: 32px;
 }
+
+/***********************************************/
+/* === 2.0 - Responsive and Media Queries ==== */
+/***********************************************/
+
+/**************  Laptop Device  ****************/
+@media (min-width: 992px) {
+}
+
+/**************  Tablet Device  ****************/
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/**************  Phone Landscape  ***************/
+/**************        &&         ***************/
+/**************  Phone Portrait  ****************/
+@media (min-width: 20px) and (max-width: 767px) {
+	div.bottle-img {
+		height: 78%;
+		margin-top: 3px;
+	}
+}

@@ -12,7 +12,11 @@
         {% endif %}
         <div class="product-sub-action">
             <a href="{{path('favorite_add', {'product_id': product.id})}}">
-                <img src="{{asset('build/images/like.png')}}" alt="">
+                <img id="product-like-img" src="{{asset('build/images/alert-bell.png')}}" alt="">
+            </a>
+            <div class="sub-action-vertical-stripe"></div>
+            <a href="{{path('favorite_add', {'product_id': product.id})}}">
+                <img id="product-like-img" src="{{asset('build/images/like.png')}}" alt="">
             </a>
         </div>
     </div>
@@ -26,42 +30,31 @@
                     Vin {{product.type}} / {{product.region}} / {{product.designation}} / {{product.alcool}}% vol
                 </p>
             </div>
-            <div class="capacity">
-                <p>{{product.liter / 100}} L</p>
+            <div class="product-capacity">
+                <p class="product-capacity">{{product.liter / 100}} L</p>
             </div>
         </div>
         <div class="price-section">
-            <div class="price">
-                <div class="price-number">
-                    <p>{{product.price}},0 €</p>
-                </div>
-                <div class="price-spec">
-                    <h5>A l'unité</h5>
-                </div>
-            </div>
+            <p class="price-text"><span class="price-amount">{{product.price}},0 €</span> A l'unité</p>
         </div>
         <div class="main-action">
+            <div class="add-to-cart mr-3">
+                <form class="add-to-cart-form d-flex full-w" action="{{path("cart_add", {'product_id': product.id})}}"
+                    method="post">
+                    <select id="add-to-cart-select" name="quantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <button id="add-to-cart-btn" type="submit">AJOUTER AU PANIER</button>
+                </form>
+            </div>
             <div class="more-info">
-                <div class="add-to-cart">
-                    <form action="{{path("cart_add", {'product_id': product.id})}}" method="post">
-                        <select class="form-control" name="quantity" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>12</option>
-                            <option>24</option>
-                        </select>
-                        <button type="submit">AJOUTER AU PANIER</button>
-                    </form>
-                </div>
-                <div class="product-categories">
-                    {% for c in product.categories %}
-                    <em class="text-muted text-primary text-italic">#{{c.value}}</em>
-                    {% endfor %}
-                </div>
                 <!-- <a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au
                     panier</a> -->
                 <a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">En Savoir plus</a>

@@ -1,51 +1,56 @@
 {{ form_start(form, {'action': path('home_search')}) }}
-{{form_widget(form.q, {'attr': {'class':'mb-2 full-w'}})}}
+{{form_widget(form.q, {'attr': {'class':'mt-3 mb-4 full-w searchbar-filter'}}) }}
 <div id="activeFilter-section">
-    {% if search.regionCategories %}
-    {% for region in search.regionCategories %}
-    <p id="region-active-filter" class="active-filter">
-        Region: {{region.value}}
-    </p>
-    {% endfor %}
-    {% endif %}
-
-    {% if search.grapeCategories %}
-    {% for grape in search.grapeCategories %}
-    <p id="grape-active-filter" class="active-filter">
-        Cépage: {{grape.value}}
-    </p>
-    {% endfor %}
-    {% endif %}
-
-    {% if search.designationCategories %}
-    {% for designation in search.designationCategories %}
-    <p id="designation-active-filter" class="active-filter">
-        Appelation: {{designation.value}}
-    </p>
-    {% endfor %}
-    {% endif %}
-
-    {% if search.typeCategories %}
-    {% for type in search.typeCategories %}
-    <p id="type-active-filter" class="active-filter">
-        {% if type.value == "Rouge" %}
-        Type: {{type.value}}
+    <div id="activeFilter-section-title" class="mb-2 mt-4">
+        <h2 id="activeFilter-section-title-text" class="mt-1">Filtres actifs</h2>
+    </div>
+    <div id="activeFilter-section-filters" class="pl-2">
+        {% if search.regionCategories %}
+        {% for region in search.regionCategories %}
+        <p id="region-active-filter" class="active-filter">
+            Region: {{region.value}}
+        </p>
+        {% endfor %}
         {% endif %}
-    </p>
-    {% endfor %}
-    {% endif %}
 
-    {% if search.alcoolCategories %}
-    {% for alcool in search.alcoolCategories %}
-    <p id="type-active-filter" class="active-filter">
-        {% if alcool.value == "Rouge" %}
-        Alcool: {{alcool.value}}
+        {% if search.grapeCategories %}
+        {% for grape in search.grapeCategories %}
+        <p id="grape-active-filter" class="active-filter">
+            Cépage: {{grape.value}}
+        </p>
+        {% endfor %}
         {% endif %}
-    </p>
-    {% endfor %}
-    {% endif %}
 
+        {% if search.designationCategories %}
+        {% for designation in search.designationCategories %}
+        <p id="designation-active-filter" class="active-filter">
+            Appelation: {{designation.value}}
+        </p>
+        {% endfor %}
+        {% endif %}
+
+        {% if search.typeCategories %}
+        {% for type in search.typeCategories %}
+        <p id="type-active-filter" class="active-filter">
+            {% if type.value == "Rouge" %}
+            Type: {{type.value}}
+            {% endif %}
+        </p>
+        {% endfor %}
+        {% endif %}
+
+        {% if search.alcoolCategories %}
+        {% for alcool in search.alcoolCategories %}
+        <p id="type-active-filter" class="active-filter">
+            {% if alcool.value == "Rouge" %}
+            Alcool: {{alcool.value}}
+            {% endif %}
+        </p>
+        {% endfor %}
+        {% endif %}
+    </div>
 </div>
+
 <div id="homeMenu-section-region" class="homeMenu-section">
     <button class="homeMenu-button full-w text-left" type="button">
         <p class="ml-2">Region</p>

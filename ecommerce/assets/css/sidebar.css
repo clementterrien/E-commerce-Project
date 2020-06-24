@@ -3,13 +3,35 @@
 /* ====== 2.1 - Menu Section ======== */
 /**************************************/
 .homeMenu-section {
-	border-bottom: solid 1px black;
+    border-bottom: solid 1px black;
+    background-color: white;
 }
 
+/****** 2.1.1 - Menu Active-filter ********/
+div#activeFilter-section {
+    border-bottom: 1px black solid;
+    padding-bottom: 1em;
+}
+div#activeFilter-section-title {
+    display: flex;
+    justify-content: center;
+    background-color: lightgray;
+}
+h2#activeFilter-section-title-text {
+    white-space:nowrap;
+    font-size: 1em;
+    margin-top: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 /****** 2.1.1 - Menu Buttons ********/
+input.searchbar-filter {
+    min-height: 2em ;
+}
 .homeMenu-button {
     position: relative;
     border: none;
+    background-color: white !important;
     box-shadow:none;
     height: 50px;
     text-transform: uppercase;
@@ -17,6 +39,7 @@
     font-weight: 900;
 	font-size: 1rem;
 }
+
 .homeMenu-button:active, .homeMenu-button:focus, .homeMenu-button:focus:active {
   background-image: none;
   outline: 0;
@@ -39,7 +62,7 @@ img.arrow {
     transform: translateX(-50%) translateY(-50%) rotate(180deg) !important; 
 }
 
-/****** 2.1. - Menu Collapses *******/
+/****** 2.1.2 - Menu Collapses *******/
 .homeMenu-filterselector {
     font-size: 12px;
     border-top: solid 0.8px lightgray;
