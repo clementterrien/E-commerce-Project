@@ -23,6 +23,9 @@
     <div class="card-right-col">
         <div class="main-infos">
             <div class="product-title">
+                <a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">
+                    <p class="product-name">{{product.name}}</p>
+                </a>
                 <p class="product-name">{{product.name}}</p>
             </div>
             <div class="product-other-info">
@@ -53,11 +56,6 @@
                     </select>
                     <button id="add-to-cart-btn" type="submit">AJOUTER AU PANIER</button>
                 </form>
-            </div>
-            <div class="more-info">
-                <!-- <a href="{{ path( 'cart_add', {'product_id': product.id})}}" class="btn btn-primary">Ajouter au
-                    panier</a> -->
-                <a href="{{path('product_details', {'product_id': product.id})}}" class="card-link">En Savoir plus</a>
             </div>
         </div>
     </div>

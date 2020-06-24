@@ -1,5 +1,7 @@
 {{ form_start(form, {'action': path('home_search')}) }}
 {{form_widget(form.q, {'attr': {'class':'mt-3 mb-4 full-w searchbar-filter'}}) }}
+
+{% if search.regionCategories or search.grapeCategories or search.designationCategories or search.typeCategories or search.alcoolCategories or search.literCategories %}
 <div id="activeFilter-section">
     <div id="activeFilter-section-title" class="mb-2 mt-4">
         <h2 id="activeFilter-section-title-text" class="mt-1">Filtres actifs</h2>
@@ -42,14 +44,21 @@
         {% if search.alcoolCategories %}
         {% for alcool in search.alcoolCategories %}
         <p id="type-active-filter" class="active-filter">
-            {% if alcool.value == "Rouge" %}
             Alcool: {{alcool.value}}
-            {% endif %}
+        </p>
+        {% endfor %}
+        {% endif %}
+
+        {% if search.literCategories %}
+        {% for liter in search.literCategories %}
+        <p id="liter-active-filter" class="active-filter">
+            Contenance: {{liter.value / 100}} L
         </p>
         {% endfor %}
         {% endif %}
     </div>
 </div>
+{% endif %}
 
 <div id="homeMenu-section-region" class="homeMenu-section">
     <button class="homeMenu-button full-w text-left" type="button">
@@ -122,7 +131,7 @@
         {% endfor %}
     </div>
 </div>
-<div id="homeMenu-section-liter" class="homeMenu-section">
+<div id="homeMenu-section-alcool" class="homeMenu-section">
     <button class="homeMenu-button full-w text-left" type="button">
         <p class="ml-2">Alcool</p>
         <img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
