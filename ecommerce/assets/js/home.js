@@ -9,6 +9,7 @@ $(window).on('load', function() {
     homeFilterButton.click(function(){  
         if (homeMenu.is(':visible') === true) {
         homeMenu.hide();
+        homeMenu.attr("style", "");
         } else {
         homeMenu.show();
         }

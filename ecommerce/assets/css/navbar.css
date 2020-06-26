@@ -1,78 +1,213 @@
 
-/* ========= 1 - Navbar Generals ========= */
-/*******************************************/
-#my-navbar {
+/********************************************************************/
+/* ====================== 1 - Navbar Generals ===================== */
+/********************************************************************/
+
+nav#my-navbar {
     background-color: white;
-    width: 100%; min-height: 110px;
+    width: 100%; min-height: 110px; padding-right: 1%;
     justify-content: space-around;
 }
-/* ========= 1.1 - Navbar Floor 1 ========= */
-/********************************************/
-#navbar-floor1 {
+
+/********************************************************************/
+/* ======================= 2 - Navbar Floor1 ====================== */
+/********************************************************************/
+div#navbar-floor1 {
     width: 100%; height: 90px;
     padding-left: 5vmin;
     justify-content: space-between;
 }
-/* ========= 1.1.1 - Navbar Floor 1 - Elements ========= */
-/*********************************************************/
+/************************************************/
+/* ============== 2.1 - Elements ============== */
+/************************************************/
+/* 1. element logo */
+/* 2. element search */
+/* 3. element menu */
+/* 4. element support */
 
-/* element search */
-#element-search{
-    width: 70%;
+/*********** 2.1.1 element-logo ***********/
+/******************************************/
+img#brand-logo {
+    width: 125px; height: auto;
+}
+
+/********** 2.1.2 element-search **********/
+/******************************************/
+div#nav-element-search{
+    width: 50%;
     margin-left: 10px; margin-right: 10px;
 }
-#nav-searchbar {
+div#nav-searchbar {
     width: 100%; height: 40px;
 }
-/* end element search */
 
-/* element menu*/
-#element-menu {
-    min-width: 500px;
+/*********** 2.1.3 element-menu ***********/
+/******************************************/
+div#nav-element-menu {
+    min-width: 406px;
+    width: 40%;
     padding: 7px;
 }
-.item-container {
+/* 4 item-containers */ 
+/* my-account */ 
+/* newsletter */ 
+/* favorites */ 
+/* cart */
+div.item-container {
     width: 25%; height: 90%;
     padding: 0.8em;
-    border: solid 1px white;
+    border: solid 1px rgb(255, 255, 255);
 }
-.hover {
+div.item-container.hover {
     background-color: rgb(245, 245, 245);
-    border: solid 1px rgb(230, 230, 230);
+    border: solid 1px rgb(210, 210, 210);
 }
-.hover-button {
-    background-color: rgb(227, 227, 227);
-    border-color: rgb(0, 0, 0);
-}
-.item-logo-section {
+/********************************************/
+/***** Inside each item-container ***********/
+/***** 1. Logo and Name of the button *******/
+/***** 2. Appearing Box with Mouse overflow */
+/********************************************/
+
+/***** 1. Logo and Name of the button *******/
+/* 1a - logo */
+div.item-logo-section {
     display: flex;
     width: 100%; height: 70%;
     padding: 3%;
     justify-content: center;
 }
-.item-logo {
+img.item-logo {
     width:auto; height: 90%;
 }
-.menu-item-title{
+/* 1b - name*/
+p.menu-item-title{
     text-align: center;
     font-size: 11px;
 }
-.border-menu {
+
+/***** 2. Appearing Boxes with Mouse overflow */
+/* 1. account-box */
+/* 2. newsletter-box */
+/* 3. cart-box */
+div.border-menu {
     border: solid 1px rgb(225, 225, 225);
 }
-/* end element menu */
-.logo-letter {
-    padding: 1px;
+.box-content {
+    font-size: 12px; text-align: justify;
 }
-#element-support {
-    width: 280px;
+/* 1. account-box */
+/* One Display if user's logged other if not */
+div#account-box { 
+    display: none; 
+    width: 350px; max-height: 500px; 
+    padding: 1rem; top: 100%; right: -1px; z-index: 10;
 }
-#brand-logo {
-    width: 125px; height: auto;
+
+/* Logged Out */
+h2.box-title, h3.box-title {
+        margin-top: 7px;
+        font-size: 19px;
+        justify-content: center;
+        text-align: center;
+    }
+
+/* Logged In*/
+div.left-box-buttons-col {
+    display: flex; flex-direction: column;
+    width: 60%; height: 100%;
 }
-/********************************************/
-/* ========= 1.2 - Navbar Floor 2 ========= */
-/********************************************/
+div.right-box-buttons-col {
+    display: flex; flex-direction: column;
+    width: 40%; height: 100%;
+}
+
+div.myaccount-box-buttons {
+    display: flex;
+    height: 85px;
+}
+
+div.box-buttons-button {
+    display: flex; flex-direction: column;
+    height: 50%;
+    margin: 3px;
+    justify-content: center; align-items: center;
+    font-size: 11px;
+    border: solid rgb(169, 169, 169) 1px;
+}
+div.box-buttons-button.hover {
+    background-color: rgb(220, 220, 220);
+}
+div.box-buttons-title {
+    display: flex; flex-direction: column;
+    width: 100%; height: 100%;
+    margin: 0;
+    align-items: center; justify-content: center;
+}
+div.box-buttons-button a {
+    width: 100%; height: 100%;
+    text-decoration: none;
+    color: black;
+}
+div.box-buttons-button p {
+    display: flex;
+    justify-content: center;
+}
+
+/* 2. newsletter-box */
+div#newsletter-box {
+    display: none;
+    width: 300px; height: auto;
+    top: 100%;left: -1px; z-index: 10;
+    padding: 1rem;
+}
+div.box-newsletter-form {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    min-height: 4rem;
+    padding-top: 0.8rem; padding-bottom: 0.8rem;
+}
+input#box-newsletter-form-input {
+    width: 70%; height: 100%; min-height: 2rem;
+}
+button#box-newsletter-form-btn {
+    width: 28%; height: 100%; min-height: 2rem;
+    background-color: gray; color: white;
+    border: solid 1px rgb(210, 210, 210);
+}
+
+/* 3. cart-box */
+div#cart-box {
+    display: none;
+    top: 100%; right: -1px; z-index: 10;
+    width: 350px;
+    padding: 1rem;
+}
+div.cart-box-product-quantity {
+    width: 15%;
+    text-align: right; vertical-align: top;
+}
+div.product-infos-other-infos {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+
+/*********** 2.1.3 element-support ***********/
+/******************************************/
+div#nav-element-support {
+    width: 18%; max-width: 145px;
+}
+p#phone-support-numbers {
+    font-weight: 900; font-size: 1.2rem;
+    white-space: nowrap;
+}
+/************* end element menu *************/
+
+
+
+/********************************************************************/
+/* ======================= 3 - Navbar Floor2 ====================== */
+/********************************************************************/
 #navbar-floor2 {
     width: 100%; height: 25px;
     margin-top: 10px; padding-left: 5vmin;
@@ -82,86 +217,6 @@
     margin-left: 5%;
     font-weight: 900;
 }
-a {
-    text-decoration: none;
-    color: black;
-}
-#account-box {
-    display: none;
-    width: 350px; max-height: 500px; 
-    padding: 1rem; top: 100%; right: -1px; z-index: 10;
-}
-#newsletter-box {
-    display: none;
-    width: 300px; height: 250px;;
-    top: 100%;left: -1px; z-index: 10;
-    padding: 1rem;
-}
-#cart-box {
-    display: none;
-    top: 100%; right: -1px; z-index: 10;
-    width: 350px;
-    padding: 1rem;
-}
-.cart-box-product-infos {
-    width: 85%;
-    font-size: 14px;
-}
-.product-infos-other-infos {
-    text-transform: uppercase;
-    font-size: 12px;
-}
-.cart-box-product-quantity {
-    width: 15%;
-    text-align: right; vertical-align: top;
-}
-.box-buttons {
-    display: flex;
-    height: 85px;
-}
-.left-box-buttons-col {
-    display: flex; flex-direction: column;
-    width: 60%; height: 100%;
-}
-.right-box-buttons-col {
-    display: flex; flex-direction: column;
-    width: 40%; height: 100%;
-}
-.box-buttons-button {
-    display: flex; flex-direction: column;
-    height: 50%;
-    margin: 3px;
-    justify-content: center; align-items: center;
-    font-size: 11px;
-    border: solid rgb(169, 169, 169) 1px;
-}
-.box-buttons-title {
-    display: flex; flex-direction: column;
-    width: 100%; height: 100%;
-    margin: 0;
-    align-items: center;
-}
-.box-buttons-button a {
-    width: 100%; height: 100%;
-    text-decoration: none;
-    color: black;
-}
-.box-buttons-button p {
-    display: flex;
-    justify-content: center;
-}
-#box-myaccount {
-    height: 220px;
-}
-#box-title {
-    margin-top: 7px;
-    font-size: 19px;
-    justify-content: center;
-    text-align: center;
-}
-.box-content {
-    font-size: 12px; text-align: justify;
-}
 .element-home {
     width: 100px;
 }
@@ -169,12 +224,12 @@ a {
     width: auto; height: 100%;
     margin-left: 20px;
 }
-.element-vins-button {
+div.nav-element-wine-button {
     display: flex; flex-direction: column-reverse;
     height: 100%;
     box-sizing: content-box;
 }
-.vins-button-hover {
+div.nav-element-wine-button.hover {
     border-bottom: solid black 3px;
 }
 .floor2-text-element {
@@ -185,13 +240,10 @@ hr {
 }
 
 
-/** 
-************ FONT ***************
-*/
+/********************************************************************/
+/* ======================= 4 - Media Queries ====================== */
+/********************************************************************/
 
-#box-title-black {
-
-}
 
 @media (min-width: 992px) and (max-width: 1137px) {
     #navbar-container {
@@ -205,6 +257,7 @@ hr {
     }
 }
 
+/**************  Tablet Device  ****************/
 @media (min-width: 1138px) {
     .element-support {
         display: flex;
@@ -213,34 +266,52 @@ hr {
         display: none;
     }
 }
+
 @media (max-width: 991px) {
-    .element-menu{
-        width: 33.333333%;
-    }
-    #navbar-container {
+
+    nav#my-navbar {
         display: none;
     }
-    #reduced-navbar-container {
-        display: inline;
+    nav#reduced-navbar-container {
+        display: flex; width: 100%; height: 150px;
     }
-    #navbar-floor1 {
-        height: 57px;
+
+    div#reduced-nav-element-logo {
+        width: 50%; margin-left: 2%;
     }
-    #my-navbar {
-        min-height: 0;
+    img#reduced-brand-logo {
+        width: 90%; height: auto; max-width: 250px;
     }
-    #element-menu {
-        width: 40%;
-        min-width: 0;
+
+    div#reduced-element-menu {
+        display: flex; align-items: center;
+        width: 40%; min-width: 90px; max-width: 330px; margin-right: 2%;
     }
-    .item-container {
-        padding: 3px;
-        align-items: center;
-        justify-content: center;
+
+    a.reduced-nav-btn {
+        display: flex; align-items: center; justify-content: center;
+        height: 45px; width: 100%;
+        border: solid 1px rgb(255, 255, 255);
     }
-    .item-logo-section {
-        height: 100%;
-        padding: 4px;
+    a.reduced-nav-btn.hover {
+        background-color: rgb(245, 245, 245);
+        border: solid 1px rgb(210, 210, 210);
+    }
+    a#reduced-nav-newsletter-btn {
+        padding-bottom: 2px; padding-top: 2px;
+    }
+
+    .reduced-item-container {
+        width: 25%; height: 100%;
+        display: flex; align-items: center; justify-content: center;
+    }
+
+    img.reduced-item-logo {
+        width: auto; height: 53%;
+        max-height: 32px;
+    }
+    div#reduced-nav-searchbar {
+        height: 2.5em;
     }
 }
 

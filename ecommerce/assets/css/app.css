@@ -11,6 +11,10 @@
 * {
 	font-family: 'Roboto', sans-serif;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
 .full-size {
 	width: 100%; height: 100%;
 }

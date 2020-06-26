@@ -32,17 +32,19 @@
 
 <body class="bg-white">
     {% include "layout/navbar.html.twig" %}
-    <section id="home-container" class="container-fluid mt-5">
+    <section id="home-container" class="container-fluid">
         <div id="homeMenu-section">
             <div id="homeMenu">
                 {% include 'partials/sidebar.html.twig' with {form: form, min: min, max: max, search: searchData} only %}
             </div>
         </div>
-        <div id="homeProducts-section" class="pl-2 d-column-centered">
+        <div id="homeProducts-section" class="d-column-x-centered">
             <button id="home-filterButton" class="mb-3 full-w">Filtrer</button>
+            {% if app.flashes('failure')%}
             {% for message in app.flashes('failure')%}
             {% include "partials/modal.html.twig" %}
             {% endfor %}
+            {% endif %}
             {% block body %}
             {% endblock %}
         </div>
