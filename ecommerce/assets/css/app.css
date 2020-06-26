@@ -11,6 +11,10 @@
 * {
 	font-family: 'Roboto', sans-serif;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
 .full-size {
 	width: 100%; height: 100%;
 }
@@ -28,9 +32,13 @@
 	align-items: center;
 	justify-content: space-around;
 }
-.d-column-centered {
+.d-column-xy-centered {
 	display: flex; flex-direction: column;
 	justify-content: center;
+	align-items: center;
+}
+.d-column-x-centered {
+	display: flex; flex-direction: column;
 	align-items: center;
 }
 .d-column-centered-between {

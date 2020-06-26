@@ -1,0 +1,25 @@
+{% extends './home/home.html.twig' %}
+
+{% block title %}Recherche de vins{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('search') }}
+{% endblock javascripts %}
+
+{% block body %}
+{% for message in app.flashes('failure')%}
+{% include "partials/modal.html.twig" %}
+{% endfor %}
+<div id="search-header" class="full-w mt-0">
+    <h1 id="search-header-title">Recherche</h1>
+    <hr>
+</div>
+<div id="product-section" class="row">
+    {% for product in products %}
+    <div class="col-xl-4 col-md-6 d-flex justify-content-center mb-3">
+        {% include 'partials/product-card.html.twig' %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

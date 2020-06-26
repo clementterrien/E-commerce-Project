@@ -2,12 +2,19 @@
 
 namespace App\Controller;
 
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Data\SearchData;
+use App\Form\SearchType;
+use App\Data\StructureData;
+use App\Data\SearchStructure;
+use App\Service\Data\DataService;
+use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use App\Service\Product\ProductService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -15,32 +22,54 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(ProductService $productService, PaginatorInterface $paginator, Request $request)
+    public function home(Request $request, ProductService $productService, ProductRepository $productRepo)
     {
-
-        $formQuery = $request->query->all();
-        $key = key($formQuery);
-
-        $filteredProducts = null;
-
-        dump($key);
-        if (!is_null($key) && $key !== "page") {
-            $value = $request->query->get($key);
-            $filteredProducts = $paginator->paginate($productService->getProductsByCriteria($key, $value), $request->query->getInt('page', 1));
-        }
+        $searchData = new SearchData;
+        $searchData->page = $request->get('page', 1);
 
 
-        $topThreeProducts = $productService->getTop3MostLikedProducts();
-        $allTheProducts = $paginator->paginate(
-            $productService->getAllTheProducts(),
-            $request->query->getInt('page', 1),
-            12
-        );
+        $form = $this->createForm(SearchType::class, $searchData);
+        $form->handleRequest($request);
+        [$min, $max] = $productRepo->findMinMaxPrice($searchData);
+
 
         return $this->render('/home/home.html.twig', [
-            "topThreeProducts" => $topThreeProducts,
-            "allTheProducts" => $allTheProducts,
-            "filteredProducts" => $filteredProducts
+            'top3GoodPlans' => $productService->getTop3GoodPlans(),
+            'top3RedWineSelection' => $productService->getTop3RedWineSelection(),
+            'top3GrandsCrusSelection' => $productService->getTop3GrandsCrusSelection(),
+            'form' => $form->createView(),
+            'min' => $min,
+            'max' => $max,
+            'searchData' => $searchData
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="home_search")
+     */
+    public function homeSearch(
+        ProductRepository $productRepo,
+        Request $request,
+        ProductService $productService,
+        CategoryRepository $catRepo,
+        DataService $dataService,
+        SessionInterface $session
+    ) {
+        $dataSearch = new SearchData;
+        $dataSearch->page = $request->get('page', 1);
+
+        $form = $this->createForm(SearchType::class, $dataSearch);
+        $form->handleRequest($request);
+
+        [$min, $max] = $productRepo->findMinMaxPrice($dataSearch);
+        $products = $productRepo->findSearch($dataSearch);
+
+        return $this->render('/home/home_search.html.twig', [
+            'products' => $products,
+            'form' => $form->createView(),
+            'min' => $min,
+            'max' => $max,
+            'searchData' => $dataSearch
         ]);
     }
 
@@ -71,21 +100,5 @@ class HomeController extends AbstractController
         $mailer->send($email);
 
         return $this->redirectToRoute('home');
-    }
-
-    /**
-     * @Route("/tester", name="test_tester")
-     */
-    public function testament()
-    {
-        return $this->render('test/test.html.twig');
-    }
-
-    /**
-     * @Route("/tester1", name="test1_tester")
-     */
-    public function testament1()
-    {
-        return $this->render('test/test1.html.twig');
     }
 }

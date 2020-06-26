@@ -1,32 +1,6 @@
 {% extends 'base.html.twig' %}
-
-
 {% block body %}
-<div class="container d-flex justify-content-between align-items-start mt-5">
-    <div class="col-md-2">
-        {% include 'partials/product-card.html.twig' %}
-    </div>
-    <div class="col-md-8">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Designation</th>
-                    <th scope="col">Grape</th>
-                    <th scope="col">Capacité</th>
-                    <th scope="col">Région</th>
-                    <th scope="col">Année</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{product.designation}}</td>
-                    <td>{{product.grape}}</td>
-                    <td>{{product.liter}}</td>
-                    <td>{{product.region}}</td>
-                    <td>{{product.year}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container">
+    hello
 </div>
 {% endblock %}

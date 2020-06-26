@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Exception;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Error;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -84,19 +86,19 @@ class Product
     private $favoriteProducts;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tags", mappedBy="Product")
-     */
-    private $tags;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $stock;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="products")
+     */
+    private $categories;
+
     public function __construct()
     {
         $this->favoriteProducts = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -267,34 +269,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Tags[]
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tags $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-            $tag->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tags $tag): self
-    {
-        if ($this->tags->contains($tag)) {
-            $this->tags->removeElement($tag);
-            $tag->removeProduct($this);
-        }
-
-        return $this;
-    }
-
     public function getStock(): ?int
     {
         return $this->stock;
@@ -315,6 +289,50 @@ class Product
     public function setAlcool(int $alcool): self
     {
         $this->alcool = $alcool;
+
+        return $this;
+    }
+
+    public function __get(string $attribute)
+    {
+        $allAttributes = $this->getAttributes();
+
+        if (!empty($allAttributes[$attribute])) {
+            return $allAttributes[$attribute];
+        } else {
+            throw new Error("Invalid field entered !");
+        }
+    }
+
+    public function getAttributes()
+    {
+        return get_object_vars($this);
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeProduct($this);
+        }
 
         return $this;
     }

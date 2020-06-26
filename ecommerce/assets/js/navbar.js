@@ -1,7 +1,6 @@
 import '../css/navbar.css';
 
 window.onload = function () {
-    var itemContainer = $('.item-container');
 
     var myaccount = $('#myaccount-container');
         myaccount.mouseenter(function () {
@@ -11,7 +10,15 @@ window.onload = function () {
         myaccount.mouseleave(function () {
             myaccount.removeClass('hover');
             $('#account-box').hide();
-        })
+        });
+
+    var boxButtons = $(".box-buttons-button");
+            boxButtons.mouseenter(function () {
+            $(this).addClass('hover');
+        });
+        boxButtons.mouseleave(function () {
+            $(this).removeClass('hover');
+        });
 
     var newsletter  = $('#newsletter-container');
         newsletter.mouseover(function () {
@@ -41,71 +48,22 @@ window.onload = function () {
             $('#cart-box').hide();
         })
 
-    var adress = $('.adress-button');
-    adress.mouseover(function () {
-        adress.addClass('hover-button');
+    var wineButtons = $('.nav-element-wine-button');
+    wineButtons.mouseenter(function () {
+        $(this).addClass('hover');
     });
-    adress.mouseout(function () {
-        adress.removeClass('hover-button');
-        })
-
-    var order = $('.order-button');
-    order.mouseover(function () {
-        order.addClass('hover-button');
-    });
-    order.mouseout(function () {
-        order.removeClass('hover-button');
+    wineButtons.mouseleave(function () {
+        $(this).removeClass('hover');
     });
 
-    var personalInfos = $('.personal-information-button');
-    personalInfos.mouseover(function () {
-        personalInfos.addClass('hover-button');
+    var reducedNavButtons = $('.reduced-nav-btn');
+    reducedNavButtons.mouseenter(function () {
+        $(this).addClass('hover');
     });
-    personalInfos.mouseout(function () {
-        personalInfos.removeClass('hover-button');
-    });
-
-    var reduction = $('.reduction-button');
-    reduction.mouseover(function () {
-        reduction.addClass('hover-button');
-    });
-    reduction.mouseout(function () {
-        reduction.removeClass('hover-button');
+    reducedNavButtons.mouseleave(function () {
+        $(this).removeClass('hover');
     });
 
-        var promo = $('.element-promo');
-    promo.mouseover(function () {
-        promo.addClass('vins-button-hover');
-    });
-    promo.mouseout(function () {
-        promo.removeClass('vins-button-hover');
-    });
-
-        var white = $('.element-vin-blanc');
-    white.mouseover(function () {
-        white.addClass('vins-button-hover');
-    });
-    white.mouseout(function () {
-        white.removeClass('vins-button-hover');
-    });
-
-        var red = $('.element-vin-rouge');
-    red.mouseover(function () {
-        red.addClass('vins-button-hover');
-    });
-    red.mouseout(function () {
-        red.removeClass('vins-button-hover');
-    });
-
-        var champaign = $('.element-champagne');
-    champaign.mouseover(function () {
-        champaign.addClass('vins-button-hover');
-    });
-    champaign.mouseout(function () {
-        champaign.removeClass('vins-button-hover');
-    });
     
-    $('.myaccount-container').click(function(){
-    })
   
 }

@@ -1,0 +1,22 @@
+{% extends '/home/base_home.html.twig' %}
+{% block body %}
+<section class="search-title d-column mb-2 mt-2 px-2 full-w">
+    <h1 class="courgette">Ma Selection</h1>
+    <hr>
+    <div class="search-infos full-w">
+        {{ products.getTotalItemCount }} articles
+        <hr>
+    </div>
+</section>
+<section id="search-product">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-xl-4 col-lg-6 col-md-12 d-flex justify-content-center mb-3">
+            {% include 'partials/product-card.html.twig' with {product: product} only %}
+        </div>
+        {% endfor %}
+        <div id="pagination">
+            {{ knp_pagination_render(products) }}
+        </div>
+</section>
+{% endblock body %}

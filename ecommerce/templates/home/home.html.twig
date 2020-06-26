@@ -1,193 +1,100 @@
-{% extends 'base.html.twig' %}
-{% block title %}Welcome on Wine!{% endblock %}
-{% block stylesheets %}
-{{ parent() }}
-{% endblock %}
+{% extends '/home/base_home.html.twig' %}
+
 {% block body %}
-{% for message in app.flashes('failure')%}
-{% include "partials/modal.html.twig" %}
-{% endfor %}
-{% block javascripts %}
-{{ parent() }}
-{{ encore_entry_script_tags('product-card')}}
-{{ encore_entry_script_tags('home') }}
-{% endblock %}
-
-<section id="home-container" class="container-fluid mt-5">
-	<div id="homeMenu-section">
-		<div id="homeMenu">
-			{# {% include 'partials/sidebar.html.twig' %} #}
-			<div id="homeMenu-section-price" class="homeMenu-section">
-				<button class="homeMenu-button full-w text-left ml-2" type="button">
-					Prix
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div id="price-collapse" class="my-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Moins de 10€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">De 10€ à 20€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">De 20€ à 50€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">De 50€ à 100€</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Plus de 100€</p>
-						</div>
-					</div>
-				</div>
+{% if top3GoodPlans is defined and top3GoodPlans is not null %}
+<section id="top3-goodplans" class="top3-section mb-3">
+	<div class="top3-infos mb-3">
+		<div class="top3-title section-product-title-container">
+			<div class="line-title left">
 			</div>
-			<div id="homeMenu-section-type" class="homeMenu-section">
-				<button class="homeMenu-button full-w text-left ml-2" type="button">
-					Type
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div class="my-collapse" id="type-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Vins</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Champagne</p>
-						</div>
-					</div>
-				</div>
+			<div class="title">
+				<h2>3 BONS PLANS</h2>
 			</div>
-			<div id="homeMenu-section-country" class="homeMenu-section">
-				<button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button">
-					Pays
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div class="my-collapse" id="country-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rouge</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Blanc</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rosé</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Champagne</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="homeMenu-section-color" class="homeMenu-section">
-				<button id="color-collapse-button" class="homeMenu-button full-w text-left ml-2" type="button"
-					data-toggle="collapse" data-target="#color-collapse" aria-expanded="false"
-					aria-controls="color-collapse">
-					Couleur
-					<img class="arrow" src="{{asset('build/images/arrow.png')}}" alt="">
-				</button>
-				<div class="my-collapse" id="color-collapse">
-					<div class="card card-body">
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rouge</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Blanc</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Rosé</p>
-						</div>
-						<div class="homeMenu-filterselector d-flex">
-							<input type="checkbox" name="" id="" class="ml-3">
-							<p class="ml-2">Champagne</p>
-						</div>
-					</div>
-				</div>
+			<div class="line-title right">
 			</div>
 		</div>
-
+		<div class="catch-phrase">
+			<p>Pour acheter du vin les yeux fermés</p>
+		</div>
+		<div class="section-description">
+			<p>Destockage, meilleures ventes, coups de coeur, ventes privées… Vinatis vous propose une foire aux
+				vins permanente pour acheter votre vin en toute confiance et épater vos amis lors de vos
+				réceptions.</p>
+		</div>
 	</div>
-	<div id="homeProducts-section" class="pl-2 d-column-centered">
-		<button id="home-filterButton" class="mb-3">Filtrer</button>
-		<section id="top3product-section">
-			<div class="product-title-container bons-plans-container">
-				<div class="section-product-title-container">
-					<div class="line-title left">
-					</div>
-					<div class="title">
-						<h2>3 BONS PLANS</h2>
-					</div>
-					<div class="line-title right">
-					</div>
-				</div>
-				<div class="catch-phrase">
-					<p>Pour acheter du vin les yeux fermés</p>
-				</div>
-				<div class="section-description">
-					<p>Destockage, meilleures ventes, coups de coeur, ventes privées… Vinatis vous propose une foire aux
-						vins permanente pour acheter votre vin en toute confiance et épater vos amis lors de vos
-						réceptions.</p>
-				</div>
-			</div>
-			<div id="top3products-wrapper">
-				{% for product in topThreeProducts %}
-				{% include 'partials/product-card.html.twig' %}
-				{% endfor %}
-			</div>
-		</section>
-		<div id="allproducts-title" class="product-title-container bons-plans-container">
-			<div class="section-product-title-container">
-				<div class="line-title left">
-				</div>
-				<div class="title">
-					<h2>TOUS LES PRODUITS</h2>
-				</div>
-				<div class="line-title right">
-				</div>
-			</div>
-			<div class="section-description">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus est quibusdam et laboriosam sed
-					ut ad nihil doloremque odit excepturi recusandae repellendus dolorem dignissimos quam nobis,
-					dolorum accusantium. Recusandae reprehenderit qui, delectus sequi ex consequatur non quibusdam
-					facere eos! Magnam.</p>
-			</div>
-		</div>
+	<div class="top3-products full-w">
 		<div class="row">
-			{% if filteredProducts is defined and filteredProducts is not null %}
-			{% for product in filteredProducts %}
-			<div class="col-md-4 d-flex justify-content-center mb-3">
-				{% include 'partials/product-card.html.twig' %}
+			{% for product in top3GoodPlans %}
+			<div class="col-xl-4 col-lg-6 col-md-12 d-flex justify-content-center mb-3">
+				{% include 'partials/product-card.html.twig' with {product: product} only %}
 			</div>
 			{% endfor %}
-			{% else %}
-
-			{% for product in allTheProducts %}
-			<div class="col-md-4 d-flex justify-content-center mb-3">
-				{% include 'partials/product-card.html.twig' %}
-			</div>
-			{% endfor %}
-
-			{% endif %}
 		</div>
-		<div class="pagination d-flex justify-content-center mt-2">
-			{{ knp_pagination_render(allTheProducts) }}
-		</div>
-	</div>
 	</div>
 </section>
-{% endblock %}
+{% endif %}
+{% if top3RedWineSelection is defined and top3RedWineSelection is not null %}
+<section id="top3-red-wine-selection" class="top3-section my-5">
+	<div class="top3-infos mb-3">
+		<div class="top3-title section-product-title-container">
+			<div class="line-title left">
+			</div>
+			<div class="title">
+				<h2>TOP 3 SELECTION VINS ROUGES</h2>
+			</div>
+			<div class="line-title right">
+			</div>
+		</div>
+		<div class="catch-phrase">
+			<p>Notre sélection des meilleurs vins Rouges</p>
+		</div>
+		<div class="section-description">
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda similique alias ex nostrum vitae?
+				Laudantium iusto odio praesentium a, rem dicta qui reiciendis, totam molestias provident dolor expedita
+				ducimus illum id! Perferendis tempora ea nostrum a iusto quibusdam unde. Reiciendis!</p>
+		</div>
+	</div>
+	<div class="top3-products full-w">
+		<div class="row">
+			{% for product in top3RedWineSelection %}
+			<div class="col-xl-4 col-lg-6 col-md-12 d-flex justify-content-center mb-3">
+				{% include 'partials/product-card.html.twig' with {product: product} only %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endif %}
+{% if top3GrandsCrusSelection is defined and top3GrandsCrusSelection is not null %}
+<section id="top3-grands-crus-selection" class="top3-section my-5">
+	<div class="top3-infos mb-3">
+		<div class="top3-title section-product-title-container">
+			<div class="line-title left">
+			</div>
+			<div class="title">
+				<h2>TOP 3 SELECTION GRANDS CRUS</h2>
+			</div>
+			<div class="line-title right">
+			</div>
+		</div>
+		<div class="catch-phrase">
+			<p>Notre sélection de nos meilleurs Grands Crus</p>
+		</div>
+		<div class="section-description">
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda similique alias ex nostrum vitae?
+				Laudantium iusto odio praesentium a, rem dicta qui reiciendis, totam molestias provident dolor expedita
+				ducimus illum id! Perferendis tempora ea nostrum a iusto quibusdam unde. Reiciendis!</p>
+		</div>
+	</div>
+	<div class="top3-products full-w">
+		<div class="row">
+			{% for product in top3GrandsCrusSelection %}
+			<div class="col-xl-4 col-lg-6 col-md-12 d-flex justify-content-center mb-3">
+				{% include 'partials/product-card.html.twig' with {product: product} only %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endif %}
+{% endblock body %}

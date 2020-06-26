@@ -12,6 +12,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
+
+
+
+    /**
+     * @Route("/home", name="product_show")
+     */
+    public function ProductHomepage(ProductRepository $productRepo)
+    {
+        $products = $productRepo->findSearch();
+
+        return $this->render('search/search.html.twig', [
+            'products' => $products
+        ]);
+    }
+
     /**
      * @Route("/newproduct", name="product_create")
      */
