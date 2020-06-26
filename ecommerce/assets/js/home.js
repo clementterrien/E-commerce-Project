@@ -20,6 +20,13 @@ $(window).on('load', function() {
        $(this).next().toggleClass('show-collapse');
     });
 
+    var literFilter = $('label.sidebar-liter-filter');
+    for (let i = 0; i < literFilter.length; i++) {
+        const element = literFilter[i];
+        element.innerText = element.innerText/100;
+            }
+
+
     var slider = document.getElementById('price-slider');
 
     if(slider){

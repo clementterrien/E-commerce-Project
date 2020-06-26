@@ -13,7 +13,7 @@ class CategoryController extends AbstractController
      */
     public function createCategories(CategoryService $categoryService)
     {
-        $attributesWanted = array('type');
+        $attributesWanted = array('alcool');
         $categoryService->createCategoriesByEntityAttributes($attributesWanted);
 
         return $this->redirectToRoute('home');

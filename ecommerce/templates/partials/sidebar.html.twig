@@ -44,7 +44,7 @@
         {% if search.alcoolCategories %}
         {% for alcool in search.alcoolCategories %}
         <p id="type-active-filter" class="active-filter">
-            Alcool: {{alcool.value}}
+            Alcool: {{alcool.value}} %
         </p>
         {% endfor %}
         {% endif %}
@@ -141,7 +141,7 @@
         {% for child in form.alcoolCategories|filter(child => not child.rendered) %}
         <div class="homeMenu-filterselector full-w">
             {{ form_widget(child, {'attr': {'class':'mr-2'}}) }}
-            {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }}
+            {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }} %
             {{ form_help(child) }}
             {{ form_errors(child) }}
         </div>
@@ -158,7 +158,7 @@
         {% for child in form.literCategories|filter(child => not child.rendered) %}
         <div class="homeMenu-filterselector full-w">
             {{ form_widget(child, {'attr': {'class':'mr-2'}}) }}
-            {{ form_label(child, null, {'label_attr': {'class':'m-0'}}) }}
+            {{ form_label(child, null, {'label_attr': {'class':'m-0 sidebar-liter-filter'}}) }} L
             {{ form_help(child) }}
             {{ form_errors(child) }}
         </div>

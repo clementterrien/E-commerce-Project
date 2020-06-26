@@ -124,12 +124,9 @@ class ProductRepository extends ServiceEntityRepository
             $query = $query
                 ->andwhere('p.grape IN (:grapeCategories)')
                 ->setParameter('grapeCategories', $grapeCategories);
-
-            return $query;
         }
-
         /**
-         * Priority 1 : if designation category is defined, only this searchData will be used to find products 
+         * Priority 2 : if designation category is defined, only this searchData will be used to find products 
          * example: An Alsace Designation bottle could only come from Alsace
          */
         if (!empty($search->designationCategories)) {
@@ -140,10 +137,7 @@ class ProductRepository extends ServiceEntityRepository
             $query = $query
                 ->andwhere('p.designation IN (:designationCategories)')
                 ->setParameter('designationCategories', $designationCategories);
-            return $query;
         }
-
-
         if (!empty($search->regionCategories)) {
             $regionCategories = [];
             foreach ($search->regionCategories as $key => $regionCategory) {
@@ -153,7 +147,6 @@ class ProductRepository extends ServiceEntityRepository
                 ->andwhere('p.region IN (:regionCategories)')
                 ->setParameter('regionCategories', $regionCategories);
         }
-
         if (!empty($search->typeCategories)) {
             $typeCategories = [];
             foreach ($search->typeCategories as $key => $typeCategory) {
@@ -162,6 +155,25 @@ class ProductRepository extends ServiceEntityRepository
             $query = $query
                 ->andwhere('p.type IN (:typeCategories)')
                 ->setParameter('typeCategories', $typeCategories);
+        }
+
+        if (!empty($search->alcoolCategories)) {
+            $alcoolCategories = [];
+            foreach ($search->alcoolCategories as $key => $alcoolCategory) {
+                array_push($alcoolCategories, $alcoolCategory->getValue());
+            }
+            $query = $query
+                ->andwhere('p.alcool IN (:alcoolCategories)')
+                ->setParameter('alcoolCategories', $alcoolCategories);
+        }
+        if (!empty($search->literCategories)) {
+            $literCategories = [];
+            foreach ($search->literCategories as $key => $literCategory) {
+                array_push($literCategories, $literCategory->getValue());
+            }
+            $query = $query
+                ->andwhere('p.liter IN (:literCategories)')
+                ->setParameter('literCategories', $literCategories);
         }
 
         return $query;
