@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Adress;
 use App\Entity\FavoriteList;
+use Webmozart\Assert\Assert;
 use App\Entity\ConfirmedOrder;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
@@ -11,9 +12,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
-
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -44,7 +43,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8", minMessage="pas bon")
      * 
-     * 
      */
     private $password;
 
@@ -55,9 +53,11 @@ class User implements UserInterface
 
     /**
      * A non-persisted field that's used to create the encoded password.
-     * 
      * @var string
-     * @SecurityAssert\UserPassword(message="Veuillez entrer votre mot de passe actuel pour modifier vos informations", groups = {"update"})
+     * @SecurityAssert\UserPassword(
+     *     message = "Vous devez entrer votre mot de passe actuel",
+     *     groups = {"update"}
+     * )
      */
     private $plainPassword;
 

@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Form\UserModificationType;
 use Doctrine\ORM\EntityManager;
+use App\Form\UserModificationType;
+use App\Service\Adress\AdressService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,12 +22,12 @@ class AccountController extends AbstractController
     /**
      * @Route("/mon-compte", name="account_home")
      */
-    public function showMyAccount()
+    public function showMyAccount(AdressService $adressService)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         return $this->render('account/myaccount.html.twig', [
-            'controller_name' => 'AccountController',
+            'defaultAdress' => $adressService->getDefaultAdress()
         ]);
     }
 

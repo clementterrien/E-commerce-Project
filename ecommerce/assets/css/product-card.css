@@ -3,7 +3,7 @@
 	border: solid  rgb(148, 148, 148);
 	border-width: 1px;
 	height: 380px;
-	width: 360px;
+	width: 100%;
 }
 .product-hover {
 	background-color: rgb(247, 247, 247);
