@@ -13,6 +13,11 @@ import '../css/navbar.css'
 import '../css/home.css'
 import '../css/my-account.css'
 import '../css/search.css'
+import '../css/favorite.css'
+import '../css/sidebars/myaccount-sidebar.css'
+import '../css/myaccount/myaccount-myinfos.css'
+import '../css/product-details.css'
+import '../css/product/product-card-detailed.css'
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 
@@ -20,9 +25,9 @@ $(window).on('load', function() {
     let sidebarItem = $('.myaccount-sidebar-item');
 
     sidebarItem.mouseenter(function(){
-        $(this).addClass('myaccount-sidebar-item-hover');
+        $(this).addClass('hover');
     })
     sidebarItem.mouseleave(function(){
-        $(this).removeClass('myaccount-sidebar-item-hover');
+        $(this).removeClass('hover');
     })
 });

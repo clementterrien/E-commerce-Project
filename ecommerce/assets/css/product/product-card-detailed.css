@@ -1,0 +1,95 @@
+/********************************************************************/
+/* =============== 1 - Product-card detailed Generals ============= */
+/********************************************************************/
+div#product-card-detailed-general-settings {
+    min-height: 600px; height: 650px;
+}
+/* 1 - image-section */
+/* 2 - main-infos-section */
+/* 3 - price section */
+
+/***** 1 - image-section *****/
+/*****************************/
+
+/** 1.1 - bottle-img **/
+div#product-card-detailed-image-section {
+    width: 30%; height: 100%; margin: 0; max-height: 400px;
+}
+div.detailed-bottle-img {
+    display: flex;
+	width: 100%; height: 90%;
+	background-repeat: no-repeat; background-position: center; background-size: auto 90%;
+}
+div.rouge {
+    background-image: url('../../images/vin-rouge.png');
+}
+div.blanc {
+    background-image: url('../../images/vin-blanc.png');
+}
+div.champagne {
+    background-image: url('../../images/champagne.png');
+}
+/** 1.2 - product-sub-action **/
+div#product-sub-action {
+    display: flex; align-items: center;
+    justify-content: space-around;
+    width: 45%; height: 10%;
+
+}
+
+/** 2 - main-infos-section ***/
+/*****************************/
+div#product-card-detailed-main-infos-section {
+    width: 45%;
+}
+/* 2.1 - detailed-product-infos*/
+h3#detailed-product-infos-title {
+    font-size: 26px;
+}
+
+div#detailed-product-card-breadcrumb, div#detailed-product-card-breadcrumb *::before {
+    font-size: 14px;
+    white-space: normal;
+}
+
+div.breadcrumb-item {
+    white-space: normal;
+}
+p.card-breadcrumb-item-paragraph {
+    white-space: nowrap;
+}
+
+div#product-detailed-ranking-section {
+    height: 40px;
+    font-weight: 900; font-size: 16px;
+}
+
+div#product-detailed-rank-section {
+    display: flex; flex-direction: column; justify-content: center;
+    border: solid 2px rgb(255,99,80);
+}
+span#rank-numb {
+    font-size: 25px; font-weight: 900;
+}
+div#product-detailed-reviews-number-section {
+    white-space: nowrap; text-transform: uppercase; text-decoration: underline;
+}
+/* 2.2 - detailed-first-comment */
+/* 2.2.1 - Rate */
+
+/*2.2.2 - Comment*/
+p#first-comment-paragraph {
+    text-align: justify;
+}
+
+
+
+
+/* 3 - price section */
+div#product-card-detailed-price-section {
+    width: 25%;
+}
+div#product-detailed-order-pricing-section {
+    height: 50%; width: 100%;
+    background-color: rgb(240, 240, 240);
+}

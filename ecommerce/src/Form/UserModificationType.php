@@ -52,9 +52,7 @@ class UserModificationType extends AbstractType
                     'class' => 'input-infos-form'
                 ],
             ])
-            ->add('submit', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-lg']
-            ]);
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

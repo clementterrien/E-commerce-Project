@@ -1,7 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends "/account/base-myaccount.html.twig" %}
 
-{% block title %}Hello FavoriteController!{% endblock %}
-
+{% block title %}Ma liste de favoris{% endblock %}
+{% block stylesheets %}
+{{parent() }}
+<link rel="stylesheet" href="{{asset('build/favorite.css')}}">
+{% endblock %}
 {% block body %}
 
 {% for favoriteProduct in favoriteProducts %}

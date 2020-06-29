@@ -1,0 +1,42 @@
+/********************************************************************/
+/* ================== 1 - Product-details Generals ================ */
+/********************************************************************/
+
+/* product-details-main-container*/
+
+
+/********************************************************************/
+/* =============== 2 - Product-details Main Container ============= */
+/********************************************************************/
+
+/* ======== 2.1 - Product-details-main-container ======== */
+/**********************************************************/
+/* 1 - Product-details-main-container */
+/* 2 - product-details-suggested-popular-product */
+
+/* ======== 2.1.1 - product-container ======== */
+div#product-details-product-container {
+    width: 80%;
+}
+/* product-details-category-breadcrumb */
+p.breadcrumb-item-paragraph, div.breadcrumb-item::before {
+    font-size: 18px;
+}
+/* product-details-product-title */
+div#product-details-product-title-section {
+    display: flex; text-align: center; justify-content: center; align-items: center;
+    min-height: 50px;
+    background-color: rgb(240, 240, 240);
+}
+h2#product-details-product-title {
+    font-size: 23px; text-transform: uppercase; text-align: center;
+    height: fit-content;
+    margin: 0;
+}
+
+/* = === 2.1.2 - suggested-popular-product ==== */
+div#product-details-suggested-popular-product {
+    width: 20%;
+}
+/* product-details-product-card-detailed */
+

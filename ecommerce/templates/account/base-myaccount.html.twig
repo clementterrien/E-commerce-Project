@@ -31,98 +31,14 @@
 
 <body class="bg-white">
     {% include "layout/navbar.html.twig" %}
-    <div id="main-container" class="d-flex-column px-2">
-        <div id="message" class="full-w bg-white">
+    <div id="message" class="full-w bg-white">
+    </div>
+    <div id="main-container" class="d-flex px-2">
+        <div id="myaccount-sidebar-container" class="hidden-xs hidden-sm col-md-3 border-grey px-0 mx-2">
+            {% include "partials/sidebars/myaccount-sidebar.html.twig" %}
         </div>
-        <div class="row">
-            <div id="myaccount-sidebar-container" class="hidden-xs hidden-sm col-md-3">
-                <div id="myaccount-sidebar" class="border-grey">
-                    <div id="myaccount-home" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Accueil Mon Compte
-                            </p>
-                        </div>
-                    </div>
-                    <div id="my-purchase-guide" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Mon Guide d'achat
-                            </p>
-                        </div>
-                    </div>
-                    <div id="my-orders" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Mes Commandes
-                            </p>
-                        </div>
-                    </div>
-                    <div id="my-infos" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Mes Infos
-                            </p>
-                        </div>
-                    </div>
-                    <div id="my-adresses" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Mes Adresses
-                            </p>
-                        </div>
-                    </div>
-                    <div id="my-newsletter-preferences" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Mes preferences Newsletter
-                            </p>
-                        </div>
-                    </div>
-                    <div id="my-reviews" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Mes Parrainages
-                            </p>
-                        </div>
-                    </div>
-                    <div id="my-favorite-list" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Mes Avis
-                            </p>
-                        </div>
-                    </div>
-                    <div id="myaccount-deconnexion" class="d-flex full-w myaccount-sidebar-item">
-                        <div class="sidebar-img">
-                        </div>
-                        <div class="sidebar-text">
-                            <p class="sidebar-menu-title">
-                                Deconnexion
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="myaccount-main-section" class="col-sm-12 col-md-9 d-flex-column">
-                {% block body %}{% endblock %}
-            </div>
+        <div id="myaccount-main-section" class="col-sm-12 col-md-9 d-flex-column">
+            {% block body %}{% endblock %}
         </div>
     </div>
 </body>

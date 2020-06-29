@@ -1,4 +1,9 @@
 {% extends "/account/base-myaccount.html.twig" %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{asset('build/my-account.css')}}">
+<link rel="stylesheet" href="{{asset('build/myaccount/myaccount-myinfos.css')}}">
+{% endblock stylesheets %}
 {% block body %}
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -19,7 +24,7 @@
         </div>
         {% endfor %}
     </div>
-    <p class="title-account courgette font-color-orange">
+    <p class="title-account courgette font-orange">
         Mes Informations Personnelles
     </p>
     <p class="subtitle-account">N'hésitez pas à modifier vos informations personnelles si celles-ci ont changé.
@@ -28,37 +33,34 @@
 <div class="personal-infos-form">
     {{ form_start(form) }}
     {{ form_errors(form) }}
-    <div class="form-infos-input-section d-flex">
-        <label class="label-margin" for="">Titre</label>
+    <div id="modif-user-form-gender" class="form-infos-input-section mb-1">
+        <label class="label-margin pl-2" for="">Titre</label>
         {{ form_widget(form.sex) }}
     </div>
-    <div class="form-infos-input-section label-margin">
-        <label for=""><span class="font-color-orange">*</span> Prénom</label>
+    <div id="modif-user-form-firstname" class="form-infos-input-section label-margin">
+        <label for=""><span class="font-orange">*</span> Prénom</label>
         {{ form_widget(form.firstname) }}
     </div>
-    <div class="form-infos-input-section label-margin">
-        <label for=""><span class="font-color-orange">*</span> Nom</label>
+    <div id="modif-user-form-lastname" class="form-infos-input-section label-margin">
+        <label for=""><span class="font-orange">*</span> Nom</label>
         {{ form_widget(form.lastname) }}
     </div>
-    <div class="form-infos-input-section label-margin d-flex">
-        <div id="birthdate-form" class="d-flex">
-            <label id="birthdate-form" for=""> Date de Naissance</label>
-            {{ form_widget(form.birthDate)}}
-        </div>
+    <div id="modif-user-form-birthdate" class="form-infos-input-section label-margin">
+        <label id="birthdate-form" class="pl-2" for=""> Date de Naissance</label>
+        {{ form_widget(form.birthDate)}}
     </div>
-    <div class="form-infos-input-section label-margin">
-        <label for=""><span class="font-color-orange">*</span> Adresse Email</label>
+    <div id="modif-user-form-email" class="form-infos-input-section label-margin">
+        <label for=""><span class="font-orange">*</span> Adresse Email</label>
         {{ form_widget(form.email) }}
     </div>
-    <div class="form-infos-input-section label-margin">
-        <label for=""><span class="font-color-orange">*</span> Mot de Passe Actuel</label>
+    <div id="modif-user-form-password" class="form-infos-input-section label-margin">
+        <label for=""><span class="font-orange">*</span> Mot de Passe Actuel</label>
         {{ form_widget(form.plainPassword) }}
     </div>
-    <div id="submit-infosform-button" class="form-infos-input-section label-margin">
-        {{ form_widget(form.submit, { 'label': 'Sauvegarder' }) }}
-        <p><span class="font-color-orange">*</span>Champs Requis</p>
+    <div id="submit-infosform-button" class="d-column mt-4 pl-2">
+        {{ form_widget(form.submit, {'label': 'Sauvegarder', 'attr': {'class': 'modif-user-form-submit-btn mb-2'} }) }}
+        <p><span class="font-orange">*</span>Champs Requis</p>
     </div>
     {{form_end(form)}}
-</div>
 </div>
 {% endblock body %}

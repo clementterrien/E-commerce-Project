@@ -1,0 +1,110 @@
+<div id="product-card-detailed-general-settings" class="full-w d-flex py-3">
+    <div id="product-card-detailed-image-section" class="d-column-x-centered full-h m-0">
+        {% if product.type == "Blanc" %}
+        <div class="detailed-bottle-img blanc">
+        </div>
+        {% elseif product.type == "Rouge" %}
+        <div class="detailed-bottle-img rouge">
+        </div>
+        {% elseif product.type == "Champagne" %}
+        <div class="detailed-bottle-img champagne">
+        </div>
+        {% endif %}
+        <div id="product-sub-action" class="d-flex">
+            <a href="{{path('favorite_add', {'product_id': product.id})}}">
+                <img id="product-like-img" src="{{asset('build/images/alert-bell.png')}}" alt="">
+            </a>
+            <div class="sub-action-vertical-stripe"></div>
+            <a href="{{path('favorite_add', {'product_id': product.id})}}">
+                <img id="product-like-img" src="{{asset('build/images/like.png')}}" alt="">
+            </a>
+        </div>
+    </div>
+    <div id="product-card-detailed-main-infos-section" class="d-column-x-centered full-h pt-3 px-2">
+        <div id="detailed-product-infos" class="full-w d-column mb-2">
+            <div id="product-detailed-badge-section"></div>
+            <div id="detailed-product-infos-title-section" class="d-column">
+                <h3 id="detailed-product-infos-title"><strong>{{product.name}}</strong></h3>
+            </div>
+            <div id="detailed-product-card-breadcrumb" class="d-flex full-w my-2">
+                <div id="product-detailed-liter-box" class="mr-2 px-2 border-grey text-nowrap">
+                    {{product.liter}} cl
+                </div>
+                <div class="breadcrumb-item">
+                    Vin {{product.type}}
+                </div>
+                <div class="breadcrumb-item">
+                    {{product.region}}
+                </div>
+                <div class="breadcrumb-item">
+                    {{product.designation}}
+                </div>
+                <div class="breadcrumb-item">
+                    {{product.alcool}}%
+                </div>
+            </div>
+            <div id="product-detailed-ranking-section" class="d-flex font-orange">
+                <div id="product-detailed-rank-section" class="mr-2 px-1 full-h">
+                    <p><span id="rank-numb">16.2</span>/20</p>
+                </div>
+                <div id="product-detailed-reviews-number-section" class="d-column-xy-centered">
+                    <p id="product-detailed-reviews-number"> Noté par 446 clients </p>
+                </div>
+            </div>
+            <div id="product-detailed-tags-section" class="d-flex my-3">
+                <button class="btn btn-primary mr-3">Example Tag</button>
+                <button class="btn btn-primary mr-3">Example Tag</button>
+            </div>
+        </div>
+        <div id="detailed-first-comment-section" class="d-column">
+            <div id="detailed-first-comment-rate" class="full-w">
+                <p class="font-orange"><span>17.0</span>/20</p>
+            </div>
+            <div id="detailed-first-comment-text" class="p-3 border-grey">
+                <h4 id="first-comment-autor">Clément Terrien</h4>
+                <p id="first-comment-paragraph">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio, aliquam illo! Ad soluta incidunt
+                    quam illo totam odit mollitia animi, culpa asperiores accusamus fuga, distinctio odio numquam beatae
+                    consequatur? Iste quisquam commodi sequi ipsum ea cupiditate earum enim sint tempore debitis in
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="product-card-detailed-price-section" class="pl-2">
+        <div id="product-detailed-order-pricing-section" class="p-3 d-column-xy-centered">
+            <div id="product-detailed-prices-section" class="full-w h-50 d-column-xy-centered">
+                <div id="product-detailed-price-1" class="full-w d-flex">
+                    <h4><strong>{{product.price}},00 €</strong></h4>
+                    <h6 class="d-flex-centered ml-2 mb-0">à l'unité</h6>
+                </div>
+                <div id="product-detailed-price-2" class="full-w">
+                </div>
+                <div id="product-detailed-price-3" class="full-w">
+                </div>
+            </div>
+            <div id="product-detailed-order-section" class="d-column h-50 full-w pt-4">
+                <form class="add-to-cart-form d-flex full-w mb-2"
+                    action="{{path("cart_add", {'product_id': product.id})}}" method="post">
+                    <select id="add-to-cart-select" name="quantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <button id="add-to-cart-btn" type="submit">AJOUTER AU PANIER</button>
+                </form>
+                <div id="product-detailed-order-information-section" class="d-column">
+                    {% if product.stock > 0 %}
+                    <p class="product-detailed-order-information">Disponible</p>
+                    {% endif %}
+                    <p class="product-detailed-order-information">Emballage Anti-casse</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

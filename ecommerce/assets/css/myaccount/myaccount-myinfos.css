@@ -1,0 +1,51 @@
+/********************************************************************/
+/* ================ 1 - Myaccount-myinfos Generals ================ */
+/********************************************************************/
+
+
+/********************************************************************/
+/* ================ 2 - Myaccount-myinfos Elements ================ */
+/********************************************************************/
+/* 1 - Nav-Breacrumb */
+/* 2 - title & Subtitles */
+/* 3 - Personal Infos Form*/
+
+/* 1 - Nav-Breacrumb */
+nav.breadcrumb {
+    text-align: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* 2 - title & Subtitles */
+
+/* 3 - Personal Infos Form*/
+
+div.form-infos-input-section {
+    display: flex; align-items: center;
+    margin-bottom: 5px;
+}
+
+#birthdate-form {
+    height: 100%;
+    display: flex; align-items: center;
+}
+div.label-margin label, label.label-margin {
+    width: 150px;
+    margin-right: 60px; margin-bottom: 0;
+}
+
+div#user_modification_sex label{
+    margin-right: 40px;
+}
+div#user_modification_sex input{
+    margin-right: 5px;
+}
+button.modif-user-form-submit-btn {
+    width: 100% !important;
+    max-width: 140px; height: 35px;
+    background-color: rgb(255,99,80); color: rgb(255,255,255);
+    border: none;
+    text-transform: uppercase; font-weight: 900;
+}
+

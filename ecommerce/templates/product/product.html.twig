@@ -1,6 +1,82 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{asset('build/product-details.css')}}">
+<link rel="stylesheet" href="{{asset('build/product/product-card-detailed.css')}}">
+{% endblock stylesheets %}
+
 {% block body %}
-<div class="container">
-    hello
+<div id="product-details-container" class="px-1">
+    <div id="product-details-main-container" class="d-flex">
+        <div id="product-details-product-container">
+            <div id="product-details-category-breadcrumb" class="d-flex ml-1 mb-2 full-w">
+                {% for category in product.categories %}
+                {% if category.name == "region" %}
+                <div id="product-details-breadcrumb-region" class="breadcrumb-item">
+                    <p class="breadcrumb-item-paragraph">
+                        <a class="full-size d-flex" href="#">
+                            {{category.value}}
+                        </a>
+                    </p>
+                </div>
+                {% elseif category.name == "type" %}
+                <div id="product-details-breadcrumb-type" class="breadcrumb-item">
+                    <p class="breadcrumb-item-paragraph">
+                        <a class="full-size d-flex" href="#">
+                            {% if category.value == "champagne "%}
+                            {{category.value}}
+                            {% else %}
+                            Vins {{category.value}}
+                            {% endif %}
+                        </a>
+                    </p>
+                </div>
+                {% elseif category.name == "type" %}
+                <div id="product-details-breadcrumb-type" class="breadcrumb-item">
+                    <p class="breadcrumb-item-paragraph">
+                        <a class="full-size d-flex" href="#">
+                            {{category.value}}
+                        </a>
+                    </p>
+                </div>
+                {% elseif category.name == "year" %}
+                <div id="product-details-breadcrumb-year" class="breadcrumb-item">
+                    <p class="breadcrumb-item-paragraph">
+                        <a class="full-size d-flex" href="#">
+                            {{category.value}}
+                        </a>
+                    </p>
+                </div>
+                {% elseif category.name == "grape" %}
+                <div id="product-details-breadcrumb-year" class="breadcrumb-item">
+                    <p class="breadcrumb-item-paragraph">
+                        <a class="full-size d-flex" href="#">
+                            {{category.value}}
+                        </a>
+                    </p>
+                </div>
+                {% elseif category.name == "alcool" %}
+                <div id="product-details-breadcrumb-alcool" class="breadcrumb-item">
+                    <p class="breadcrumb-item-paragraph">
+                        <a class="full-size d-flex" href="#">
+                            {{category.value}} %
+                        </a>
+                    </p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div id="product-details-product-title-section" class="my-2">
+                <h2 id="product-details-product-title">élu numéro 1 par nos clients dans le top
+                    <strong>{{ product.region }}</strong>
+                </h2>
+            </div>
+            <div id="product-details-product-card-detailed">
+                {% include "/partials/product/product-card-detailed.html.twig"  with {product: product} only %}
+            </div>
+        </div>
+        <div id="product-details-suggested-popular-product">
+        </div>
+    </div>
 </div>
 {% endblock %}

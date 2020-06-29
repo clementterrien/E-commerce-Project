@@ -1,29 +1,13 @@
+/********************************************************************/
+/* ==================== 1 - My-account Generals =================== */
+/********************************************************************/
+
 #message {
-    height: 50px;
 }
-#myaccount-sidebar-container {
-    padding-right: 15px; padding-left: 20px;
-}
-#myaccount-sidebar {
-}
-.myaccount-sidebar-item {
-    display: flex;
-    align-items: center;
-    min-height: 55px; width: 100%;
-    padding-left: 1em;
-}
-.myaccount-sidebar-item-hover {
-    background-color: rgb(235, 235, 235);
-}
-.breadcrumb {
-    text-align: center;
-    justify-content: center;
-    font-size: 12px;
-}
-.label-margin label, label.label-margin {
-    width: 150px;
-    margin-right: 60px;
-}
+
+
+
+
 .subtitle-account {
     margin-top: 10px;
     font-weight: bold;
@@ -32,27 +16,7 @@
 .input-infos-form {
     width: 300px; height: 35px;
 }
-#user_modification_sex label{
-    margin-right: 40px;
-}
-#user_modification_sex label{
-    margin-right: 40px;
-}
-#user_modification_sex input{
-    margin-right: 5px;
-}
-.form-infos-input-section {
-    margin-bottom: 5px;
-}
-#submit-infosform-button {
-    margin-top: 15px;
-}
-#birthdate-form {
-    height: 100%;
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
-}
+
 #user_modification_birthDate {
     display: flex;
 }
@@ -90,7 +54,6 @@ hr {
 /*******************************
 ******* END ADRESS PART ********
 ********************************/
-
 
 
 
@@ -141,6 +104,11 @@ button.account-action-button {
 .square-item-title {
     font-size: 30px;
 }
+
+/********************************************************************/
+/* ======================= 4 - Media Queries ====================== */
+/********************************************************************/
+
 @media (max-width: 992px){
     #myaccount-sidebar {
         display: none;
