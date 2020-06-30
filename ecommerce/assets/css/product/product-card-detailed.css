@@ -8,8 +8,8 @@ div#product-card-detailed-general-settings {
 /* 2 - main-infos-section */
 /* 3 - price section */
 
-/***** 1 - image-section *****/
-/*****************************/
+/******** 1 - image-section ********/
+/***********************************/
 
 /** 1.1 - bottle-img **/
 div#product-card-detailed-image-section {
@@ -37,8 +37,8 @@ div#product-sub-action {
 
 }
 
-/** 2 - main-infos-section ***/
-/*****************************/
+/****** 2 - main-infos-section *******/
+/*************************************/
 div#product-card-detailed-main-infos-section {
     width: 45%;
 }
@@ -76,16 +76,25 @@ div#product-detailed-reviews-number-section {
 }
 /* 2.2 - detailed-first-comment */
 /* 2.2.1 - Rate */
+p#detailed-first-comment-rate {
+    font-size: 19px; font-style: italic;
+}
+p#detailed-first-comment-rate span {
+    font-size: 25px; font-weight: 900;
+} 
 
 /*2.2.2 - Comment*/
+h5#first-comment-autor {
+    font-size: 16px;
+}
 p#first-comment-paragraph {
-    text-align: justify;
+    text-align: justify; font-weight: 900;
 }
 
 
 
-
-/* 3 - price section */
+/********* 3 - Price-section *********/
+/*************************************/
 div#product-card-detailed-price-section {
     width: 25%;
 }

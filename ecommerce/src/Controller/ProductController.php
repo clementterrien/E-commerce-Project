@@ -70,6 +70,10 @@ class ProductController extends AbstractController
     public function productDetails($product_id, ProductRepository $productRepo)
     {
         $product = $productRepo->findOneBy(['id' => $product_id]);
-        return $this->render("product/product.html.twig", ["product" => $product]);
+        $recomendedProducts = $productRepo->findBy(['region' => $product->getRegion(), 'type' => $product->getType()], null, 3);
+        return $this->render("product/product.html.twig", [
+            "product" => $product,
+            'recommendedProducts' => $recomendedProducts
+        ]);
     }
 }

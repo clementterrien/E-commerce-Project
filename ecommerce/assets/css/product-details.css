@@ -38,5 +38,36 @@ h2#product-details-product-title {
 div#product-details-suggested-popular-product {
     width: 20%;
 }
+
+div#suggested-popular-product-title-section {
+    background-color: rgb(240, 240, 240);
+    min-height: 50px; margin-top: 35px;
+}
+h3#suggested-popular-product-title {
+    font-size: 20px; text-transform: uppercase; font-weight: 900;
+}
+
+div#suggested-popular-product-main-container {
+    border: 6px solid rgb(240, 240, 240); box-sizing: border-box;
+}
+div#suggested-popular-product-main-container img {
+    max-height: 260px;
+}
+h6#suggested-popular-product-name {
+    font-size: 16px; font-weight: 900;
+    text-transform: uppercase; text-align: center;
+}
+p#suggested-popular-product-description {
+ font-weight: 900;
+}
 /* product-details-product-card-detailed */
 
+/********************************************************************/
+/* =========== 4 - Product-details Comentaries Container ========== */
+/********************************************************************/
+
+/* 1. product-comentaries-left-insert */
+div#product-comentaries-left-insert {
+    min-height: 300px; background-color: rgb(240, 240, 240);
+}
+/* 2. product-comentaries-main-container*/

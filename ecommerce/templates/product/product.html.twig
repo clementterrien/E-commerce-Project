@@ -7,7 +7,7 @@
 
 {% block body %}
 <div id="product-details-container" class="px-1">
-    <div id="product-details-main-container" class="d-flex">
+    <div id="product-details-main-container" class="d-flex full-w">
         <div id="product-details-product-container">
             <div id="product-details-category-breadcrumb" class="d-flex ml-1 mb-2 full-w">
                 {% for category in product.categories %}
@@ -75,8 +75,49 @@
                 {% include "/partials/product/product-card-detailed.html.twig"  with {product: product} only %}
             </div>
         </div>
-        <div id="product-details-suggested-popular-product">
+        <div id="product-details-suggested-popular-product" class="mx-2">
+            <div id="suggested-popular-product-title-section" class="d-flex-centered mb-4">
+                <h3 id="suggested-popular-product-title">Populaire</h3>
+            </div>
+            <div id="suggested-popular-product-main-container" class="d-column-x-centered px-2">
+                <img src="{{asset('build/images/chateau-jean-de-marceau-2017.png')}}" class="my-3" alt="">
+                <h6 id="suggested-popular-product-name" class="my-2">
+                    Chateau Jean de Marceau 2016
+                </h6>
+                <p id="suggested-popular-product-description" class="full-w my-2 px-2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae quaerat adipisci rerum minima.
+                    Dignissimos, quod accusamus reprehenderit blanditiis animi
+                </p>
+                <button class="btn btn-success my-3">Voir plus</button>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    <div id="product-details-suggestion-container" class="d-column full-w px-4 my-4">
+        <div id="product-details-suggestion-title-section" class="full-w">
+            <h4 id="product-details-suggestion-title" class="my-3 font-orange">Recommandé pour vous</h4>
+        </div>
+        <div class="top3-products full-w">
+            <div class="row">
+                {% for product in recommendedProducts %}
+                <div class="col-xl-4 col-lg-6 col-md-12 d-flex justify-content-center mb-3">
+                    {% include 'partials/product-card.html.twig' with {product: product} only %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="product-details-specifications" class="full-w"></div>
+    <div id="product-details-commentaries-container" class="d-flex">
+        <div id="product-comentaries-left-insert" class="full-h py-4">
+            <div id="left-insert-content-section" class="px-4">
+                <h3 class="font-orange">Vous aimez ce vin ?</h3>
+            </div>
+        </div>
+        <div id="product-comentaries-main-container" class="d-column-x-centered px-3">
+            <div id="product-comentaries-title-container" class="full-w">
+                <h4>Derniers avis laissés</h4>
+            </div>
+            <div id="product-comentaries-comments-container" class="full-w"></div>
+        </div>
+    </div>
+    {% endblock %}
