@@ -25,7 +25,9 @@ class UserEntityListener
             $list = new FavoriteList;
             $token = urlencode(hash("sha256", random_bytes(8)));
             $entity->setFavoriteList($list);
+            dump($entity);
             $entity->setCreatedAt(new \DateTime());
+            dd($entity);
             $this->encodePassword($entity);
             $entity->setEnabled(true);
             $entity->setConfirmationToken($token);
