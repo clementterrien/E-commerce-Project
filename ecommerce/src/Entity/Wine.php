@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\WineRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\WineRepository;
+use Doctrine\ORM\Mapping\AttributeOverrides;
 
 /**
- * @ORM\Entity(repositoryClass=WineRepository::class)
+ * @ORM\Entity
  */
 class Wine
 {
@@ -60,12 +63,12 @@ class Wine
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $designation_of_origin;
+    private $designationOfOrigin;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $grape_variety;
+    private $grapeVariety;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -80,12 +83,12 @@ class Wine
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $service_temperature;
+    private $serviceTemperature;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $to_drink_until;
+    private $toDrinkUntil;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -96,6 +99,21 @@ class Wine
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\OneToOne(targetEntity=WineInventory::class, mappedBy="wine", cascade={"persist", "remove"})
+     */
+    private $wineInventory;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=WineCategory::class, mappedBy="wines")
+     */
+    private $wineCategories;
+
+    public function __construct()
+    {
+        $this->wineCategories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,7 +137,7 @@ class Wine
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setProductName(string $name): self
     {
         $this->name = $name;
 
@@ -200,24 +218,24 @@ class Wine
 
     public function getDesignationOfOrigin(): ?string
     {
-        return $this->designation_of_origin;
+        return $this->designationOfOrigin;
     }
 
-    public function setDesignationOfOrigin(?string $designation_of_origin): self
+    public function setDesignationOfOrigin(?string $designationOfOrigin): self
     {
-        $this->designation_of_origin = $designation_of_origin;
+        $this->designationOfOrigin = $designationOfOrigin;
 
         return $this;
     }
 
     public function getGrapeVariety(): ?string
     {
-        return $this->grape_variety;
+        return $this->grapeVariety;
     }
 
-    public function setGrapeVariety(?string $grape_variety): self
+    public function setGrapeVariety(?string $grapeVariety): self
     {
-        $this->grape_variety = $grape_variety;
+        $this->grapeVariety = $grapeVariety;
 
         return $this;
     }
@@ -248,24 +266,24 @@ class Wine
 
     public function getServiceTemperature(): ?string
     {
-        return $this->service_temperature;
+        return $this->serviceTemperature;
     }
 
-    public function setServiceTemperature(?string $service_temperature): self
+    public function setServiceTemperature(?string $serviceTemperature): self
     {
-        $this->service_temperature = $service_temperature;
+        $this->serviceTemperature = $serviceTemperature;
 
         return $this;
     }
 
     public function getToDrinkUntil(): ?int
     {
-        return $this->to_drink_until;
+        return $this->toDrinkUntil;
     }
 
-    public function setToDrinkUntil(?int $to_drink_until): self
+    public function setToDrinkUntil(?int $toDrinkUntil): self
     {
-        $this->to_drink_until = $to_drink_until;
+        $this->toDrinkUntil = $toDrinkUntil;
 
         return $this;
     }
@@ -290,6 +308,51 @@ class Wine
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getWineInventory(): ?WineInventory
+    {
+        return $this->wineInventory;
+    }
+
+    public function setWineInventory(WineInventory $wineInventory): self
+    {
+        $this->wineInventory = $wineInventory;
+
+        // set the owning side of the relation if necessary
+        if ($wineInventory->getWine() !== $this) {
+            $wineInventory->setWine($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|WineCategory[]
+     */
+    public function getWineCategories(): Collection
+    {
+        return $this->wineCategories;
+    }
+
+    public function addWineCategory(WineCategory $wineCategory): self
+    {
+        if (!$this->wineCategories->contains($wineCategory)) {
+            $this->wineCategories[] = $wineCategory;
+            $wineCategory->addWine($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWineCategory(WineCategory $wineCategory): self
+    {
+        if ($this->wineCategories->contains($wineCategory)) {
+            $this->wineCategories->removeElement($wineCategory);
+            $wineCategory->removeWine($this);
+        }
 
         return $this;
     }

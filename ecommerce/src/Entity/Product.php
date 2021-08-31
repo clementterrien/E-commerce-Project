@@ -2,23 +2,25 @@
 
 namespace App\Entity;
 
-use Exception;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-use Error;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $wine_id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -26,14 +28,24 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
-    private $year;
+    private $alcool;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    private $color;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $vintage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $country;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -41,69 +53,65 @@ class Product
     private $region;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="float")
      */
-    private $grape;
+    private $capacity;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $designation;
+    private $designation_of_origin;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $liter;
+    private $grape_variety;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $alcool;
+    private $tastes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $smell;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $service_temperature;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     */
+    private $to_drink_until;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
      */
     private $price;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $likeCounter;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $orderCounter;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $enabled;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FavoriteProduct", mappedBy="Product", orphanRemoval=true)
-     */
-    private $favoriteProducts;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $stock;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="products")
-     */
-    private $categories;
-
-    public function __construct()
-    {
-        $this->favoriteProducts = new ArrayCollection();
-        $this->categories = new ArrayCollection();
-    }
+    private $image;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getWineId(): ?int
+    {
+        return $this->wine_id;
+    }
+
+    public function setWineId(int $wine_id): self
+    {
+        $this->wine_id = $wine_id;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -111,172 +119,9 @@ class Product
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setProductName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getYear(): ?int
-    {
-        return $this->year;
-    }
-
-    public function setYear(int $year): self
-    {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?string $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getGrape(): ?string
-    {
-        return $this->grape;
-    }
-
-    public function setGrape(?string $grape): self
-    {
-        $this->grape = $grape;
-
-        return $this;
-    }
-
-    public function getDesignation(): ?string
-    {
-        return $this->designation;
-    }
-
-    public function setDesignation(?string $designation): self
-    {
-        $this->designation = $designation;
-
-        return $this;
-    }
-
-    public function getLiter(): ?string
-    {
-        return $this->liter;
-    }
-
-    public function setLiter(string $liter): self
-    {
-        $this->liter = $liter;
-
-        return $this;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(?int $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getLikeCounter(): ?int
-    {
-        return $this->likeCounter;
-    }
-
-    public function setLikeCounter(?int $likeCounter): self
-    {
-        $this->likeCounter = $likeCounter;
-
-        return $this;
-    }
-
-    public function getOrderCounter(): ?int
-    {
-        return $this->orderCounter;
-    }
-
-    public function setOrderCounter(?int $orderCounter): self
-    {
-        $this->orderCounter = $orderCounter;
-
-        return $this;
-    }
-
-    public function getEnabled(): ?bool
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): self
-    {
-        $this->enabled = $enabled;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|FavoriteProduct[]
-     */
-    public function getFavoriteProducts(): Collection
-    {
-        return $this->favoriteProducts;
-    }
-
-    public function addFavoriteProduct(FavoriteProduct $favoriteProduct): self
-    {
-        if (!$this->favoriteProducts->contains($favoriteProduct)) {
-            $this->favoriteProducts[] = $favoriteProduct;
-            $favoriteProduct->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFavoriteProduct(FavoriteProduct $favoriteProduct): self
-    {
-        if ($this->favoriteProducts->contains($favoriteProduct)) {
-            $this->favoriteProducts->removeElement($favoriteProduct);
-            // set the owning side to null (unless already changed)
-            if ($favoriteProduct->getProduct() === $this) {
-                $favoriteProduct->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(?int $stock): self
-    {
-        $this->stock = $stock;
 
         return $this;
     }
@@ -293,46 +138,158 @@ class Product
         return $this;
     }
 
-    public function __get(string $attribute)
+    public function getColor(): ?string
     {
-        $allAttributes = $this->getAttributes();
-
-        if (!empty($allAttributes[$attribute])) {
-            return $allAttributes[$attribute];
-        } else {
-            throw new Error("Invalid field entered !");
-        }
+        return $this->color;
     }
 
-    public function getAttributes()
+    public function setColor(string $color): self
     {
-        return get_object_vars($this);
-    }
-
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->addProduct($this);
-        }
+        $this->color = $color;
 
         return $this;
     }
 
-    public function removeCategory(Category $category): self
+    public function getVintage(): ?int
     {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-            $category->removeProduct($this);
-        }
+        return $this->vintage;
+    }
+
+    public function setVintage(?int $vintage): self
+    {
+        $this->vintage = $vintage;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getCapacity(): ?float
+    {
+        return $this->capacity;
+    }
+
+    public function setCapacity(float $capacity): self
+    {
+        $this->capacity = $capacity;
+
+        return $this;
+    }
+
+    public function getDesignationOfOrigin(): ?string
+    {
+        return $this->designation_of_origin;
+    }
+
+    public function setDesignationOfOrigin(?string $designation_of_origin): self
+    {
+        $this->designation_of_origin = $designation_of_origin;
+
+        return $this;
+    }
+
+    public function getGrapeVariety(): ?string
+    {
+        return $this->grape_variety;
+    }
+
+    public function setGrapeVariety(?string $grape_variety): self
+    {
+        $this->grape_variety = $grape_variety;
+
+        return $this;
+    }
+
+    public function getTastes(): ?string
+    {
+        return $this->tastes;
+    }
+
+    public function setTastes(?string $tastes): self
+    {
+        $this->tastes = $tastes;
+
+        return $this;
+    }
+
+    public function getSmell(): ?string
+    {
+        return $this->smell;
+    }
+
+    public function setSmell(?string $smell): self
+    {
+        $this->smell = $smell;
+
+        return $this;
+    }
+
+    public function getServiceTemperature(): ?string
+    {
+        return $this->service_temperature;
+    }
+
+    public function setServiceTemperature(?string $service_temperature): self
+    {
+        $this->service_temperature = $service_temperature;
+
+        return $this;
+    }
+
+    public function getToDrinkUntil(): ?int
+    {
+        return $this->to_drink_until;
+    }
+
+    public function setToDrinkUntil(?int $to_drink_until): self
+    {
+        $this->to_drink_until = $to_drink_until;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

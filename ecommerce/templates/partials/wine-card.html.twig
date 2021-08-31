@@ -1,0 +1,62 @@
+<div class="wine-card">
+    <div class="card-left-col">
+        {% if wine.color == "Blanc" %}
+        <div class="bottle-img blanc">
+        </div>
+        {% elseif wine.color == "Rouge" %}
+        <div class="bottle-img rouge">
+        </div>
+        {% elseif wine.color == "Champagne" %}
+        <div class="bottle-img champagne">
+        </div>
+        {% endif %}
+        <div class="wine-sub-action">
+            {# <a href="{{path('favorite_add', {'wine_id': wine.id})}}">
+                <img id="wine-like-img" src="{{asset('build/images/alert-bell.png')}}" alt="">
+            </a>
+            <div class="sub-action-vertical-stripe"></div>
+            <a href="{{path('favorite_add', {'wine_id': wine.id})}}">
+                <img id="wine-like-img" src="{{asset('build/images/like.png')}}" alt="">
+            </a> #}
+        </div>
+    </div>
+    <div class="card-right-col">
+        <div class="main-infos">
+            <div class="wine-title">
+                {# <a href="{{path('wine_details', {'wine_id': wine.id})}}" class="card-link">
+                    <p class="wine-name">{{wine.name}}</p>
+                </a> #}
+                <p class="wine-name">{{wine.name}}</p>
+            </div>
+            <div class="wine-other-info">
+                <p class="additional-wine-infos">
+                    Vin {{wine.color}} / {{wine.region}} / {{wine.designation_of_origin}} / {{wine.alcool}}% vol
+                </p>
+            </div>
+            <div class="wine-capacity">
+                <p class="wine-capacity">{{wine.liter / 100}} L</p>
+            </div>
+        </div>
+        <div class="price-section">
+            <p class="price-text"><span class="price-amount">{{wine.price}},0 €</span> A l'unité</p>
+        </div>
+        <div class="main-action">
+            <div class="add-to-cart mr-3">
+                <form class="add-to-cart-form d-flex full-w" action="{{path("cart_add", {'wine_id': wine.id})}}"
+                    method="post">
+                    <select id="add-to-cart-select" name="quantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>12</option>
+                        <option>24</option>
+                    </select>
+                    <button id="add-to-cart-btn" type="submit">AJOUTER AU PANIER</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
