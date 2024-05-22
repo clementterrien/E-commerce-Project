@@ -1,5 +1,4 @@
 ###> symfony/framework-bundle ###
-.env*
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /src/.preload.php
@@ -25,3 +24,9 @@ yarn-error.log
 
 # *.icloud files to be ignored
 *.icloud
+
+# env and secrets
+.env*
+
+# IDE 
+.vscode/
